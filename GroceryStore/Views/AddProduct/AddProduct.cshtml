@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Add New Product</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Add New Products
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form role="form">
+
+
+                                    <div class="form-group">
+                                        <label>Select Category</label>
+
+                                        <select name="Category" style="width: 50%; height: 40px;">
+                                            <option value="Kitchen items">Kitchen items</option>
+                                            <option value="Makeup Items">Makeup Items</option>
+                                            <option value="Fruits">Fruits</option>
+                                            <option value="Dry Fruits">Dry Fruits</option>
+                                            <option value="Vegetables">Vegetables</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Enter Product Name</label>
+                                        <p><input type="text" /></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Enter Price</label>
+                                        <p><input type="text" /></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Enter SKU (Unit)</label>
+                                        <select name="Category" style="width: 50%; height: 40px;">
+                                            <option value="Kitchen items">Small Pack(1 kg)</option>
+                                            <option value="Makeup Items">Medium pack(5 kg)</option>
+                                            <option value="Fruits">Large box (20 kg)</option>
+                                           
+
+                                        </select>
+                                    </div>
+                                    <center>
+                                        <button type="submit" class="button2" style="height: 40px; width: 150px;">Add</button>
+                                    </center>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

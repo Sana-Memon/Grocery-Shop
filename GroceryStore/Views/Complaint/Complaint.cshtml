@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Complaint";
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Customers Complaint</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Complaint Details
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form role="form">
+
+                                    <div class="form-group">
+                                        <label>Enter Complaint ID</label>
+                                        <p><input type="text" /></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Complainant's Name</label>
+                                        <p><label>Mr.Jawad"</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>E-mail</label>
+                                        <label>  m.jawad@gmail.com </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>The complaint is regarding:</label>
+                                        <label> Issue on portal registration</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>The specific details of the complaint:</label>
+                                        <label> Registration showing error</label>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label>Select Complaint Status</label>
+
+                                        <select name="Status" ">
+                                            <option value="In Progress">In Progress</option>
+                                            <option value="Closed">Closed</option>
+
+                                        </select>
+
+
+                                    </div>
+
+
+                                    <center>
+                                        <button type="submit" class="button2" style="height: 40px; width: 150px;">Submit</button>
+
+                                    </center>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
