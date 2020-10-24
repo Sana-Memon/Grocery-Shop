@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Dashboard</title>
+    <title>Customer Dashboard</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="~/CustomerAssets/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,6 @@
     <!-- Custom CSS -->
     <link href="~/CustomerAssets/css/startmin.css" rel="stylesheet">
 
-
     <!-- Custom Fonts -->
     <link href="~/CustomerAssets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -32,13 +31,9 @@
 
 
         <!-- Navigation -->
-        <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../AdminDashboard/AdminDashboard"><i class="fa fa-home fa-fw"></i>Grocery Store</a>
-            </div>
 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -46,13 +41,20 @@
             </button>
 
             <ul class="nav navbar-nav navbar-left navbar-top-links">
-                <!--<li><a href="../../index.html"><i class="fa fa-home fa-fw"></i> Website</a></li>-->
+                <li><a href="../CustomerDashboard/CustomerDashboard"><i class="fa fa-home fa-fw"></i> Grocery Store</a></li>
+                <li>
+
+                </li>
+            </ul>
+
+            <ul class="nav navbar-right navbar-top-links">
             </ul>
 
 
 
 
             <ul class="nav navbar-right navbar-top-links">
+
                 <li class="dropdown navbar-inverse">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
@@ -85,7 +87,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <i class.="fa fa-tasks fa-fw"></i> New Task
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
@@ -102,12 +104,9 @@
 
                     </ul>
                 </li>
+                <li>
 
-
-
-
-
-
+                </li>
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -116,10 +115,10 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <a href="Profile Card/profile.html"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            <a href=""><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -143,66 +142,32 @@
                                 </span>
                             </div>
                             <!-- /input-group -->
+                            <!-- /input-group -->
 
                         </li>
 
                         <li>
-                            <a href="../AdminDashboard/AdminDashboard" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-
-
-                        <li>
-                            <a href="../ViewProduct/ViewProduct"><i class="fa fa-edit fa-fw"></i> Products</a>
-                        </li>
-
-                        <li>
-                            <a href="../Categories/Categories"><i class="fa fa-edit fa-fw"></i> Categories</a>
-
-                        </li>
-
-                        <li>
-                            <a href="../ViewAllComplaints/ViewAllComplaints"><i class="fa fa-user-o"></i> Customer Complaints</a>
-                        </li>
-
-
-                        <li>
-
-                            <a href="../ViewOrderQueue/ViewOrderQueue" class="dropdown-btn"><i class="fa fa-cart-plus"></i> Order Queue</a>
-
+                            <a href="../NewOrder/NewOrder" class="active"><i class="fa fa-dashboard fa-fw"></i> Order Assign</a>
                         </li>
                         <li>
-
-                            <a href="../PastOrder/PastOrder" class="dropdown-btn"><i class="fa fa-cart-plus"></i> Order Delivered</a>
-
+                            <a href="../OrderStatus/OrderStatus" class="active"><i class="fa fa-dashboard fa-fw"></i> Order Status</a>
                         </li>
-
                         <li>
-                            <a href="../OrderTrack/OrderTrack"><i class="fa fa-cart-plus"></i> Order Tracking</a>
+                            <a href="../Delivered/Delivered" class="active"><i class="fa fa-dashboard fa-fw"></i> Order History</a>
                         </li>
 
-                        <li>
-                            <a href="../DeliveryMan/DeliveryMan"><i class="fa fa-user-o"></i> Delivery Boy</a>
 
-                        </li>
-
-                        <li>
-                            <a href="../AvailableSttock/AvailableSttock"><i class="fa fa-user-o"></i>Available Stock</a>
-
-                        </li>
-
-                        <li>
-                            <a href="../Stockend/Stockend"><i class="fa fa-user-o"></i> Ended  Stock</a>
-
-                        </li>
 
 
                     </ul>
                 </div>
             </div>
         </nav>
-
         @RenderBody()
 
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
     </div>
@@ -215,7 +180,6 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="~/CustomerAssets/js/metisMenu.min.js"></script>
-
 
 
     <!-- Custom Theme JavaScript -->

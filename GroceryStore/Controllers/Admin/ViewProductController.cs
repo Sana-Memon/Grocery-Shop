@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace GroceryStore.Controllers.Admin
 {
-    public class BilingController : Controller
+    public class ViewProductController : Controller
     {
-        // GET: Biling
-        public ActionResult Biling()
+        // GET: ViewProduct
+        public ActionResult ViewProduct()
         {
             return View();
         }

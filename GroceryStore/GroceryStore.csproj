@@ -125,20 +125,23 @@
     <Compile Include="Controllers\Admin\AddProductController.cs" />
     <Compile Include="Controllers\Admin\AdminDashboardController.cs" />
     <Compile Include="Controllers\Admin\AvailableSttockController.cs" />
-    <Compile Include="Controllers\Admin\BilingController.cs" />
     <Compile Include="Controllers\Admin\CategoriesController.cs" />
     <Compile Include="Controllers\Admin\ComplaintController.cs" />
     <Compile Include="Controllers\Admin\DeliveryManController.cs" />
-    <Compile Include="Controllers\Admin\OrderDetailController.cs" />
+    <Compile Include="Controllers\Admin\PastOrderController.cs" />
     <Compile Include="Controllers\Admin\OrderQueueController.cs" />
     <Compile Include="Controllers\Admin\OrderTrackController.cs" />
-    <Compile Include="Controllers\Admin\ProductController.cs" />
+    <Compile Include="Controllers\Admin\PastOrderDetailsController.cs" />
     <Compile Include="Controllers\Admin\StockDetailController.cs" />
     <Compile Include="Controllers\Admin\StockendController.cs" />
+    <Compile Include="Controllers\Admin\ViewAllComplaintsController.cs" />
+    <Compile Include="Controllers\Admin\ViewOrderQueueController.cs" />
+    <Compile Include="Controllers\Admin\ViewProductController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\Customer\AddNewAddressController.cs" />
+    <Compile Include="Controllers\Customer\ComplaintHistoryController.cs" />
     <Compile Include="Controllers\Customer\CustomerComplaintController.cs" />
     <Compile Include="Controllers\Customer\CustomerDashboardController.cs" />
     <Compile Include="Controllers\Customer\CustomerProfileController.cs" />
@@ -147,6 +150,10 @@
     <Compile Include="Controllers\Customer\PasswordResetController.cs" />
     <Compile Include="Controllers\Customer\ReferFriendController.cs" />
     <Compile Include="Controllers\Customer\TrackOrderController.cs" />
+    <Compile Include="Controllers\DeliveryMan\DeliveredController.cs" />
+    <Compile Include="Controllers\DeliveryMan\DeliveryManDashboardController.cs" />
+    <Compile Include="Controllers\DeliveryMan\NewOrderController.cs" />
+    <Compile Include="Controllers\DeliveryMan\OrderStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -2136,7 +2143,6 @@
     <Content Include="Views\Checkout\Checkout.cshtml" />
     <Content Include="Views\SingleProduct\SingleProduct.cshtml" />
     <Content Include="Views\Thankyou\Thanyou.cshtml" />
-    <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Signup\Signup.cshtml" />
     <Content Include="Views\Shared\CustomerDashboard.cshtml" />
@@ -2155,18 +2161,29 @@
     <Content Include="Views\AddProduct\AddProduct.cshtml" />
     <Content Include="Views\AvailableSttock\AvailableSttock.cshtml" />
     <Content Include="Views\Complaint\Complaint.cshtml" />
-    <Content Include="Views\Biling\Biling.cshtml" />
-    <Content Include="Views\DeliveryMan\DeliveryMan.cshtml" />
     <Content Include="Views\StockDetail\StockDetail.cshtml" />
-    <Content Include="Views\OrderDetail\OrderDetail.cshtml" />
     <Content Include="Views\OrderQueue\OrderQueue.cshtml" />
     <Content Include="Views\OrderTrack\OrderTrack.cshtml" />
     <Content Include="Views\Stockend\Stockend.cshtml" />
+    <Content Include="Views\ViewProduct\ViewProduct.cshtml" />
+    <Content Include="Views\Categories\Categories.cshtml" />
+    <Content Include="Views\ViewAllComplaints\ViewAllComplaints.cshtml" />
+    <Content Include="Views\ViewOrderQueue\ViewOrderQueue.cshtml" />
+    <Content Include="Views\Shared\DeliveryManLayout.cshtml" />
+    <Content Include="Views\DeliveryManDashboard\DeliveryManDashboard.cshtml" />
+    <Content Include="Views\Delivered\Delivered.cshtml" />
+    <Content Include="Views\NewOrder\NewOrder.cshtml" />
+    <Content Include="Views\OrderStatus\OrderStatus.cshtml" />
+    <Content Include="Views\ComplaintHistory\ComplaintHistory.cshtml" />
+    <Content Include="Views\DeliveryMan\DeliveryMan.cshtml" />
+    <Content Include="Views\PastOrder\PastOrder.cshtml" />
+    <Content Include="Views\PastOrderDetails\PastOrderDetails.cshtml" />
+    <Content Include="Views\AvailableSttock\dfb.cshtml" />
+    <Content Include="Views\Product\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Categories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

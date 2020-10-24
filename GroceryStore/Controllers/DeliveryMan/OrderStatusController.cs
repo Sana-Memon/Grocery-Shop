@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GroceryStore.Controllers.Admin
+namespace GroceryStore.Controllers.DeliveryMan
 {
-    public class ProductController : Controller
+    public class OrderStatusController : Controller
     {
-        // GET: Product
-        public ActionResult Product()
+        // GET: OrderStatus
+        public ActionResult OrderStatus()
         {
             return View();
         }

@@ -4,5 +4,702 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Product</h2>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('../images/banner3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-center">
+            <div class="col-md-9 ftco-animate mb-5 text-center">
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Products <i class="fa fa-chevron-right"></i></span></p>
+                <h2 class="mb-0 bread">Products</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row mb-4">
+                    <div class="col-md-12 d-flex justify-content-between align-items-center">
+                        <h4 class="product-select">Select Category of Products</h4>
+                        <select class="selectpicker" multiple>
+                            <option>Lipton</option>
+                            <option>Spirit</option>
+                            <option>Vim</option>
+                            <option>Harpic</option>
+                            <option>Comfort</option>
+                            <option>Zeeba</option>
+                        </select>
+                    </div>
+                </div>
 
+            </div>
+        </div>
+
+
+</section>
+<div class="container">
+    <h3 class="h3">All Product Categories</h3>
+    <div class="row">
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+        <script type="text/javascript">$(document).ready(function(){
+					$('.search').click(function(){
+						var $productview = $(this).parent().parent().parent().parent().parent().next();
+						jQuery($productview).fadeIn('1000');
+					});
+
+					$('.close-btn').click(function(){
+						var $closebtn = $(this).parent();
+						$($closebtn).fadeOut('800');
+					});
+				});</script>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="../images/CelerySticks_ulljfz.jpg" ">
+                        <img class="pic-2" src="../images/Cucumber_w6hlxr.jpg" ">
+                    </a>
+
+                    <ul class="social">
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="cart.html" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">20%</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Celery Sticks</a></h3>
+                    <div class="price">$16.00<span>$20.00</span></div>
+                    <a class="add-to-cart" href="product-single.html">View Details</a>
+                </div>
+
+            </div>
+            <center>
+                <a class="add-to-cart" href="cart.html"><button class="button2" style="margin: 20px;">Add to Cart</button></a>
+            </center>
+        </div>
+
+
+        <div class="product-view">
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="../images/CelerySticks_ulljfz.jpg">
+            </div>
+
+            <div class="product-big-desc">
+
+                <h2>Celery Sticks</h2>
+                <h2>product Code: 4356768</h2>
+                <h5>category: Vegetables</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="../images/a2.jpg" ">
+                        <img class="pic-2" src="../images/product-11.jpg" ">
+                    </a>
+
+                    <ul class="social">
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="cart.html" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">20%</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Harpic</a></h3>
+                    <div class="price">$16.00<span>$20.00</span></div>
+                    <a class="add-to-cart" href="product-single.html">View Details</a>
+                </div>
+
+            </div>
+            <center>
+                <a class="add-to-cart" href="cart.html"><button class="button2" style="margin: 20px;"> Add to Cart</button></a>
+            </center>
+        </div>
+
+        <div class="product-view" >
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="../images/a2.jpg" >
+            </div>
+
+            <div class="product-big-desc">
+                <br><br>
+                <br><br>
+                <h2>Harpic Cleaner</h2>
+                <h2>product Code: 4356768</h2>
+                <h5>category: Cleaner</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="../images/si.jpg" ">
+                        <img class="pic-2" src="../images/si3.jpg" ">
+                    </a>
+
+                    <ul class="social">
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">20%</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Rice</a></h3>
+                    <div class="price">$16.00<span>$20.00</span></div>
+                    <a class="add-to-cart" href="product-single.html">View Details</a>
+                </div>
+
+            </div>
+            <center>
+                <a class="add-to-cart" href="cart.html"><button class="button2" style="margin: 20px;"> Add to Cart</button></a>
+            </center>
+        </div>
+
+        <div class="product-view" >
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="../images/si.jpg" ">
+            </div>
+
+            <div class="product-big-desc">
+                <br><br>
+                <br><br>
+                <h2>Zeeba Rice</h2>
+                <h2>product Code: 4356768</h2>
+                <h5>category: Rice</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="../images/k3.jpg " ">
+                        <img class="pic-2" src="../images/product-details-4.jpg" ">
+                    </a>
+
+                    <ul class="social">
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">20%</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Lipton</a></h3>
+                    <div class="price">$16.00<span>$20.00</span></div>
+                    <a class="add-to-cart" href="product-single.html">View Details</a>
+                </div>
+
+            </div>
+            <center>
+                <a class="add-to-cart" href="cart.html"><button class="button2" style="margin: 20px;"> Add to Cart</button></a>
+            </center>
+        </div>
+        <div class="product-view" >
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="../images/k3.jpg" >
+            </div>
+
+            <div class="product-big-desc">
+                <br><br>
+                <br><br>
+                <h2>Lipton</h2>
+                <h2>product Code: 4356768</h2>
+                <h5>category: Tea</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="../images/a1.jpg" ">
+                        <img class="pic-2" src="../images/product-details-4.jpg" ">
+                    </a>
+
+                    <ul class="social">
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">20%</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Vim Dish Washer</a></h3>
+                    <div class="price">$16.00<span>$20.00</span></div>
+                    <a class="add-to-cart" href="product-single.html">View Details</a>
+                </div>
+
+            </div>
+            <center>
+                <a class="add-to-cart" href="cart.html"><button class="button2" style="margin: 20px;"> Add to Cart</button></a>
+            </center>
+        </div>
+
+        <div class="product-view" style="top: 180%;">
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="../images/a1.jpg" >
+            </div>
+
+            <div class="product-big-desc">
+                <br><br>
+                <br><br>
+                <h2>Vim</h2>
+                <h2>product Code: 4356768</h2>
+                <h5>category: Dish Washer</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="../images/BrusselsSprouts_adwhet.jpg" ">
+                        <img class="pic-2" src="../images/GreenLimes_jrodle.jpg" ">
+                    </a>
+
+                    <ul class="social">
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">20%</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Brussels Sprouts</a></h3>
+                    <div class="price">$16.00<span>$20.00</span></div>
+                    <a class="add-to-cart" href="product-single.html">View Details</a>
+                </div>
+
+            </div>
+            <center>
+                <a class="add-to-cart" href="cart.html"><button class="button2" style="margin: 20px;"> Add to Cart</button></a>
+            </center>
+        </div>
+
+        <div class="product-view" style="top: 180%;">
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="../images/BrusselsSprouts_adwhet.jpg" ">
+            </div>
+
+            <div class="product-big-desc">
+                <br><br>
+                <br><br>
+                <h2>Brussels Sprouts</h2>
+                <h2>product Code: 4356768</h2>
+                <h5>category: Vegetables</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="../images/s8.jpg" ">
+                        <img class="pic-2" src="../images/product-details-4.jpg" ">
+                    </a>
+
+                    <ul class="social">
+
+
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">20%</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Dairy Milk</a></h3>
+                    <div class="price">$16.00<span>$20.00</span></div>
+                    <a class="add-to-cart" href="product-single.html">View Details</a>
+                </div>
+
+            </div>
+            <center>
+                <a class="add-to-cart" href="cart.html"><button class="button2" style="margin: 20px;"> Add to Cart</button></a>
+            </center>
+        </div>
+
+        <div class="product-view" style="top: 180%;">
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="../images/s8.jpg" >
+            </div>
+
+            <div class="product-big-desc">
+                <br><br>
+                <br><br>
+                <h2>Dairy Milk</h2>
+                <h2>product Code: 4356768</h2>
+                <h5>category: Chocolates</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="../images/s5.jpg" ">
+                        <img class="pic-2" src="../images/product-11.jpg" ">
+                    </a>
+
+                    <ul class="social">
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">20%</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Spirit</a></h3>
+                    <div class="price">$16.00<span>$20.00</span></div>
+                    <a class="add-to-cart" href="product-single.html">View Details</a>
+                </div>
+
+            </div>
+            <center>
+                <a class="add-to-cart" href="cart.html"><button class="button2" style="margin: 20px;"> Add to Cart</button></a>
+            </center>
+        </div>
+
+        <div class="product-view" style="top: 180%;">
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="../images/s5.jpg" >
+            </div>
+
+            <div class="product-big-desc">
+                <br><br>
+                <br><br>
+                <h2>Spirit</h2>
+                <h2>product Code: 4356768</h2>
+                <h5>category: Soft Drinks</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<div class="col text-center">
+    <div class="block-27">
+        <ul>
+            <li><a href="#">&lt;</a></li>
+            <li class="active"><span>1</span></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&gt;</a></li>
+        </ul>
+    </div>
+</div>
+
+<br>
+<br>
+
+
+
+
+
+<!-- //top products
+<!-- special offers -->
+<!-- <div class="featured-section" id="projects">
+    <div class="container"> -->
+<!-- tittle heading -->
+<!-- <div class="row justify-content-center pb-5">
+    <div class="col-md-7 heading-section text-center ftco-animate">
+      <span class="subheading">Shop Now</span>
+      <h2>Our Special Offers</h2>
+    </div>
+  </div> -->
+<!-- //tittle heading -->
+<div class="">
+    <div class="nbs-flexisel-container">
+        <div class="nbs-flexisel-inner">
+            <ul id="flexiselDemo1" class="nbs-flexisel-ul">
+
+
+                <li class="nbs-flexisel-item" style="width: 262px;">
+                    <div class="w3l-specilamk">
+                        <div class="speioffer-agile">
+                            <a href="single.html">
+                                <img src="../images/s5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="product-name-w3l">
+                            <h4>
+                                <a href="single.html">Sprite, 2.25L (Pack of 2)</a>
+                            </h4>
+                            <div class="w3l-pricehkj">
+                                <h6>Rs.180.00</h6>
+                                \
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>										</fieldset>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nbs-flexisel-item" style="width: 262px;">
+                    <div class="w3l-specilamk">
+                        <div class="speioffer-agile">
+                            <a href="single2.html">
+                                <img src="../images/s9.jpg" alt="" >
+                            </a>
+                        </div>
+                        <div class="product-name-w3l">
+                            <h4>
+                                <a href="single2.html">Lakme Eyeconic Kajal, 0.35 g</a>
+                            </h4>
+                            <div class="w3l-pricehkj">
+                                <h6>Rs.153.00</h6>
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nbs-flexisel-item" style="width: 262px;">
+                    <div class="w3l-specilamk">
+                        <div class="speioffer-agile">
+                            <a href="single.html">
+                                <img src="../images/s5.jpg" alt="" >
+                            </a>
+                        </div>
+                        <div class="product-name-w3l">
+                            <h4>
+                                <a href="single.html">Sprite, 2.25L (Pack of 2)</a>
+                            </h4>
+                            <div class="w3l-pricehkj">
+                                <h6>Rs.180.00</h6>
+                                \
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>										</fieldset>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+        </div>
+    </div>
+</div>

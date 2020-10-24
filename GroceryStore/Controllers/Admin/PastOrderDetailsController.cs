@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace GroceryStore.Controllers.Admin
 {
-    public class OrderDetailController : Controller
+    public class PastOrderDetailsController : Controller
     {
-        // GET: OrderDetail
-        public ActionResult OrderDetail()
+        // GET: PastOrderDetails
+        public ActionResult PastOrderDetails()
         {
             return View();
         }
