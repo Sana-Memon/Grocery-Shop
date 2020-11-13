@@ -77,3 +77,5 @@ C:\Users\Sanaa\source\repos\GroceryStore\GroceryStore\obj\Debug\GroceryStore.csp
 C:\Users\Sanaa\source\repos\GroceryStore\GroceryStore\obj\Debug\GroceryStore.csproj.CopyComplete
 C:\Users\Sanaa\source\repos\GroceryStore\GroceryStore\obj\Debug\GroceryStore.dll
 C:\Users\Sanaa\source\repos\GroceryStore\GroceryStore\obj\Debug\GroceryStore.pdb
+C:\Users\Sanaa\source\repos\GroceryStore\GroceryStore\bin\EntityFramework.dll
+C:\Users\Sanaa\source\repos\GroceryStore\GroceryStore\bin\EntityFramework.xml
