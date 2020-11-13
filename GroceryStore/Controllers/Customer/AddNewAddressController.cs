@@ -12,6 +12,7 @@ namespace GroceryStore.Controllers.Customer
         public ActionResult AddNewAddress()
         {
             return View();
+//test
         }
     }
 }
