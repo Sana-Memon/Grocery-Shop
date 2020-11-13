@@ -45,10 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -156,12 +162,91 @@
     <Compile Include="Controllers\DeliveryMan\OrderStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\myLoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Controllers\SingleProductController.cs" />
     <Compile Include="Controllers\ThankyouController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\about.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Complaint_Type.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer_Complaints.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer_Referals.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DealAndDiscount.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Delivery_boy.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GroceryShopModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroceryShopModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GroceryShopModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GroceryShopModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroceryShopModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\List.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\order.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\orderProductsPrior.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\orderProductsTrain.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderToDeliver.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OurSatisfiedCustomer.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OurTeam.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product_Location.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Review_Ratings.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SKU.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>GroceryShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2044,6 +2129,16 @@
     <Content Include="images\tab3.png" />
     <Content Include="images\VeggiePlatter_ztcg0m.jpg" />
     <Content Include="images\videoimg2.png" />
+    <Content Include="Models\GroceryShopModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GroceryShopModel.Context.cs</LastGenOutput>
+      <DependentUpon>GroceryShopModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\GroceryShopModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GroceryShopModel.edmx</DependentUpon>
+      <LastGenOutput>GroceryShopModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="css\.DS_Store" />
@@ -2114,6 +2209,13 @@
     <Content Include="CustomerAssets\Profile Card\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.ttf" />
     <Content Include="CustomerAssets\Profile Card\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.woff" />
     <Content Include="CustomerAssets\Profile Card\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.woff2" />
+    <EntityDeploy Include="Models\GroceryShopModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GroceryShopModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\GroceryShopModel.edmx.diagram">
+      <DependentUpon>GroceryShopModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2180,10 +2282,14 @@
     <Content Include="Views\PastOrderDetails\PastOrderDetails.cshtml" />
     <Content Include="Views\AvailableSttock\dfb.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
+    <Content Include="Views\Home\SatisfiedCustomers.cshtml" />
+    <Content Include="Views\Home\TopRatedProduct.cshtml" />
+    <Content Include="Views\Product\Shop.cshtml" />
+    <Content Include="Views\myLogin\myLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2197,6 +2303,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

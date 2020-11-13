@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GroceryStoreModelStoreContainer" CdmEntityContainer="GroceryStoreEntities">
+    <EntitySetMapping Name="abouts">
+      <EntityTypeMapping TypeName="GroceryStoreModel.about">
+        <MappingFragment StoreEntitySet="about">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="GroceryStoreModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="position_id" ColumnName="position_id" />
+          <ScalarProperty Name="category1" ColumnName="category" />
+          <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Complaint_Type">
+      <EntityTypeMapping TypeName="GroceryStoreModel.Complaint_Type">
+        <MappingFragment StoreEntitySet="Complaint_Type">
+          <ScalarProperty Name="Complaint_Type_Id" ColumnName="Complaint_Type_Id" />
+          <ScalarProperty Name="Complaint_Tpe" ColumnName="Complaint_Tpe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer_Referals">
+      <EntityTypeMapping TypeName="GroceryStoreModel.Customer_Referals">
+        <MappingFragment StoreEntitySet="Customer_Referals">
+          <ScalarProperty Name="CR_Id" ColumnName="CR_Id" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="referees_Email" ColumnName="referees_Email" />
+          <ScalarProperty Name="Joining_Status" ColumnName="Joining_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="GroceryStoreModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DealAndDiscounts">
+      <EntityTypeMapping TypeName="GroceryStoreModel.DealAndDiscount">
+        <MappingFragment StoreEntitySet="DealAndDiscount">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DealName" ColumnName="DealName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="EndingDate" ColumnName="EndingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Delivery_boy">
+      <EntityTypeMapping TypeName="GroceryStoreModel.Delivery_boy">
+        <MappingFragment StoreEntitySet="Delivery-boy">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lists">
+      <EntityTypeMapping TypeName="GroceryStoreModel.List">
+        <MappingFragment StoreEntitySet="List">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderProductsPriors">
+      <EntityTypeMapping TypeName="GroceryStoreModel.orderProductsPrior">
+        <MappingFragment StoreEntitySet="orderProductsPrior">
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="add_to_cart_order" ColumnName="add_to_cart_order" />
+          <ScalarProperty Name="reordered" ColumnName="reordered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="GroceryStoreModel.order">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="customerr_id" ColumnName="customerr_id" />
+          <ScalarProperty Name="eval_set" ColumnName="eval_set" />
+          <ScalarProperty Name="order_number" ColumnName="order_number" />
+          <ScalarProperty Name="order_dow" ColumnName="order_dow" />
+          <ScalarProperty Name="order_hour_of_day" ColumnName="order_hour_of_day" />
+          <ScalarProperty Name="days_since_prior_order" ColumnName="days_since_prior_order" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OurSatisfiedCustomers">
+      <EntityTypeMapping TypeName="GroceryStoreModel.OurSatisfiedCustomer">
+        <MappingFragment StoreEntitySet="OurSatisfiedCustomers">
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OurTeams">
+      <EntityTypeMapping TypeName="GroceryStoreModel.OurTeam">
+        <MappingFragment StoreEntitySet="OurTeam">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Location">
+      <EntityTypeMapping TypeName="GroceryStoreModel.Product_Location">
+        <MappingFragment StoreEntitySet="Product_Location">
+          <ScalarProperty Name="position_id" ColumnName="position_id" />
+          <ScalarProperty Name="position" ColumnName="position" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="GroceryStoreModel.product">
+        <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="CostPrice" ColumnName="CostPrice" />
+          <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+          <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
+          <ScalarProperty Name="StockAmount" ColumnName="StockAmount" />
+          <ScalarProperty Name="SkuId" ColumnName="SkuId" />
+          <ScalarProperty Name="MartLocation" ColumnName="MartLocation" />
+          <ScalarProperty Name="ImageFilePath2" ColumnName="ImageFilePath2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Review_Ratings">
+      <EntityTypeMapping TypeName="GroceryStoreModel.Review_Ratings">
+        <MappingFragment StoreEntitySet="Review&amp;Ratings">
+          <ScalarProperty Name="R_Id" ColumnName="R_Id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SKUs">
+      <EntityTypeMapping TypeName="GroceryStoreModel.SKU">
+        <MappingFragment StoreEntitySet="SKUs">
+          <ScalarProperty Name="SkuId" ColumnName="SkuId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="GroceryStoreModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="GroceryStoreModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Subscription" ColumnName="Subscription" />
+          <ScalarProperty Name="Home_Address" ColumnName="Home_Address" />
+          <ScalarProperty Name="Office_Addres" ColumnName="Office_Addres" />
+          <ScalarProperty Name="Other_Address" ColumnName="Other_Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer_Complaints">
+      <EntityTypeMapping TypeName="GroceryStoreModel.Customer_Complaints">
+        <MappingFragment StoreEntitySet="Customer_Complaints">
+          <ScalarProperty Name="Complaint_Id" ColumnName="Complaint_Id" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Complaint_type_Id" ColumnName="Complaint_type_Id" />
+          <ScalarProperty Name="Complaint" ColumnName="Complaint" />
+          <ScalarProperty Name="Complaint_Status" ColumnName="Complaint_Status" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderProductsTrains">
+      <EntityTypeMapping TypeName="GroceryStoreModel.orderProductsTrain">
+        <MappingFragment StoreEntitySet="orderProductsTrain">
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="add_to_cart_order" ColumnName="add_to_cart_order" />
+          <ScalarProperty Name="reordered" ColumnName="reordered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderToDelivers">
+      <EntityTypeMapping TypeName="GroceryStoreModel.OrderToDeliver">
+        <MappingFragment StoreEntitySet="OrderToDeliver">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="DeliveryManId" ColumnName="DeliveryManId" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Customer_Order" TypeName="GroceryStoreModel.Customer_Order" StoreEntitySet="Customer_Order">
+      <EndProperty Name="Customers">
+        <ScalarProperty Name="Customer_id" ColumnName="Customer_ID" />
+      </EndProperty>
+      <EndProperty Name="orders">
+        <ScalarProperty Name="order_id" ColumnName="Order_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

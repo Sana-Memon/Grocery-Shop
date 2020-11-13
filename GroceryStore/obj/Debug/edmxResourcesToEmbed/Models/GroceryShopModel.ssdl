@@ -1,0 +1,620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GroceryStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="about">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="position_id" Type="int" />
+    <Property Name="category" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Complaint_Type">
+    <Key>
+      <PropertyRef Name="Complaint_Type_Id" />
+    </Key>
+    <Property Name="Complaint_Type_Id" Type="int" Nullable="false" />
+    <Property Name="Complaint_Tpe" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.Customer_Complaints' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Customer_Complaints">
+    <Key>
+      <PropertyRef Name="Complaint_Id" />
+      <PropertyRef Name="Customer_Id" />
+      <PropertyRef Name="Complaint_type_Id" />
+      <PropertyRef Name="Complaint" />
+    </Key>
+    <Property Name="Complaint_Id" Type="int" Nullable="false" />
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
+    <Property Name="Complaint_type_Id" Type="int" Nullable="false" />
+    <Property Name="Complaint" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Complaint_Status" Type="nchar" MaxLength="10" />
+    <Property Name="date" Type="date" />
+  </EntityType>
+  <EntityType Name="Customer_Order">
+    <Key>
+      <PropertyRef Name="Order_ID" />
+      <PropertyRef Name="Customer_ID" />
+    </Key>
+    <Property Name="Order_ID" Type="int" Nullable="false" />
+    <Property Name="Customer_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer_Referals">
+    <Key>
+      <PropertyRef Name="CR_Id" />
+    </Key>
+    <Property Name="CR_Id" Type="int" Nullable="false" />
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
+    <Property Name="referees_Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Joining_Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Customer_id" />
+    </Key>
+    <Property Name="Customer_id" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DealAndDiscount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="DealName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="createdDate" Type="date" Nullable="false" />
+    <Property Name="EndingDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Delivery-boy">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CNIC" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="List">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="orderProductsPrior">
+    <Key>
+      <PropertyRef Name="order_id" />
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="add_to_cart_order" Type="varchar" MaxLength="50" />
+    <Property Name="reordered" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="orderProductsTrain">
+    <Key>
+      <PropertyRef Name="order_id" />
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="add_to_cart_order" Type="varchar" MaxLength="50" />
+    <Property Name="reordered" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="orders">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="customerr_id" Type="int" Nullable="false" />
+    <Property Name="eval_set" Type="varchar" MaxLength="50" />
+    <Property Name="order_number" Type="varchar" MaxLength="50" />
+    <Property Name="order_dow" Type="varchar" MaxLength="50" />
+    <Property Name="order_hour_of_day" Type="varchar" MaxLength="50" />
+    <Property Name="days_since_prior_order" Type="varchar" MaxLength="50" />
+    <Property Name="date" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OrderToDeliver">
+    <Key>
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="DeliveryManId" />
+      <PropertyRef Name="OrderStatus" />
+    </Key>
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="DeliveryManId" Type="int" Nullable="false" />
+    <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="OurSatisfiedCustomers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Customer_Id" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OurTeam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="UserID" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product_Location">
+    <Key>
+      <PropertyRef Name="position_id" />
+    </Key>
+    <Property Name="position_id" Type="int" Nullable="false" />
+    <Property Name="position" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="product_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" />
+    <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CostPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DiscountPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="FullDescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StockAmount" Type="int" />
+    <Property Name="SkuId" Type="int" />
+    <Property Name="MartLocation" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImageFilePath2" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Review&amp;Ratings">
+    <Key>
+      <PropertyRef Name="R_Id" />
+    </Key>
+    <Property Name="R_Id" Type="int" Nullable="false" />
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="Rate" Type="int" Nullable="false" />
+    <Property Name="Review" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Customer_ID" Type="int" Nullable="false" />
+    <Property Name="ImageFilePath" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SKUs">
+    <Key>
+      <PropertyRef Name="SkuId" />
+    </Key>
+    <Property Name="SkuId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactNo" Type="nchar" MaxLength="15" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
+    <Property Name="Subscription" Type="bit" />
+    <Property Name="Home_Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="Office_Addres" Type="nvarchar" MaxLength="100" />
+    <Property Name="Other_Address" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__Review&amp;Ra__produ__68D28DBC">
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="Review&amp;Ratings" Type="Self.Review&amp;Ratings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Review&amp;Ratings">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Complaints_Complaint_Type">
+    <End Role="Complaint_Type" Type="Self.Complaint_Type" Multiplicity="1" />
+    <End Role="Customer_Complaints" Type="Self.Customer_Complaints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Complaint_Type">
+        <PropertyRef Name="Complaint_Type_Id" />
+      </Principal>
+      <Dependent Role="Customer_Complaints">
+        <PropertyRef Name="Complaint_type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Complaints_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Customer_Complaints" Type="Self.Customer_Complaints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Customer_Complaints">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Order_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Customer_Order" Type="Self.Customer_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Customer_Order">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Order_orders">
+    <End Role="orders" Type="Self.orders" Multiplicity="1" />
+    <End Role="Customer_Order" Type="Self.Customer_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="Customer_Order">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Referals_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Customer_Referals" Type="Self.Customer_Referals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Customer_Referals">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DealAndDiscount_products">
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="DealAndDiscount" Type="Self.DealAndDiscount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="DealAndDiscount">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Delivery-boy_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Delivery-boy" Type="Self.Delivery-boy" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Delivery-boy">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_departments_aisles">
+    <End Role="Product_Location" Type="Self.Product_Location" Multiplicity="0..1" />
+    <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Location">
+        <PropertyRef Name="position_id" />
+      </Principal>
+      <Dependent Role="Categories">
+        <PropertyRef Name="position_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_List_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="List" Type="Self.List" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="List">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_List_products">
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="List" Type="Self.List" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="List">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderProductsPrior_orders1">
+    <End Role="orders" Type="Self.orders" Multiplicity="1" />
+    <End Role="orderProductsPrior" Type="Self.orderProductsPrior" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="orderProductsPrior">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderProductsPrior_products">
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="orderProductsPrior" Type="Self.orderProductsPrior" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="orderProductsPrior">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderToDeliver_Delivery-boy">
+    <End Role="Delivery-boy" Type="Self.Delivery-boy" Multiplicity="1" />
+    <End Role="OrderToDeliver" Type="Self.OrderToDeliver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Delivery-boy">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="OrderToDeliver">
+        <PropertyRef Name="DeliveryManId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderToDeliver_orders">
+    <End Role="orders" Type="Self.orders" Multiplicity="1" />
+    <End Role="OrderToDeliver" Type="Self.OrderToDeliver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="OrderToDeliver">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OurSatisfiedCustomers_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="OurSatisfiedCustomers" Type="Self.OurSatisfiedCustomers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="OurSatisfiedCustomers">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OurTeam_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="OurTeam" Type="Self.OurTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="OurTeam">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_SKUs">
+    <End Role="SKUs" Type="Self.SKUs" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SKUs">
+        <PropertyRef Name="SkuId" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="SkuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review&amp;Ratings_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Review&amp;Ratings" Type="Self.Review&amp;Ratings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Review&amp;Ratings">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GroceryStoreModelStoreContainer">
+    <EntitySet Name="about" EntityType="Self.about" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Complaint_Type" EntityType="Self.Complaint_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer_Order" EntityType="Self.Customer_Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer_Referals" EntityType="Self.Customer_Referals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DealAndDiscount" EntityType="Self.DealAndDiscount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Delivery-boy" EntityType="Self.Delivery-boy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="List" EntityType="Self.List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderProductsPrior" EntityType="Self.orderProductsPrior" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OurSatisfiedCustomers" EntityType="Self.OurSatisfiedCustomers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OurTeam" EntityType="Self.OurTeam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Location" EntityType="Self.Product_Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Review&amp;Ratings" EntityType="Self.Review&amp;Ratings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SKUs" EntityType="Self.SKUs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer_Complaints" EntityType="Self.Customer_Complaints" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Customer_Complaints].[Complaint_Id] AS [Complaint_Id], 
+[Customer_Complaints].[Customer_Id] AS [Customer_Id], 
+[Customer_Complaints].[Complaint_type_Id] AS [Complaint_type_Id], 
+[Customer_Complaints].[Complaint] AS [Complaint], 
+[Customer_Complaints].[Complaint_Status] AS [Complaint_Status], 
+[Customer_Complaints].[date] AS [date]
+FROM [dbo].[Customer_Complaints] AS [Customer_Complaints]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="orderProductsTrain" EntityType="Self.orderProductsTrain" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[orderProductsTrain].[order_id] AS [order_id], 
+[orderProductsTrain].[product_id] AS [product_id], 
+[orderProductsTrain].[add_to_cart_order] AS [add_to_cart_order], 
+[orderProductsTrain].[reordered] AS [reordered]
+FROM [dbo].[orderProductsTrain] AS [orderProductsTrain]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OrderToDeliver" EntityType="Self.OrderToDeliver" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[OrderToDeliver].[OrderID] AS [OrderID], 
+[OrderToDeliver].[DeliveryManId] AS [DeliveryManId], 
+[OrderToDeliver].[OrderStatus] AS [OrderStatus], 
+[OrderToDeliver].[Date] AS [Date]
+FROM [dbo].[OrderToDeliver] AS [OrderToDeliver]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Review&amp;Ra__produ__68D28DBC" Association="Self.FK__Review&amp;Ra__produ__68D28DBC">
+      <End Role="products" EntitySet="products" />
+      <End Role="Review&amp;Ratings" EntitySet="Review&amp;Ratings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Complaints_Complaint_Type" Association="Self.FK_Customer_Complaints_Complaint_Type">
+      <End Role="Complaint_Type" EntitySet="Complaint_Type" />
+      <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Complaints_Customers" Association="Self.FK_Customer_Complaints_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Order_Customers" Association="Self.FK_Customer_Order_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Customer_Order" EntitySet="Customer_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Order_orders" Association="Self.FK_Customer_Order_orders">
+      <End Role="orders" EntitySet="orders" />
+      <End Role="Customer_Order" EntitySet="Customer_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Referals_Customers" Association="Self.FK_Customer_Referals_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Customer_Referals" EntitySet="Customer_Referals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_Users1" Association="Self.FK_Customers_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DealAndDiscount_products" Association="Self.FK_DealAndDiscount_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="DealAndDiscount" EntitySet="DealAndDiscount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Delivery-boy_Users" Association="Self.FK_Delivery-boy_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Delivery-boy" EntitySet="Delivery-boy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_departments_aisles" Association="Self.FK_departments_aisles">
+      <End Role="Product_Location" EntitySet="Product_Location" />
+      <End Role="Categories" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_List_Customers" Association="Self.FK_List_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="List" EntitySet="List" />
+    </AssociationSet>
+    <AssociationSet Name="FK_List_products" Association="Self.FK_List_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="List" EntitySet="List" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderProductsPrior_orders1" Association="Self.FK_orderProductsPrior_orders1">
+      <End Role="orders" EntitySet="orders" />
+      <End Role="orderProductsPrior" EntitySet="orderProductsPrior" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderProductsPrior_products" Association="Self.FK_orderProductsPrior_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="orderProductsPrior" EntitySet="orderProductsPrior" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderToDeliver_Delivery-boy" Association="Self.FK_OrderToDeliver_Delivery-boy">
+      <End Role="Delivery-boy" EntitySet="Delivery-boy" />
+      <End Role="OrderToDeliver" EntitySet="OrderToDeliver" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderToDeliver_orders" Association="Self.FK_OrderToDeliver_orders">
+      <End Role="orders" EntitySet="orders" />
+      <End Role="OrderToDeliver" EntitySet="OrderToDeliver" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OurSatisfiedCustomers_Customers" Association="Self.FK_OurSatisfiedCustomers_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="OurSatisfiedCustomers" EntitySet="OurSatisfiedCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OurTeam_Users" Association="Self.FK_OurTeam_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="OurTeam" EntitySet="OurTeam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_Categories" Association="Self.FK_products_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_SKUs" Association="Self.FK_products_SKUs">
+      <End Role="SKUs" EntitySet="SKUs" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review&amp;Ratings_Customers" Association="Self.FK_Review&amp;Ratings_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Review&amp;Ratings" EntitySet="Review&amp;Ratings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<GroceryStore.Models.product>
+
+
+@foreach (var item in Model)
+{
+    <div class="col-md-3 d-flex">
+        <div class="product ftco-animate">
+            <div class="img d-flex align-items-center justify-content-center" style="background-image: url(@item.ImageFilePath);">
+                <div class="desc">
+                    <p class="meta-prod d-flex">
+                        <a href="../Cart/Cart" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                        <a class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                    </p>
+                </div>
+            </div>
+            <div class="text text-center">
+                <span class="category">Sweet</span>
+                <h2>@item.product_name</h2>
+                <span class="price">Rs @item.SellingPrice</span>
+            </div>
+        </div>
+    </div>
+    <div class="product-view">
+        <div class="close-btn">X</div>
+        <div class="product-big-image">
+            <img style="height: 500px; width: 300px;" src="@item.ImageFilePath" >
+        </div>
+
+        <div class="product-big-desc">
+            <br><br>
+            <br><br>
+            <h2>@item.product_name</h2>
+            <h2>product Code: 4356768</h2>
+            <h5>category: Home Freshners</h5>
+            <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+            <div class="price">
+                <h4 class="old-price"><del>Rs. @item.SellingPrice</del><sup>@item.DiscountPrice off</sup></h4>
+                <h4 class="new-price">Rs. @item.DiscountPrice +<abbr>99 Shipping</abbr></h4>
+            </div>
+
+            <button class="button2">Click to Buy</button>
+            <br>
+            <p><b>Warrenty: </b> 1 day seller replacement </p>
+            <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+        </div>
+    </div>
+}
+
