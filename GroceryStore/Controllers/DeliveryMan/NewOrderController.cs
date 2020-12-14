@@ -13,5 +13,13 @@ namespace GroceryStore.Controllers.DeliveryMan
         {
             return View();
         }
+
+        // POST: place an order
+        /*public ActionResult StoreOrder()
+        {
+            var Form = Request.Form;
+
+            return null;
+        }*/
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroceryStore.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,14 @@ namespace GroceryStore.Controllers.DeliveryMan
         // GET: DeliveryManDashboard
         public ActionResult DeliveryManDashboard()
         {
-            return View();
+            string rolename = (Session["RoleName"] != null) ? Session["RoleName"].ToString() : "";
+            int? userId = (Session["userID"] != null) ? Int32.Parse(Session["userID"].ToString()) : 0;
+
+            if (rolename == "" && userId == 0) return RedirectToAction("Auth", "Auth");
+
+            if (rolename == AppRoles.DeliveryBoy)
+                return View();
+            return RedirectToAction("Auth", "Auth");
         }
     }
 }

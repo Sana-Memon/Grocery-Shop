@@ -1,10 +1,21 @@
-﻿@model IEnumerable<GroceryStore.Models.product>
+﻿@model IEnumerable<GroceryStore.Controllers.Dto.ProductDto>
+
+
+
+
+
+@if (true)
+{
+    <a id="proceed-checkout" href="../Cart/Cart" style="position: relative; z-index: 10000; visibility: @( Model.Where(x => x.customerId > 0).ToList().Count > 0 ?"visible":"hidden")">
+        <button id="proceed-button" type="submit" class="btn btn-primary" style="position: fixed; bottom: 12px; width: 180px; right: 25px; padding: 10px;"><span style=" display: inline-block; margin-right: 12px; font-size: 1.8em; font-weight: 900;">Proceed</span> <span style="font-size: 1.8em; font-weight: bold; position: relative; top: 2px;">&#10132;</span></button>
+    </a>
+}
 
 
 @foreach (var item in Model)
 {
     <div class="col-md-3 col-sm-6">
-        <div class="product-grid">
+        <div class="product-grid" style="height: 400px;">
             <div class="product-image">
                 <a href="#">
                     <img class="pic-1" src="@item.ImageFilePath">
@@ -13,7 +24,7 @@
 
                 <ul class="social">
                     <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
-                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                    <li><a href="../SingleProduct/SingleProduct?product_id=@item.product_id" data-tip="Product Detail"><i class="fa fa-shopping-bag"></i></a></li>
                     <li><a href="cart.html" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
 
@@ -30,7 +41,7 @@
                 <li class="fa fa-star disable"></li>
             </ul>
 
-            <div class="product-content">
+            <div class="product-content" style="padding: 0px;">
                 <h3 class="title"><a href="#">@item.product_name</a></h3>
                 <div class="price">@item.CostPrice<span>@item.DiscountPrice</span></div>
                 <a class="add-to-cart" href="product-single.html">View Details</a>
@@ -38,7 +49,20 @@
 
         </div>
         <center>
-            <a class="add-to-cart" href="../Cart/Cart"><button class="button2" style="margin: 20px;">Add to Cart</button></a>
+            @*action="../Cart/SubmitList"*@
+            <form onsubmit="submitProduct(event)">
+                <input type="hidden" name="productId" value="@item.product_id">
+                <input type="hidden" name="customerId" value="@item.customerId" />
+                <a class="add-to-cart" href="#">
+                    @if (item.customerId > 0)
+                    {
+                        <button class="button2" style="padding: 10px 20px;">Remove</button> }
+                    else
+                    {
+                        <button class="button2" style="padding: 10px 20px;">Add to Cart</button>}
+                </a>
+                @*<input name="hidden" name="customerId" value="@item.cus">*@
+            </form>
         </center>
     </div>
     <div class="product-view">
@@ -63,6 +87,78 @@
             <p><b>Warrenty: </b> 1 day seller replacement </p>
             <p><b>Shipping:</b> Dispatched with 2-3 days</p>
         </div>
-    </div>
+    </div>}
+
+
+<script>
+    let allProducts = @Model.Where(x => x.customerId > 0).ToList().Count;
+    let customerValue = @( @Model.Where(x => x.customerId > 0).ToList().FirstOrDefault() != null ? @Model.Where(x => x.customerId > 0).ToList().FirstOrDefault().customerId : 0 )
+
+    console.log(allProducts);
+    console.log(customerValue);
+    const submitProduct = (event) => {
+        event.preventDefault();
+        const messageRemove = "Remove";
+        const messageAdd = "Add to Cart";
+
+        let element = $(event.srcElement);
+        let deleteValue = 0;
+
+        const child = $(element.children().get(2));
+
+
+        @*if ($(child).children().get(0).textContent == messageRemove) {
+            deleteValue = 1;
+        } else {
+            deleteValue = 0;
+        }*@
+
+        $.post(window.location.origin + '/Cart/SubmitList', $(event.srcElement).serialize(),
+            (data) => {
+                if (data == true) {
+                    $(child).children().get(0).textContent = messageRemove;
+                    allProducts = allProducts + 1;
+                    $($(event.srcElement).children().get(1)).attr("value", customerValue.toString());
+                    @*$($(child).children().get(1)).attr('value', customerValue.toString());*@
+                }
+                else if (data == false) {
+                    $(child).children().get(0).textContent = messageAdd;
+                    allProducts = allProducts - 1;
+                    console.log($($(child).children().get(1)));
+                    $($(event.srcElement).children().get(1)).attr("value", "0");
+                }
+                console.log($($(child).children()));
+                //console.log(allProducts);
+
+                if (allProducts == 0) {
+                    $("#proceed-button").css('visibility', 'hidden');
+
+                } else if (allProducts > 0) {
+                    $("#proceed-button").css('visibility', 'visible');
+                }
+
+                console.log("doc is append");
+                //document.body.innerHTML +=('<a href="../Cart/Cart"> < button id = "proceed-button" type = "submit" class= "btn btn-primary" style = "position: fixed; bottom: 12px; width: 200px; right: 25px; padding: 10px;" > <span style=" display: inline-block; margin-right: 12px; font-size: 2em; font-weight: 900;">proceed</span> <span style="font-size: 2em; font-weight: bold; position: relative; top: 2px;">&#10132;</span></button ></a>')
+
+                @*console.log("data has been uploaded ");
+                console.log(data);
+                console.log(element.parent().parent());
+                element.parent().parent().remove();*@
+            }
+        );
+
 
     }
+</script>
+
+<style>
+    @@media screen and (max-width: 600px) {
+        #proceed-checkout button {
+            width: 120px !important;
+        }
+
+            #proceed-checkout button span {
+                font-size: 1.2em !important;
+            }
+    }
+</style>

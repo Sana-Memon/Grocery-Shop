@@ -1,0 +1,67 @@
+﻿@model GroceryStore.Models.Delivery_boy
+
+@{
+    //Layout = "~/Views/Shared/AdminDashboard.cshtml";
+
+    Layout = null;
+}
+
+<div id="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div>
+                <h4>Delivery_boy</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CNIC)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CNIC)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ContactNo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ContactNo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.User.FullName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.User.FullName)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>

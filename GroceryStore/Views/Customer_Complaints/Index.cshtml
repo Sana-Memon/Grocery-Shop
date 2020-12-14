@@ -1,0 +1,64 @@
+﻿@model IEnumerable<GroceryStore.Models.Customer_Complaints>
+
+@{
+    //Layout = "~/Views/Shared/AdminDashboard.cshtml";
+    Layout = null;
+}
+
+<div id="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1 class="page-header">All Complaints</h1>
+            </div>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Complaint_Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Complaint_Type.Complaint_Tpe)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer.Customer_id)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Complaint_Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Complaint_Type.Complaint_Tpe)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer.Customer_id)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>

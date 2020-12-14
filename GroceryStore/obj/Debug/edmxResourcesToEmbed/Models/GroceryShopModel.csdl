@@ -104,7 +104,7 @@
     <Key>
       <PropertyRef Name="order_id" />
     </Key>
-    <Property Name="order_id" Type="Int32" Nullable="false" />
+    <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="customerr_id" Type="Int32" Nullable="false" />
     <Property Name="eval_set" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="order_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -168,7 +168,7 @@
     <NavigationProperty Name="DealAndDiscounts" Relationship="Self.FK_DealAndDiscount_products" FromRole="products" ToRole="DealAndDiscount" />
     <NavigationProperty Name="Lists" Relationship="Self.FK_List_products" FromRole="products" ToRole="List" />
     <NavigationProperty Name="orderProductsPriors" Relationship="Self.FK_orderProductsPrior_products" FromRole="products" ToRole="orderProductsPrior" />
-    <NavigationProperty Name="Review_Ratings" Relationship="Self.FK__Review_Ra__produ__68D28DBC" FromRole="products" ToRole="Review_Ratings" />
+    <NavigationProperty Name="Review_Ratings" Relationship="Self.FK__Review_Ra__produ__6ABAD62E" FromRole="products" ToRole="Review_Ratings" />
     <NavigationProperty Name="SKU" Relationship="Self.FK_products_SKUs" FromRole="products" ToRole="SKUs" />
   </EntityType>
   <EntityType Name="Review_Ratings">
@@ -182,7 +182,7 @@
     <Property Name="Customer_ID" Type="Int32" Nullable="false" />
     <Property Name="ImageFilePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_Review_Ratings_Customers" FromRole="Review_Ratings" ToRole="Customers" />
-    <NavigationProperty Name="product" Relationship="Self.FK__Review_Ra__produ__68D28DBC" FromRole="Review_Ratings" ToRole="products" />
+    <NavigationProperty Name="product" Relationship="Self.FK__Review_Ra__produ__6ABAD62E" FromRole="Review_Ratings" ToRole="products" />
   </EntityType>
   <EntityType Name="SKU">
     <Key>
@@ -464,7 +464,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Review_Ra__produ__68D28DBC">
+  <Association Name="FK__Review_Ra__produ__6ABAD62E">
     <End Role="products" Type="Self.product" Multiplicity="1" />
     <End Role="Review_Ratings" Type="Self.Review_Ratings" Multiplicity="*" />
     <ReferentialConstraint>
@@ -492,7 +492,7 @@
     <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
     <End Role="orders" Type="Self.order" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="GroceryStoreEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="GroceryStoreEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="abouts" EntityType="Self.about" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Complaint_Type" EntityType="Self.Complaint_Type" />
@@ -582,7 +582,7 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="OurTeam" EntitySet="OurTeams" />
     </AssociationSet>
-    <AssociationSet Name="FK__Review_Ra__produ__68D28DBC" Association="Self.FK__Review_Ra__produ__68D28DBC">
+    <AssociationSet Name="FK__Review_Ra__produ__6ABAD62E" Association="Self.FK__Review_Ra__produ__6ABAD62E">
       <End Role="products" EntitySet="products" />
       <End Role="Review_Ratings" EntitySet="Review_Ratings" />
     </AssociationSet>

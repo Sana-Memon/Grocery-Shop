@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewBag.Title = "SingleProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -35,19 +36,19 @@
         </div>
         <div class="col-md-6">
             <div class="row">
-                <h2>Zeeba High Quality Rice</h2>
+                <h2>@Model.product_name</h2>
             </div>
             <div class="row">
-                <h1><i class="fa fa-inr" aria-hidden="true"></i> 599</h1>
+                <h1><i class="fa fa-inr" aria-hidden="true"></i> @Model.SellingPrice</h1>
                 &nbsp; &nbsp;
                 <h3><del>799</del></h3>
                 &nbsp; &nbsp;
-                <h2 class="text-success">30% off</h2>
+                <h2 class="text-success">@Model.DiscountPrice</h2>
             </div>
             <div class="row">
                 <h3 class="text-warning"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></h3>
                 &nbsp; &nbsp;
-                <h5>1200 star rating  and 250 reviews</h5>
+                <h5>@Model.DealAndDiscounts</h5>
             </div>
             <div class="row">
                 <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>Bank Offer</strong> 20% Instant Discount on SBI Credit Cards</p>

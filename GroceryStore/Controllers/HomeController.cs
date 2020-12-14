@@ -9,7 +9,7 @@ namespace GroceryStore.Controllers
 {
     public class HomeController : Controller
     {
-        GroceryShopModels db = new GroceryShopModels();
+        GroceryStoreEntities db = new GroceryStoreEntities();
         public ActionResult Index()
         {
             return View();
