@@ -9,12 +9,20 @@ namespace GroceryStore.Controllers.Customer
 {
     public class AddNewAddressController : Controller
     {
+        private GroceryStoreEntities db = new GroceryStoreEntities();
         // GET: AddNewAddress
         public ActionResult AddNewAddress()
         {
             ViewBag.saveresult = "";
 
-            return View();  
+            if (Session["RoleName"] == null)
+            {
+                return RedirectToAction("Auth", "Auth");
+            }
+            int id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+
+            return View(user);  
         }
 
         [HttpPost]

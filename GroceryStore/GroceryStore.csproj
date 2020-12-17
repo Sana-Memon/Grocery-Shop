@@ -198,6 +198,7 @@
     <Compile Include="Controllers\Admin\Delivery_boyController.cs" />
     <Compile Include="Controllers\Dto\ListDto.cs" />
     <Compile Include="Controllers\Dto\ProductDto.cs" />
+    <Compile Include="Controllers\Dto\UserProducts.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\myLoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />

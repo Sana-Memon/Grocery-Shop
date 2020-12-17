@@ -1,9 +1,9 @@
-﻿@model IEnumerable<GroceryStore.Models.product>
+﻿@model GroceryStore.Controllers.Dto.UserProducts
 
 @{
-   
-    // Layout = "~/Views/Shared/AdminDashboard.cshtml";
-    Layout = null;
+    ViewBag.User = Model.User;
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
+    @*Layout = null;*@
 
 }
 
@@ -31,89 +31,93 @@
                                 <p>
                                     @Html.ActionLink("Create New", "Create")
                                 </p>
-                                <table class="table">
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.product_name)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.ImageFilePath)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.SellingPrice)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.CostPrice)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.DiscountPrice)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.FullDescription)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.StockAmount)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.MartLocation)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.ImageFilePath2)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Category.category1)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.SKU.Description)
-                                        </th>
-                                        <th></th>
-                                    </tr>
-
-                                    @foreach (var item in Model)
-                                    {
+                                @if (Model.Products.Count() > 0)
+                                {
+                                    <table class="table">
                                         <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.product_name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ImageFilePath)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SellingPrice)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CostPrice)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.DiscountPrice)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.FullDescription)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.StockAmount)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.MartLocation)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ImageFilePath2)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Category.category1)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SKU.Description)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.product_id }) |
-                                                @Html.ActionLink("Details", "Details", new { id = item.product_id }) |
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.product_id })
-                                            </td>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].product_name)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].ImageFilePath)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].SellingPrice)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].CostPrice)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].DiscountPrice)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].FullDescription)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].StockAmount)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].MartLocation)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].ImageFilePath2)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].Category.category1)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Products[0].SKU.Description)
+                                            </th>
+                                            <th></th>
                                         </tr>
-                                    }
 
-                                </table>
+                                        @foreach (var item in Model.Products)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.product_name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ImageFilePath)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SellingPrice)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CostPrice)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DiscountPrice)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.FullDescription)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.StockAmount)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.MartLocation)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ImageFilePath2)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Category.category1)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SKU.Description)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Edit", "Edit", new { id = item.product_id }) |
+                                                    @Html.ActionLink("Details", "Details", new { id = item.product_id }) |
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.product_id })
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </table>
+
+                                }
                             </div>
                             <!-- /.container-fluid -->
                         </div>

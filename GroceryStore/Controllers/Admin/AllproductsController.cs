@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using GroceryStore.Controllers.Dto;
 using GroceryStore.Models;
 
 namespace GroceryStore.Controllers
@@ -22,7 +23,10 @@ namespace GroceryStore.Controllers
                 return RedirectToAction("Auth", "Auth");
             }
             var products = db.products.Include(p => p.Category).Include(p => p.SKU);
-            return View(products.ToList());
+            int id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+
+            return View(new UserProducts { Products = products.ToList(), User = user }) ;
         }
 
         // GET: Allproducts/Details/5
