@@ -44,7 +44,27 @@
                         </p>
                     </div>
                     <div class="reg">
-                        <p class="mb-0"><a href="../Signup/Signup" class="mr-2">Sign Up</a> <a href="../Login/Login">Log In</a></p>
+                        <p class="mb-0">
+                            
+                            @if (Session["userId"] == null)
+                            {
+                                <a href="../Signup/Signup" class="mr-2">Sign Up</a> <span style="color: white;">|</span>
+                                <a href="../Auth/Auth">Log In</a>
+                            }
+                            else if (Session["RoleName"].ToString() == "Admin")
+                            {
+                                <a href="../AdminDashboard/AdminDashboard">Dashboard</a> <span style="color: white;">|</span>
+                            }
+                            else if (Session["RoleName"].ToString() == "Customer")
+                            {
+                                <a href="../CustomerDashboard/CustomerDashboard">Dashboard</a> <span style="color: white;">|</span>
+                            }
+
+                            @if (Session["userId"] != null)
+                            {
+                                <a style="margin-left: 5px;" href="../Auth/Auth">Log Out</a>
+                            }
+                        </p>
                     </div>
                 </div>
             </div>
@@ -56,9 +76,9 @@
         <div class="container">
             <a class="navbar-brand" href="../Home/Index">Grocery <span>store</span></a>
             <div class="order-lg-last btn-group">
-                <a href="#" class="btn-cart dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a style="width: 60px;" href="#" class="btn-cart dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="flaticon-shopping-bag"></span>
-                    <div class="d-flex justify-content-center align-items-center"><small>3</small></div>
+                    <div style="display: inline-block !important; margin: 0px 3px;"  class="d-flex justify-content-center align-items-center"><small>3</small></div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-item d-flex align-items-start" href="#">

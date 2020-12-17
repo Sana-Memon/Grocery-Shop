@@ -45,16 +45,56 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Sqlite, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Sqlite.Core.5.0.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=2.0.4.976, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.2.0.4\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -127,28 +167,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
-    <Compile Include="Controllers\Admin\AddCategoryController.cs" />
-    <Compile Include="Controllers\Admin\AddProductController.cs" />
     <Compile Include="Controllers\Admin\AdminDashboardController.cs" />
     <Compile Include="Controllers\Admin\AvailableSttockController.cs" />
-    <Compile Include="Controllers\Admin\CategoriesController.cs" />
-    <Compile Include="Controllers\Admin\ComplaintController.cs" />
-    <Compile Include="Controllers\Admin\DeliveryManController.cs" />
     <Compile Include="Controllers\Admin\PastOrderController.cs" />
     <Compile Include="Controllers\Admin\OrderQueueController.cs" />
     <Compile Include="Controllers\Admin\OrderTrackController.cs" />
     <Compile Include="Controllers\Admin\PastOrderDetailsController.cs" />
     <Compile Include="Controllers\Admin\StockDetailController.cs" />
     <Compile Include="Controllers\Admin\StockendController.cs" />
-    <Compile Include="Controllers\Admin\ViewAllComplaintsController.cs" />
     <Compile Include="Controllers\Admin\ViewOrderQueueController.cs" />
-    <Compile Include="Controllers\Admin\ViewProductController.cs" />
+    <Compile Include="Controllers\Admin\AllproductsController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\Admin\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\Customer\AddNewAddressController.cs" />
-    <Compile Include="Controllers\Customer\ComplaintHistoryController.cs" />
-    <Compile Include="Controllers\Customer\CustomerComplaintController.cs" />
     <Compile Include="Controllers\Customer\CustomerDashboardController.cs" />
     <Compile Include="Controllers\Customer\CustomerProfileController.cs" />
     <Compile Include="Controllers\Customer\CustomerShoppingListController.cs" />
@@ -156,12 +190,15 @@
     <Compile Include="Controllers\Customer\PasswordResetController.cs" />
     <Compile Include="Controllers\Customer\ReferFriendController.cs" />
     <Compile Include="Controllers\Customer\TrackOrderController.cs" />
+    <Compile Include="Controllers\Customer\Customer_ComplaintsController.cs" />
     <Compile Include="Controllers\DeliveryMan\DeliveredController.cs" />
     <Compile Include="Controllers\DeliveryMan\DeliveryManDashboardController.cs" />
     <Compile Include="Controllers\DeliveryMan\NewOrderController.cs" />
     <Compile Include="Controllers\DeliveryMan\OrderStatusController.cs" />
+    <Compile Include="Controllers\Admin\Delivery_boyController.cs" />
+    <Compile Include="Controllers\Dto\ListDto.cs" />
+    <Compile Include="Controllers\Dto\ProductDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\myLoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
@@ -171,90 +208,98 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\about.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Address.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Complaint_Type.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer_Complaints.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer_Referals.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DealAndDiscount.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Delivery_boy.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GroceryShopModel.Context.cs">
+    <Compile Include="Models\GroceryStoreEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GroceryShopModel.Context.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GroceryShopModel.cs">
+    <Compile Include="Models\GroceryStoreEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GroceryShopModel.Designer.cs">
+    <Compile Include="Models\GroceryStoreEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GroceryShopModel.edmx</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\List.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\order.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\orderProductsPrior.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\orderProductsTrain.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderToDeliver.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OurSatisfiedCustomer.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OurTeam.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\product.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product_Location.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Review_Ratings.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SKU.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+    <Compile Include="Models\Town.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>GroceryShopModel.tt</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AppRoles.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="css\ajax-loader.gif" />
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
@@ -271,10 +316,12 @@
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\jquery-ui1.css" />
     <Content Include="css\magnific-popup.css" />
+    <Content Include="css\main.css" />
     <Content Include="css\owl.carousel.min.css" />
     <Content Include="css\owl.theme.default.min.css" />
     <Content Include="css\popuo-box.css" />
     <Content Include="css\style.css" />
+    <Content Include="css\util.css" />
     <Content Include="CustomerAssets\css\bootstrap-social.css" />
     <Content Include="CustomerAssets\css\bootstrap-theme.min.css" />
     <Content Include="CustomerAssets\css\bootstrap.min.css" />
@@ -2129,15 +2176,15 @@
     <Content Include="images\tab3.png" />
     <Content Include="images\VeggiePlatter_ztcg0m.jpg" />
     <Content Include="images\videoimg2.png" />
-    <Content Include="Models\GroceryShopModel.Context.tt">
+    <Content Include="Models\GroceryStoreEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>GroceryShopModel.Context.cs</LastGenOutput>
-      <DependentUpon>GroceryShopModel.edmx</DependentUpon>
+      <DependentUpon>GroceryStoreEntities.edmx</DependentUpon>
+      <LastGenOutput>GroceryStoreEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\GroceryShopModel.tt">
+    <Content Include="Models\GroceryStoreEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GroceryShopModel.edmx</DependentUpon>
-      <LastGenOutput>GroceryShopModel.cs</LastGenOutput>
+      <DependentUpon>GroceryStoreEntities.edmx</DependentUpon>
+      <LastGenOutput>GroceryStoreEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2209,12 +2256,12 @@
     <Content Include="CustomerAssets\Profile Card\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.ttf" />
     <Content Include="CustomerAssets\Profile Card\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.woff" />
     <Content Include="CustomerAssets\Profile Card\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.woff2" />
-    <EntityDeploy Include="Models\GroceryShopModel.edmx">
+    <EntityDeploy Include="Models\GroceryStoreEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GroceryShopModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>GroceryStoreEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\GroceryShopModel.edmx.diagram">
-      <DependentUpon>GroceryShopModel.edmx</DependentUpon>
+    <Content Include="Models\GroceryStoreEntities.edmx.diagram">
+      <DependentUpon>GroceryStoreEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2250,7 +2297,6 @@
     <Content Include="Views\Shared\CustomerDashboard.cshtml" />
     <Content Include="Views\CustomerDashboard\CustomerDashboard.cshtml" />
     <Content Include="Views\AddNewAddress\AddNewAddress.cshtml" />
-    <Content Include="Views\CustomerComplaint\CustomerComplaint.cshtml" />
     <Content Include="Views\CustomerShoppingList\CustomerShoppingList.cshtml" />
     <Content Include="Views\TrackOrder\TrackOrder.cshtml" />
     <Content Include="Views\ReferFriend\ReferFriend.cshtml" />
@@ -2259,25 +2305,17 @@
     <Content Include="Views\CustomerProfile\CustomerProfile.cshtml" />
     <Content Include="Views\Shared\AdminDashboard.cshtml" />
     <Content Include="Views\AdminDashboard\AdminDashboard.cshtml" />
-    <Content Include="Views\AddCategory\AddCategory.cshtml" />
-    <Content Include="Views\AddProduct\AddProduct.cshtml" />
     <Content Include="Views\AvailableSttock\AvailableSttock.cshtml" />
-    <Content Include="Views\Complaint\Complaint.cshtml" />
     <Content Include="Views\StockDetail\StockDetail.cshtml" />
     <Content Include="Views\OrderQueue\OrderQueue.cshtml" />
     <Content Include="Views\OrderTrack\OrderTrack.cshtml" />
     <Content Include="Views\Stockend\Stockend.cshtml" />
-    <Content Include="Views\ViewProduct\ViewProduct.cshtml" />
-    <Content Include="Views\Categories\Categories.cshtml" />
-    <Content Include="Views\ViewAllComplaints\ViewAllComplaints.cshtml" />
     <Content Include="Views\ViewOrderQueue\ViewOrderQueue.cshtml" />
     <Content Include="Views\Shared\DeliveryManLayout.cshtml" />
     <Content Include="Views\DeliveryManDashboard\DeliveryManDashboard.cshtml" />
     <Content Include="Views\Delivered\Delivered.cshtml" />
     <Content Include="Views\NewOrder\NewOrder.cshtml" />
     <Content Include="Views\OrderStatus\OrderStatus.cshtml" />
-    <Content Include="Views\ComplaintHistory\ComplaintHistory.cshtml" />
-    <Content Include="Views\DeliveryMan\DeliveryMan.cshtml" />
     <Content Include="Views\PastOrder\PastOrder.cshtml" />
     <Content Include="Views\PastOrderDetails\PastOrderDetails.cshtml" />
     <Content Include="Views\AvailableSttock\dfb.cshtml" />
@@ -2287,6 +2325,27 @@
     <Content Include="Views\Home\TopRatedProduct.cshtml" />
     <Content Include="Views\Product\Shop.cshtml" />
     <Content Include="Views\myLogin\myLogin.cshtml" />
+    <Content Include="Views\Auth\Auth.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Delivery_boy\Create.cshtml" />
+    <Content Include="Views\Delivery_boy\Delete.cshtml" />
+    <Content Include="Views\Delivery_boy\Details.cshtml" />
+    <Content Include="Views\Delivery_boy\Edit.cshtml" />
+    <Content Include="Views\Delivery_boy\Index.cshtml" />
+    <Content Include="Views\Allproducts\Create.cshtml" />
+    <Content Include="Views\Allproducts\Delete.cshtml" />
+    <Content Include="Views\Allproducts\Details.cshtml" />
+    <Content Include="Views\Allproducts\Edit.cshtml" />
+    <Content Include="Views\Allproducts\Index.cshtml" />
+    <Content Include="Views\Customer_Complaints\Create.cshtml" />
+    <Content Include="Views\Customer_Complaints\Delete.cshtml" />
+    <Content Include="Views\Customer_Complaints\Details.cshtml" />
+    <Content Include="Views\Customer_Complaints\Edit.cshtml" />
+    <Content Include="Views\Customer_Complaints\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

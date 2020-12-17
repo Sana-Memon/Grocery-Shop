@@ -1,4 +1,4 @@
-﻿
+﻿@model GroceryStore.Models.User
 @{
     ViewBag.Title = "AddNewAddress";
     Layout = "~/Views/Shared/CustomerDashboard.cshtml";
@@ -22,7 +22,8 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-6">
-                                <form role="form">
+                                @using (Html.BeginForm("Index", "AddNewAddress", FormMethod.Post))
+                                {
                                     <div class="form-group">
                                         <select class="form-control" name="town" id="town">
                                             <option value="volvo">Select Town</option>
@@ -33,20 +34,27 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Enter area Name</label>
-                                        <input class="form-control" placeholder="Enter text">
+                                            <label>Enter area Name</label>
+                                            <input class="form-control" placeholder="Enter text">
+                                      </div>
+
+
+                                    <div class="form-group">
+                                            <label>Enter Block/ Street </label>
+                                            <input class="form-control" placeholder="Enter text">
                                     </div>
                                     <div class="form-group">
-                                        <label>Enter Block/ Street </label>
-                                        <input class="form-control" placeholder="Enter text">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Enter Plot/ flat No</label>
-                                        <input class="form-control" placeholder="Enter text">
+                                           <label>Enter Plot/ flat No</label>
+                                           <input class="form-control" placeholder="Enter text">
                                     </div>
 
+                                    @Html.TextAreaFor(m => m.Home_Address)
+
                                     <button type="submit" class="button2">Submit Button</button>
-                                </form>
+                                                                                                
+                                }
+                              
+                                <h1>@ViewBag.saveresult</h1>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                             <div class="col-lg-6">

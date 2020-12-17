@@ -122,7 +122,7 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
     <Key>
       <PropertyRef Name="order_id" />
     </Key>
-    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="customerr_id" Type="int" Nullable="false" />
     <Property Name="eval_set" Type="varchar" MaxLength="50" />
     <Property Name="order_number" Type="varchar" MaxLength="50" />
@@ -234,7 +234,7 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     <Property Name="Office_Addres" Type="nvarchar" MaxLength="100" />
     <Property Name="Other_Address" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK__Review&amp;Ra__produ__68D28DBC">
+  <Association Name="FK__Review&amp;Ra__produ__6ABAD62E">
     <End Role="products" Type="Self.products" Multiplicity="1" />
     <End Role="Review&amp;Ratings" Type="Self.Review&amp;Ratings" Multiplicity="*" />
     <ReferentialConstraint>
@@ -532,7 +532,7 @@ FROM [dbo].[orderProductsTrain] AS [orderProductsTrain]</DefiningQuery>
 [OrderToDeliver].[Date] AS [Date]
 FROM [dbo].[OrderToDeliver] AS [OrderToDeliver]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__Review&amp;Ra__produ__68D28DBC" Association="Self.FK__Review&amp;Ra__produ__68D28DBC">
+    <AssociationSet Name="FK__Review&amp;Ra__produ__6ABAD62E" Association="Self.FK__Review&amp;Ra__produ__6ABAD62E">
       <End Role="products" EntitySet="products" />
       <End Role="Review&amp;Ratings" EntitySet="Review&amp;Ratings" />
     </AssociationSet>

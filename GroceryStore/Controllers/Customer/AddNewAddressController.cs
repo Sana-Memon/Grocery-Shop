@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroceryStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,22 @@ namespace GroceryStore.Controllers.Customer
         // GET: AddNewAddress
         public ActionResult AddNewAddress()
         {
-            return View();
+            ViewBag.saveresult = "";
+
+            return View();  
+        }
+
+        [HttpPost]
+        public ActionResult AddNewAddress(User address)
+        {
+            using (GroceryStoreEntities db = new GroceryStoreEntities())
+            {
+                db.Users.Add(address);
+                db.SaveChanges();
+                ViewBag.saveresult = "Address added successfully";
+                ModelState.Clear();
+            }
+                return View(new User());
         }
     }
 }

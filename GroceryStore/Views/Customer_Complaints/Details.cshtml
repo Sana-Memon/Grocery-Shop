@@ -1,0 +1,61 @@
+﻿@model GroceryStore.Models.Customer_Complaints
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<div id="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div>
+                <h4>Customer_Complaints</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Complaint_Status)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Complaint_Status)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.date)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.date)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Complaint_Type.Complaint_Tpe)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Complaint_Type.Complaint_Tpe)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Customer.Customer_id)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Customer.Customer_id)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+
+

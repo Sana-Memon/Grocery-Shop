@@ -24,47 +24,122 @@
     </style>
 </head>
 <body>
+@*    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                @using (Html.BeginForm("Authorise", "Auth", FormMethod.Post))
+                {
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+                    <h2>Grocery Store</h2>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                        @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                 }
+            </div>
+        </div>
+    </div>*@
+
+
     <div id="login-div">
-        @using (Html.BeginForm("Authorise", "myLogin", FormMethod.Post))
-        {
-<table>
-    <tr>
-        <td></td>
-        <td style="text-decoration:underline">Login</td>
-    </tr>
-    <tr>
-        <td>@Html.LabelFor(model => model.Email)</td>
-        <td>@Html.EditorFor(model => model.Email)</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>@Html.ValidationMessageFor(model => model.Email)</td>
-    </tr>
-    <tr>
+                @using (Html.BeginForm("Authorise", "Auth", FormMethod.Post))
+                {
+        <table>
+            <tr>
+                <td></td>
+                <td style="text-decoration:underline">Login</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Email)</td>
+                <td>@Html.EditorFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@Html.ValidationMessageFor(model => model.Email)</td>
+            </tr>
+            <tr>
 
-        <td>@Html.LabelFor(model => model.Password)</td>
-        <td>@Html.EditorFor(model => model.Password)</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>@Html.ValidationMessageFor(model => model.Password)</td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <label class="field-validation-error">@Html.DisplayFor(model =>model.LoginErrorMsg)</label>
-        </td>
+                <td>@Html.LabelFor(model => model.Password)</td>
+                <td>@Html.EditorFor(model => model.Password)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@Html.ValidationMessageFor(model => model.Password)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label class="field-validation-error">@Html.DisplayFor(model =>model.LoginErrorMsg)</label>
+                </td>
 
-    </tr>
-    <tr>
-        
-        <td>
-            <input type="submit" value="Login" />
-            <input type="reset" value="Clear" />
-        </td>
-    </tr>
-</table>}
+            </tr>
+            <tr>
 
-    </div>
+                <td>
+                    <input type="submit" value="Login" />
+                    <input type="reset" value="Clear" />
+                </td>
+            </tr>
+        </table>}
+
+            </div>
+
+    @*<div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form">
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+                    <h2>Grocery Store</h2>
+
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+
+                        @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+
+                        <input class="input100" type="password" name="pass">
+                        @Html.LabelFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn">
+                                <a href="../CustomerDashboard/CustomerDashboard" style="color: white;">
+                                    Login
+                                </a>
+
+
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-t-115">
+                        <span class="txt1">
+                            Don’t have an account?
+                        </span>
+
+                        <a class="txt2" href="../Signup/Signup">
+                            Sign Updsdfdggnhcbxgssdv
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>*@
+
+
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
