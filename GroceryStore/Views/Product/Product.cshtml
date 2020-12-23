@@ -13,40 +13,32 @@
         </div>
     </div>
 </section>
-<section class="ftco-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <div class="row mb-4">
-                    <div class="col-md-12 d-flex justify-content-between align-items-center">
-                        <h4 class="product-select">Select Category of Products</h4>
-                        <select class="selectpicker" multiple>
-                            <option>Lipton</option>
-                            <option>Spirit</option>
-                            <option>Vim</option>
-                            <option>Harpic</option>
-                            <option>Comfort</option>
-                            <option>Zeeba</option>
-                        </select>
+<center>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row">
+                    <div class="form-group">
+                        @Html.DropDownList("Category", "Select Category")
                     </div>
-                </div>
 
             </div>
-        </div>
+    </section>
 
+    @using (Html.BeginForm())
+    {
+        
+            <p>
+                <div class="form-group">
+                    <div id="Search">
+                        <font color="white">Search Product: </font>@Html.TextBox("Search_Data", ViewBag.FilterValue as string)
+                        <input type="submit" class="button2" value="Find" />
+                    </div>
+                </div>
+            </p>
 
-</section>
+        }
 
-@using (Html.BeginForm())
-{
-    <p>
-        <div id="Search">
-            <font color="white">Search Product: </font>@Html.TextBox("Search_Data", ViewBag.FilterValue as string)
-            <input type="submit" value="Find" />
-        </div>
-    </p>}
-
-
+</center>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -63,7 +55,7 @@
 
 
 <div class="container">
-    <h3 class="h3">All Product Categories</h3>
+    <h3 class="h3">Our Products </h3>
 
     @{Html.RenderAction("Shop");}
 
@@ -93,7 +85,8 @@
 
 
 
-<div class="">
+    <h3 class="h3">Recommended for you</h3>
+
     <div class="nbs-flexisel-container">
         <div class="nbs-flexisel-inner">
             <ul id="flexiselDemo1" class="nbs-flexisel-ul">
@@ -112,7 +105,7 @@
                             </h4>
                             <div class="w3l-pricehkj">
                                 <h6>Rs.180.00</h6>
-                                \
+
                             </div>
                             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                 <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>										</fieldset>
@@ -130,7 +123,7 @@
                         </div>
                         <div class="product-name-w3l">
                             <h4>
-                                <a href="single2.html">Lakme Eyeconic Kajal, 0.35 g</a>
+                                <a href="single2.html">Lakme Eyeconic Kajal</a>
                             </h4>
                             <div class="w3l-pricehkj">
                                 <h6>Rs.153.00</h6>
@@ -155,7 +148,7 @@
                             </h4>
                             <div class="w3l-pricehkj">
                                 <h6>Rs.180.00</h6>
-                                \
+
                             </div>
                             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                 <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>										</fieldset>
@@ -164,6 +157,28 @@
                         </div>
                     </div>
                 </li>
+                <li class="nbs-flexisel-item" style="width: 262px;">
+                    <div class="w3l-specilamk">
+                        <div class="speioffer-agile">
+                            <a href="single2.html">
+                                <img src="../images/s9.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="product-name-w3l">
+                            <h4>
+                                <a href="single2.html">Lakme Eyeconic Kajal</a>
+                            </h4>
+                            <div class="w3l-pricehkj">
+                                <h6>Rs.153.00</h6>
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
         </div>
     </div>
 </div>

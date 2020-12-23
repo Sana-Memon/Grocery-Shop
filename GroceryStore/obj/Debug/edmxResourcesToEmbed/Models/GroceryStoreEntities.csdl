@@ -9,16 +9,6 @@
     <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ImageFilePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="Address">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Postcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="category_id" />
@@ -125,6 +115,9 @@
     <NavigationProperty Name="orderProductsPriors" Relationship="Self.FK_orderProductsPrior_orders1" FromRole="orders" ToRole="orderProductsPrior" />
     <NavigationProperty Name="OrderToDelivers" Relationship="Self.FK_OrderToDeliver_orders" FromRole="orders" ToRole="OrderToDeliver" />
     <NavigationProperty Name="Customers" Relationship="Self.Customer_Order" FromRole="orders" ToRole="Customers" />
+    <Property Name="OrderStatus" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+    <Property Name="AddressId" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="GroceryStoreModel.FK__orders__AddressI__4830B400" FromRole="order" ToRole="Address" />
   </EntityType>
   <EntityType Name="OurSatisfiedCustomer">
     <Key>
@@ -522,7 +515,6 @@
   </Association>
   <EntityContainer Name="GroceryStoreEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="abouts" EntityType="Self.about" />
-    <EntitySet Name="Addresses" EntityType="Self.Address" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Complaint_Type" EntityType="Self.Complaint_Type" />
     <EntitySet Name="Customer_Referals" EntityType="Self.Customer_Referals" />
@@ -628,5 +620,99 @@
       <End Role="Customers" EntitySet="Customers" />
       <End Role="orders" EntitySet="orders" />
     </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="GroceryStoreModel.sysdiagram" />
+    <EntitySet Name="Cities" EntityType="GroceryStoreModel.City" />
+    <EntitySet Name="Countries" EntityType="GroceryStoreModel.Country" />
+    <EntitySet Name="Addresses" EntityType="GroceryStoreModel.Address" />
+    <AssociationSet Name="FK__orders__AddressI__4830B400" Association="GroceryStoreModel.FK__orders__AddressI__4830B400">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Address__Country__53A266AC" Association="GroceryStoreModel.FK__Address__Country__53A266AC">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Address__CityId__54968AE5" Association="GroceryStoreModel.FK__Address__CityId__54968AE5">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Addresses" Relationship="GroceryStoreModel.FK__Address__CityId__54968AE5" FromRole="City" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Addresses" Relationship="GroceryStoreModel.FK__Address__Country__53A266AC" FromRole="Country" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Postcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="OtherDetails" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="orders" Relationship="GroceryStoreModel.FK__orders__AddressI__4830B400" FromRole="Address" ToRole="order" />
+    <Property Name="CountryId" Type="Int32" />
+    <NavigationProperty Name="Country" Relationship="GroceryStoreModel.FK__Address__Country__53A266AC" FromRole="Address" ToRole="Country" />
+    <Property Name="CityId" Type="Int32" />
+    <NavigationProperty Name="City" Relationship="GroceryStoreModel.FK__Address__CityId__54968AE5" FromRole="Address" ToRole="City" />
+  </EntityType>
+  <Association Name="FK__orders__AddressI__4830B400">
+    <End Type="GroceryStoreModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="GroceryStoreModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Address__Country__53A266AC">
+    <End Type="GroceryStoreModel.Country" Role="Country" Multiplicity="0..1" />
+    <End Type="GroceryStoreModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Address__CityId__54968AE5">
+    <End Type="GroceryStoreModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="GroceryStoreModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

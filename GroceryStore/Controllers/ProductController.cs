@@ -15,8 +15,8 @@ namespace GroceryStore.Controllers
 
         // GET: Product
         public ActionResult Product()
-        {   
-
+        {
+            ViewBag.Category = new SelectList(db.Categories, "category_id", "category1");
             return View();
         }
 

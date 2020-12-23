@@ -48,7 +48,7 @@ namespace GroceryStore.Controllers
             db.orders.Add(order);
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Thanyou", "Thankyou");
 
         }
     }

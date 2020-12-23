@@ -26,7 +26,6 @@ namespace GroceryStore.Models
         }
     
         public virtual DbSet<about> abouts { get; set; }
-        public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Complaint_Type> Complaint_Type { get; set; }
         public virtual DbSet<Customer_Referals> Customer_Referals { get; set; }
@@ -48,5 +47,9 @@ namespace GroceryStore.Models
         public virtual DbSet<Customer_Complaints> Customer_Complaints { get; set; }
         public virtual DbSet<orderProductsTrain> orderProductsTrains { get; set; }
         public virtual DbSet<OrderToDeliver> OrderToDelivers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
     }
 }

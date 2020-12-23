@@ -15,9 +15,11 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" />
-    <Property Name="Country" Type="varchar" MaxLength="255" />
-    <Property Name="City" Type="varchar" MaxLength="255" />
     <Property Name="Postcode" Type="varchar" MaxLength="255" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="OtherDetails" Type="varchar" MaxLength="225" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -28,12 +30,27 @@
     <Property Name="category" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="125" />
+  </EntityType>
   <EntityType Name="Complaint_Type">
     <Key>
       <PropertyRef Name="Complaint_Type_Id" />
     </Key>
     <Property Name="Complaint_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Complaint_Tpe" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="125" />
+    <Property Name="ShortName" Type="varchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.Customer_Complaints' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -140,6 +157,8 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
     <Property Name="order_hour_of_day" Type="varchar" MaxLength="50" />
     <Property Name="days_since_prior_order" Type="varchar" MaxLength="50" />
     <Property Name="date" Type="date" />
+    <Property Name="OrderStatus" Type="varchar" MaxLength="55" />
+    <Property Name="AddressId" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -225,6 +244,16 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     <Property Name="SkuId" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="Town">
     <Key>
       <PropertyRef Name="Id" />
@@ -248,6 +277,42 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     <Property Name="Other_Address" Type="nvarchar" MaxLength="100" />
     <Property Name="Role" Type="int" />
   </EntityType>
+  <Association Name="FK__Address__CityId__54968AE5">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Address__Country__53A266AC">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orders__AddressI__4830B400">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Review&amp;Ra__produ__6ABAD62E">
     <End Role="products" Type="Self.products" Multiplicity="1" />
     <End Role="Review&amp;Ratings" Type="Self.Review&amp;Ratings" Multiplicity="*" />
@@ -516,7 +581,9 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     <EntitySet Name="about" EntityType="Self.about" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Complaint_Type" EntityType="Self.Complaint_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer_Order" EntityType="Self.Customer_Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer_Referals" EntityType="Self.Customer_Referals" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
@@ -532,6 +599,7 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     <EntitySet Name="Review&amp;Ratings" EntityType="Self.Review&amp;Ratings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SKUs" EntityType="Self.SKUs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Town" EntityType="Self.Town" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer_Complaints" EntityType="Self.Customer_Complaints" store:Type="Tables" store:Schema="dbo">
@@ -560,6 +628,18 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     [OrderToDeliver].[Date] AS [Date]
     FROM [dbo].[OrderToDeliver] AS [OrderToDeliver]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK__Address__CityId__54968AE5" Association="Self.FK__Address__CityId__54968AE5">
+      <End Role="City" EntitySet="City" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Address__Country__53A266AC" Association="Self.FK__Address__Country__53A266AC">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orders__AddressI__4830B400" Association="Self.FK__orders__AddressI__4830B400">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
     <AssociationSet Name="FK__Review&amp;Ra__produ__6ABAD62E" Association="Self.FK__Review&amp;Ra__produ__6ABAD62E">
       <End Role="products" EntitySet="products" />
       <End Role="Review&amp;Ratings" EntitySet="Review&amp;Ratings" />

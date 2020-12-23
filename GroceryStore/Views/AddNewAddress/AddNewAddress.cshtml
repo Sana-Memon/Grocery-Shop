@@ -1,4 +1,4 @@
-﻿@model GroceryStore.Models.User
+﻿@model GroceryStore.Controllers.Dto.UserDto
 @{
     ViewBag.Title = "AddNewAddress";
     Layout = "~/Views/Shared/CustomerDashboard.cshtml";
@@ -20,37 +20,48 @@
                         Add new adress Here
                     </div>
                     <div class="panel-body">
+                        <button onclick="clearAllProducts();" class="button2" style="width: 120px; padding: 10px;">Insert New</button>
                         <div class="row">
                             <div class="col-lg-6">
-                                @using (Html.BeginForm("Index", "AddNewAddress", FormMethod.Post))
+                                @using (Html.BeginForm("AddAddress", "AddNewAddress", FormMethod.Post))
                                 {
                                     <div class="form-group">
-                                        <select class="form-control" name="town" id="town">
+                                        @*<select class="form-control" name="town" id="town">
                                             <option value="volvo">Select Town</option>
                                             <option value="volvo">Sadar Town</option>
                                             <option value="saab">Bin Qasim Town.</option>
                                             <option value="mercedes">Gadap Town.</option>
                                             <option value="audi">Gulshan Town.</option>
-                                        </select>
+                                        </select>*@
+
+                                        <label>Address Name</label>
+                                        <input id="address-name" class="form-control" placeholder="Enter text" type="text" name="name" required />
                                     </div>
                                     <div class="form-group">
-                                            <label>Enter area Name</label>
-                                            <input class="form-control" placeholder="Enter text">
+                                            <label>Enter Post Code</label>
+                                            <input id="post-code" class="form-control" placeholder="Post Code" name="postCode" type="text" required>
                                       </div>
 
 
                                     <div class="form-group">
-                                            <label>Enter Block/ Street </label>
-                                            <input class="form-control" placeholder="Enter text">
+                                            <label>Enter Complete Address</label>
+                                            <input id="complete-address" class="form-control" placeholder="Enter Complete Address" name="OtherDetails" type="text" required>
                                     </div>
                                     <div class="form-group">
-                                           <label>Enter Plot/ flat No</label>
-                                           <input class="form-control" placeholder="Enter text">
+                                        <label>Enter Plot/ flat No</label>
+                                        <select class="form-control" name="CityId" id="city" required>
+                                            @foreach (var city in Model.Cities)
+                                            {
+                                                <option value="@city.Id">@city.Name</option>   
+                                            }
+                                        </select>
                                     </div>
 
-                                    @Html.TextAreaFor(m => m.Home_Address)
+                                    <input id="address-id" type="hidden" name="addressId" value=""/>
 
-                                    <button type="submit" class="button2">Submit Button</button>
+                                    @*@Html.TextAreaFor(m => m.Home_Address)*@
+
+                                    <button id="submit-button" type="submit" class="button2">Submit Button</button>
                                                                                                 
                                 }
                               
@@ -59,13 +70,40 @@
                             <!-- /.col-lg-6 (nested) -->
                             <div class="col-lg-6">
                                 <h1>Your Adresses</h1>
-                                <form role="form">
-                                    <textarea class="form-control" id="w3review" name="w3review" rows="4" cols="70">
-                                                    
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque condimentum ultrices tempus. Proin sit amet lectus a libero venenatis accumsan. Cras lectus erat, tristique et libero et, tempus ullamcorper nisl.                                                     </textarea>
+                                @*                         <form role="form">*@
+                                @*<textarea class="form-control" id="w3review" name="w3review" rows="4" cols="70">
 
-                                </form>
-                                <br><br> <button type="reset" class="button2">Reset Button</button>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque condimentum ultrices tempus. Proin sit amet lectus a libero venenatis accumsan. Cras lectus erat, tristique et libero et, tempus ullamcorper nisl.                                                     </textarea>*@
+
+                                @*</form>*@
+                                <center>
+                                    <table class="content-table">
+                                        <thead>
+                                           <tr>
+                                                <th class="col-md-1">Name</th>
+                                                <th>Post Code</th>
+                                                <th>Other Details</th>
+                                                <th>City</th>
+                                               <th>Action</th>   
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var address in Model.Address)
+                                            {
+                                                <tr class="active-row" id="address-@address.Id">
+                                                    <th style="display: none;">@address.Id</th>
+                                                    <td>@address.Name</td>
+                                                    <td>@address.Postcode</td>
+                                                    <td>@address.OtherDetails</td>
+                                                    <td>@address.City.Name</td>
+                                                    <td style="font-size: 1.5em; text-align: center; cursor: pointer;" onclick="EditProduct({ Id: @address.Id, Name: '@address.Name', PostCode: '@address.Postcode',  OtherDetails: '@address.OtherDetails', CityId: '@address.City.Id' })" >&#9998;</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </center>
+                                <br><br> @*<button type="reset" class="button2">Reset Button</button>*@
 
 
                             </div>
@@ -83,3 +121,35 @@
     </div>
     <!-- /.container-fluid -->
 </div>
+
+
+<script>
+    function EditProduct(data){
+        console.log(data);
+        document.getElementById("address-name").value = data.Name;
+        document.getElementById("post-code").value = data.PostCode;
+        document.getElementById("complete-address").value = data.OtherDetails;
+        document.getElementById("city").value = data.CityId;
+        document.getElementById("address-id").value = data.Id;
+
+        console.log(document.getElementById("submit-button"));
+
+        document.getElementById("submit-button").innerText = "Update"
+
+        "Submit"
+
+    }
+
+
+    function clearAllProducts() {
+        document.getElementById("address-name").value = '';
+        document.getElementById("post-code").value = '';
+        document.getElementById("complete-address").value = '';
+        document.getElementById("city").value = '';
+        document.getElementById("address-id").value = '';
+
+        document.getElementById("submit-button").innerText = "Submit"
+    }
+
+    
+</script>

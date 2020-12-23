@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8179b9e1669b4a80bc208855bd08fc4e" Name="Diagram1">
         <EntityTypeShape EntityType="GroceryStoreModel.about" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GroceryStoreModel.Address" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.Category" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.Complaint_Type" Width="1.5" PointX="10.25" PointY="21.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.Customer_Referals" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
@@ -15,7 +14,6 @@
         <EntityTypeShape EntityType="GroceryStoreModel.Delivery_boy" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.List" Width="1.5" PointX="10.5" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.orderProductsPrior" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GroceryStoreModel.order" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.OurSatisfiedCustomer" Width="1.5" PointX="7.5" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.OurTeam" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.Product_Location" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
@@ -41,14 +39,25 @@
         <AssociationConnector Association="GroceryStoreModel.FK_Delivery_boy_Users" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.FK_OrderToDeliver_Delivery_boy" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.FK_List_products" ManuallyRouted="false" />
-        <AssociationConnector Association="GroceryStoreModel.FK_orderProductsPrior_orders1" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.FK_orderProductsPrior_products" ManuallyRouted="false" />
-        <AssociationConnector Association="GroceryStoreModel.FK_OrderToDeliver_orders" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.FK_OurTeam_Users" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.FK__Review_Ra__produ__6ABAD62E" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.FK_products_SKUs" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.FK_UserRole" ManuallyRouted="false" />
-        <AssociationConnector Association="GroceryStoreModel.Customer_Order" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GroceryStoreModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="GroceryStoreModel.order" Width="1.5" PointX="7.5" PointY="10.75" />
+        <AssociationConnector Association="GroceryStoreModel.FK_orderProductsPrior_orders1" />
+        <AssociationConnector Association="GroceryStoreModel.FK_OrderToDeliver_orders" />
+        <AssociationConnector Association="GroceryStoreModel.Customer_Order" />
+        <EntityTypeShape EntityType="GroceryStoreModel.City" Width="1.5" PointX="0.75" PointY="17.5" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Country" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Address" Width="1.5" PointX="13.375" PointY="0.875" />
+        <AssociationConnector Association="GroceryStoreModel.FK__orders__AddressI__4830B400" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Address__Country__53A266AC" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Address__CityId__54968AE5" />
+      </Diagram>
+      <Diagram DiagramId="eb6f651eed5a4b8c8923af8db3ecc98a" Name="Diagram2" >
+        <EntityTypeShape EntityType="GroceryStoreModel.order" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

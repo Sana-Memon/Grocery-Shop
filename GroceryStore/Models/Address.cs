@@ -14,10 +14,23 @@ namespace GroceryStore.Models
     
     public partial class Address
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Address()
+        {
+            this.orders = new HashSet<order>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
         public string Postcode { get; set; }
+        public Nullable<int> CustomerID { get; set; }
+        public string OtherDetails { get; set; }
+        public Nullable<int> CountryId { get; set; }
+        public Nullable<int> CityId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<order> orders { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual City City { get; set; }
     }
 }

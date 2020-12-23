@@ -30,6 +30,8 @@ namespace GroceryStore.Models
         public string order_hour_of_day { get; set; }
         public string days_since_prior_order { get; set; }
         public Nullable<System.DateTime> date { get; set; }
+        public string OrderStatus { get; set; }
+        public Nullable<int> AddressId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<orderProductsPrior> orderProductsPriors { get; set; }
@@ -37,5 +39,6 @@ namespace GroceryStore.Models
         public virtual ICollection<OrderToDeliver> OrderToDelivers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

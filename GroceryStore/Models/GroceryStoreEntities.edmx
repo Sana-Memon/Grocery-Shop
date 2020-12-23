@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GroceryStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GroceryStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="about">
           <Key>
             <PropertyRef Name="id" />
@@ -20,9 +20,11 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
-          <Property Name="Country" Type="varchar" MaxLength="255" />
-          <Property Name="City" Type="varchar" MaxLength="255" />
           <Property Name="Postcode" Type="varchar" MaxLength="255" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="OtherDetails" Type="varchar" MaxLength="225" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="CityId" Type="int" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -33,12 +35,27 @@
           <Property Name="category" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="125" />
+        </EntityType>
         <EntityType Name="Complaint_Type">
           <Key>
             <PropertyRef Name="Complaint_Type_Id" />
           </Key>
           <Property Name="Complaint_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Complaint_Tpe" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="125" />
+          <Property Name="ShortName" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.Customer_Complaints' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -145,6 +162,8 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
           <Property Name="order_hour_of_day" Type="varchar" MaxLength="50" />
           <Property Name="days_since_prior_order" Type="varchar" MaxLength="50" />
           <Property Name="date" Type="date" />
+          <Property Name="OrderStatus" Type="varchar" MaxLength="55" />
+          <Property Name="AddressId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -230,6 +249,16 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <Property Name="SkuId" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Town">
           <Key>
             <PropertyRef Name="Id" />
@@ -253,6 +282,42 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <Property Name="Other_Address" Type="nvarchar" MaxLength="100" />
           <Property Name="Role" Type="int" />
         </EntityType>
+        <Association Name="FK__Address__CityId__54968AE5">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Address__Country__53A266AC">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__AddressI__4830B400">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Review&amp;Ra__produ__6ABAD62E">
           <End Role="products" Type="Self.products" Multiplicity="1" />
           <End Role="Review&amp;Ratings" Type="Self.Review&amp;Ratings" Multiplicity="*" />
@@ -521,7 +586,9 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <EntitySet Name="about" EntityType="Self.about" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Complaint_Type" EntityType="Self.Complaint_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer_Order" EntityType="Self.Customer_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer_Referals" EntityType="Self.Customer_Referals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
@@ -537,6 +604,7 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <EntitySet Name="Review&amp;Ratings" EntityType="Self.Review&amp;Ratings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SKUs" EntityType="Self.SKUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Town" EntityType="Self.Town" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer_Complaints" EntityType="Self.Customer_Complaints" store:Type="Tables" store:Schema="dbo">
@@ -565,6 +633,18 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     [OrderToDeliver].[Date] AS [Date]
     FROM [dbo].[OrderToDeliver] AS [OrderToDeliver]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Address__CityId__54968AE5" Association="Self.FK__Address__CityId__54968AE5">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Address__Country__53A266AC" Association="Self.FK__Address__Country__53A266AC">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__AddressI__4830B400" Association="Self.FK__orders__AddressI__4830B400">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
           <AssociationSet Name="FK__Review&amp;Ra__produ__6ABAD62E" Association="Self.FK__Review&amp;Ra__produ__6ABAD62E">
             <End Role="products" EntitySet="products" />
             <End Role="Review&amp;Ratings" EntitySet="Review&amp;Ratings" />
@@ -654,8 +734,7 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GroceryStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -667,16 +746,6 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ImageFilePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Address">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Postcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -784,6 +853,9 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <NavigationProperty Name="orderProductsPriors" Relationship="Self.FK_orderProductsPrior_orders1" FromRole="orders" ToRole="orderProductsPrior" />
           <NavigationProperty Name="OrderToDelivers" Relationship="Self.FK_OrderToDeliver_orders" FromRole="orders" ToRole="OrderToDeliver" />
           <NavigationProperty Name="Customers" Relationship="Self.Customer_Order" FromRole="orders" ToRole="Customers" />
+          <Property Name="OrderStatus" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="AddressId" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="GroceryStoreModel.FK__orders__AddressI__4830B400" FromRole="order" ToRole="Address" />
         </EntityType>
         <EntityType Name="OurSatisfiedCustomer">
           <Key>
@@ -1181,7 +1253,6 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
         </Association>
         <EntityContainer Name="GroceryStoreEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="abouts" EntityType="Self.about" />
-          <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Complaint_Type" EntityType="Self.Complaint_Type" />
           <EntitySet Name="Customer_Referals" EntityType="Self.Customer_Referals" />
@@ -1287,8 +1358,102 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
             <End Role="Customers" EntitySet="Customers" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="sysdiagrams" EntityType="GroceryStoreModel.sysdiagram" />
+          <EntitySet Name="Cities" EntityType="GroceryStoreModel.City" />
+          <EntitySet Name="Countries" EntityType="GroceryStoreModel.Country" />
+          <EntitySet Name="Addresses" EntityType="GroceryStoreModel.Address" />
+          <AssociationSet Name="FK__orders__AddressI__4830B400" Association="GroceryStoreModel.FK__orders__AddressI__4830B400">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Address__Country__53A266AC" Association="GroceryStoreModel.FK__Address__Country__53A266AC">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Address__CityId__54968AE5" Association="GroceryStoreModel.FK__Address__CityId__54968AE5">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Addresses" Relationship="GroceryStoreModel.FK__Address__CityId__54968AE5" FromRole="City" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Addresses" Relationship="GroceryStoreModel.FK__Address__Country__53A266AC" FromRole="Country" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="OtherDetails" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="orders" Relationship="GroceryStoreModel.FK__orders__AddressI__4830B400" FromRole="Address" ToRole="order" />
+          <Property Name="CountryId" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="GroceryStoreModel.FK__Address__Country__53A266AC" FromRole="Address" ToRole="Country" />
+          <Property Name="CityId" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="GroceryStoreModel.FK__Address__CityId__54968AE5" FromRole="Address" ToRole="City" />
+        </EntityType>
+        <Association Name="FK__orders__AddressI__4830B400">
+          <End Type="GroceryStoreModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="GroceryStoreModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Address__Country__53A266AC">
+          <End Type="GroceryStoreModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="GroceryStoreModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Address__CityId__54968AE5">
+          <End Type="GroceryStoreModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="GroceryStoreModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1301,17 +1466,6 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Addresses">
-            <EntityTypeMapping TypeName="GroceryStoreModel.Address">
-              <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1397,6 +1551,8 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="GroceryStoreModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="customerr_id" ColumnName="customerr_id" />
                 <ScalarProperty Name="eval_set" ColumnName="eval_set" />
@@ -1551,6 +1707,47 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
               <ScalarProperty Name="order_id" ColumnName="Order_ID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GroceryStoreModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="GroceryStoreModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="GroceryStoreModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="GroceryStoreModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="OtherDetails" ColumnName="OtherDetails" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

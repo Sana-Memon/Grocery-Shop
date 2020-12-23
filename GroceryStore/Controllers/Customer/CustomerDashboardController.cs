@@ -1,4 +1,5 @@
-﻿using GroceryStore.Models;
+﻿using GroceryStore.Controllers.Dto;
+using GroceryStore.Models;
 using GroceryStore.Utilities;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace GroceryStore.Controllers.Customer
             var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
 
             if (rolename == AppRoles.Customer)
-                return View(user);
+                return View(new UserDto { User = user } );
             else return RedirectToAction("Auth", "Auth");
         }
     }

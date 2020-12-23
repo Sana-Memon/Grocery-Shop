@@ -1,6 +1,6 @@
-﻿@model GroceryStore.Models.User
+﻿@model GroceryStore.Controllers.Dto.UserDto
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">    
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -119,7 +119,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> @Model.UserName <b class="caret"></b>
+                        <i class="fa fa-user fa-fw"></i> @Model.User.UserName <b class="caret"></b>
 
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -159,29 +159,27 @@
                         </li>
 
                         <li>
-                            <a href="../Product/Product"><i class="fa fa-table fa-fw"></i> Shop Now </a>
+                            <a href="../Product/Product"><i class="fa fa-table fa-fw"></i>To be purchase list </a>
 
                         </li>
                         <li>
                             <a href="../AddNewAddress/AddNewAddress"><i class="fa fa-home "></i> My addresses</a>
                         </li>
-                        <li>
-                            <a href="todo.html"><i class="fa fa-list"></i> Mart List</a>
-                        </li>
 
                         <li>
-                            <a href="../ReferFriend/ReferFriend"><i class="fa fa-male"></i>  Refer a Friend</a>
+                            <a href="../ReferFriend/ReferFriend" data-toggle="tab"><i class="fa fa-male"></i>  Refer a Friend</a>
                         </li>
                         <li>
-                            <a href="../CustomerComplaint/CustomerComplaint"><i class="fa fa-user-o"></i> My Complaints</a>
+                            <a href="../Customer_Complaints/Create"><i class="fa fa-user-o"></i> Register New Complaint</a>
 
                         </li>
+                        </li>
                         <li>
-                            <a href="../ComplaintHistory/ComplaintHistory"><i class="fa fa-user-o"></i> Complaint History</a>
+                            <a href="../Customer_Complaints/Index"><i class="fa fa-user-o"></i> Complaint History</a>
 
                         </li>
                         <li>
-                            <a href="../CustomerShoppingList/CustomerShoppingList"><i class="fa fa-male"></i> Customer Shopping List</a>
+                            <a href="../Cart/Cart"><i class="fa fa-male"></i> Customer Shopping List</a>
                         </li>
 
 

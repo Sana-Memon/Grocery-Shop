@@ -198,6 +198,8 @@
     <Compile Include="Controllers\Admin\Delivery_boyController.cs" />
     <Compile Include="Controllers\Dto\ListDto.cs" />
     <Compile Include="Controllers\Dto\ProductDto.cs" />
+    <Compile Include="Controllers\Dto\UserDto.cs" />
+    <Compile Include="Controllers\Dto\UserCity.cs" />
     <Compile Include="Controllers\Dto\UserProducts.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\myLoginController.cs" />
@@ -217,7 +219,13 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\City.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Complaint_Type.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
@@ -284,6 +292,9 @@
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SKU.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Town.cs">
