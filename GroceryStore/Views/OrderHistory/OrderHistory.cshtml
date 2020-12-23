@@ -20,28 +20,30 @@
                                 <th>Product Name</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
-                                <th>Shipping Charges</th>
                                 <th>Total</th>
                                 <th>Billing Address</th>
+                                <th>Order Status</th>
                             </tr>
                         </thead>
                         <tbody>
 
-
-                            <tr class="active-row">
-                                <td> 2020-10-01</td>
-                                <td>1</td>
-                                <td>Dairy Milk</td>
-                                <td>2</td>
-                                <td>Rs.88</td>
-                                <td>Rs.200</td>
-                                <td>Rs.376</td>
-                                <td>
-                                    Anusha <br> 159 Honey Creek Court
-                                    Delray Beach, FL 33445 <br>0333-3124666
-                                </td>
-                            </tr>
-                            <tr class="active-row">
+                            @foreach(var item in Model.OrderDto)
+                            {
+                                <tr class="active-row">
+                                    <td>@item.date</td>
+                                    <td>@item.order_id</td>
+                                    <td>@item.product_name</td>
+                                    <td>@item.quantity</td>
+                                    <td>@item.CostPrice</td>
+                                    <td>@((item.quantity * item.CostPrice))</td>
+                                    <td>@item.Name</td>
+                                    <td>
+                                        @item.OrderStatus
+                                    </td>
+                                </tr>
+                            }
+                            
+                            @*<tr class="active-row">
                                 <td> 2020-10-11</td>
                                 <td>2</td>
                                 <td>Harpic Cleaner</td>
@@ -67,7 +69,7 @@
                                     Sana <br> 690 Augusta Dr.
                                     Brockton, MA 02301 <br>0333-3124656
                                 </td>
-                            </tr>
+                            </tr>*@
                         </tbody>
                     </table>
                 </center>
