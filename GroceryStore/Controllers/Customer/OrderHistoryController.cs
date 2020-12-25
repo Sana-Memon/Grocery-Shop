@@ -21,66 +21,53 @@ namespace GroceryStore.Controllers.Customer
             GroceryStoreEntities db = new GroceryStoreEntities();
 
             var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
+            var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
 
             if (rolename != AppRoles.Customer)
                 return RedirectToAction("Auth", "Auth");
 
-            var orders = db.orders.Join(db.orderProductsPriors,
-                                                    x => x.order_id, y => y.order_id, (x, y) => new { x, y })
-                .Join(db.products, y => y.y.product_id, b => b.product_id, (x, y) => new { 
-                    x.x.order_id,
-                    x.x.OrderStatus,
-                    x.x.date,
-                    y.product_name,
-                    y.CostPrice,
-                    x.y.quantity,
-                    x.x.AddressId,
-                    x.x.customerr_id
-                })
-                .Select(x => new OrderDto()
-                {
-                    order_id = x.order_id,
-                    OrderStatus = x.OrderStatus,
-                    date = x.date,
-                    product_name = x.product_name,
-                    CostPrice = x.CostPrice,
-                    quantity = x.quantity,
-                    Name = x.product_name,
-                    CustomerID = x.customerr_id
-                })
-                /*.Join(db.Addresses, x => x.AddressId, y => y.Id, (x, y) => new OrderDto()
-                {
-                    order_id = x.order_id,
-                    OrderStatus = x.OrderStatus,
-                    date = x.date,
-                    product_name = x.product_name,
-                    CostPrice = x.CostPrice,
-                    quantity = x.quantity,
-                    Name = y.Name,
-                    CustomerID = x.customerr_id
-                })*/
-                .ToList() ;
-
-            var customers = db.Users.Include("Customers").Where(x => x.UserID == userId).ToList();
-
-            List<OrderDto> final = new List<OrderDto>();
+            List<OrderDto> allOrder = (from orders in db.orders
+                               join address in db.Addresses on new { pid = orders.order_id } equals new { pid = address.Id } into yG
+                               from y1 in yG.DefaultIfEmpty()
+                               where (orders.customerr_id == customer.Customer_id)
+                               select new OrderDto() {
+                                   order_id = orders.order_id,
+                                   OrderStatus = orders.OrderStatus,
+                                   date = orders.date,
+                                   CustomerID = orders.customerr_id
+                               }).ToList();
 
             if (rolename == AppRoles.Admin)
             {
-                return View(new UserDto { User = user, OrderDto = orders });
+                return View(new UserDto { User = user, OrderDto = allOrder });
             }
 
-            for(int i = 0; i < customers.Count; i++)
+            return View(new UserDto { User = user, OrderDto = allOrder });
+        }
+
+        public ActionResult ChangeStatus() 
+        {
+            string queryString = Request.QueryString["status"];
+            string orderId = Request.QueryString["id"];
+            int orderIdInt = 0;
+            try
             {
-                for (int j = 0; j < orders.Count; j++)
-                {
-                    if (customers[i].Customers.ToList()[0].Customer_id == orders[i].CustomerID)
-                        final.Add(orders[i]);
-                }
+                orderIdInt = int.Parse(orderId);
+            }
+            catch (Exception e)
+            {
+                //throw new ParserError();
             }
 
-            return View(new UserDto { User = user, OrderDto = final } );
+            GroceryStoreEntities db = new GroceryStoreEntities();
 
+             var first = db.orders.Where(a => a.order_id == orderIdInt).FirstOrDefault();
+
+            first.OrderStatus = queryString;
+
+            db.SaveChanges();
+
+            return RedirectToAction("OrderHistory", "OrderHistory");
         }
     }
 }

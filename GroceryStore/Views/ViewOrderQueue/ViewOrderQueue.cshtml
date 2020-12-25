@@ -1,4 +1,4 @@
-﻿
+﻿@model GroceryStore.Controllers.Dto.UserDto  
 @{
     ViewBag.Title = "ViewOrderQueue";
     Layout = "~/Views/Shared/AdminDashboard.cshtml";
@@ -30,114 +30,169 @@
                             <table class="table table-hover" id="table">
                                 <thead>
                                     <tr>
-                                        <th>S.No</th>
-                                        <th>Order Number</th>
-                                        <th>Customer Name</th>
-                                        <th>Status</th>
-                                        <th>Description</th>
-
-
+                                        <th>Date</th>
+                                        <th>Order Id</th>
+                                        @*<th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>*@
+                                        <th>Billing Address</th>
+                                        <th>Order Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Prd001</td>
-                                        <td>Jawad</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Assigned to delivery man</td>
+                                    @foreach (var item in Model.OrderDto)
+                                    {
+                                        <tr class="active-row">
+                                            <td>@item.date</td>
+                                            <td>@item.order_id</td>
+                                            @*<td>@item.product_name</td>
+                                            <td>@item.quantity</td>
+                                            <td>@item.CostPrice</td>*@
+                                            @*<td>@((item.quantity * item.CostPrice))</td>*@
+                                            <td>@item.Name</td>
+                                            <td>
+                                                @item.OrderStatus
+                                            </td>
+                                            <td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Prd002</td>
-                                        <td>Ghafoor</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Cancelled</td>
+                                                <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
+                                                    <li class="dropdown navbar-inverse">
+                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                            <span>&#9776;</span>
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
 
+                                                            @if (item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "CANCEL")
+                                                            {
 
+                                                                    <li>
+                                                                        <a>
+                                                                            <div>
+                                                                                <span class="pull-right text-muted small">
+                                                                                    Cancel
+                                                                                </span>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a>
+                                                                            <div>
+                                                                                <span class="pull-right text-muted small">
+                                                                                    Delivered
+                                                                                </span>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a>
+                                                                            <div>
+                                                                                <span class="pull-right text-muted small">
+                                                                                    Dispatched
+                                                                                </span>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                              }
 
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Prd003</td>
-                                        <td>Daniyal</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Pending</td>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
 
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Prd004</td>
-                                        <td>Yaseen</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Assign DElivery boy</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Zeeba Rice</td>
-                                        <td>Yaseen</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>pending</td>
-
-
-                                    </tr>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Prd001</td>
-                                        <td>Jawad</td>
-
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Pending</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Prd002</td>
-                                        <td>Ghafoor</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Pending</td>
-
-
-
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Prd003</td>
-                                        <td>Daniyal</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Delivered</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Prd004</td>
-                                        <td>Yaseen</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Dispatched</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Zeeba Rice</td>
-                                        <td>Yaseen</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-                                        <td>Pending</td>
+                                            </td>
+                                        </tr>
+                                    }
+                                    @*<tr>
+            <td>2</td>
+            <td>Prd002</td>
+            <td>Ghafoor</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>Cancelled</td>
 
 
-                                    </tr>
 
-                                    <tr>
-                                        <td>11</td>
-                                        <td>Prd003</td>
-                                        <td>James</td>
-                                        <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Prd003</td>
+            <td>Daniyal</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>Pending</td>
 
-                                        <td>Delivered</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Prd004</td>
+            <td>Yaseen</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>Assign DElivery boy</td>
 
-                                    </tr>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Zeeba Rice</td>
+            <td>Yaseen</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>pending</td>
+
+
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>Prd001</td>
+            <td>Jawad</td>
+
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>Pending</td>
+
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Prd002</td>
+            <td>Ghafoor</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>Pending</td>
+
+
+
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Prd003</td>
+            <td>Daniyal</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>Delivered</td>
+
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Prd004</td>
+            <td>Yaseen</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>Dispatched</td>
+
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Zeeba Rice</td>
+            <td>Yaseen</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+            <td>Pending</td>
+
+
+        </tr>
+
+        <tr>
+            <td>11</td>
+            <td>Prd003</td>
+            <td>James</td>
+            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
+
+            <td>Delivered</td>
+
+        </tr>*@
                                 </tbody>
                             </table>
                         </div>

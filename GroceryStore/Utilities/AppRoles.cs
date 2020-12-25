@@ -14,12 +14,12 @@ namespace GroceryStore.Utilities
     }
 
     public static class OrderStatus {
-        public static string PENDING = "PENDING";
-        public static string ACCEPTED = "ACCEPTED";
-        public static string DISPATCHED = "DISPATCHED";
-        public static string DELIVERED = "DELIVERED";
-        public static string CANCEL = "CANCEL";
-        public static string DELETED = "DELETED";
+        public static string PENDING = "PENDING"; // done - user
+        public static string ACCEPTED = "ACCEPTED"; // admin 
+        public static string DISPATCHED = "DISPATCHED"; // admin
+        public static string DELIVERED = "DELIVERED"; // admin
+        public static string CANCEL = "CANCEL"; // done - user
+        public static string DELETED = "DELETED"; // done - user
 
     }
 }
