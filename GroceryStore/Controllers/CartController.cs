@@ -3,11 +3,19 @@ using System.Web.Mvc;
 using GroceryStore.Models;
 using System.Collections.Generic;
 using System.Linq;
+using GroceryStore.Services;
+using GroceryStore.Utilities;
 
 namespace GroceryStore.Controllers
 {
     public class CartController : Controller
     {
+        NotificationService _notificationService;
+        public CartController()
+        {
+            _notificationService = new NotificationService();
+        }
+
         // GET: Cart
         public ActionResult Cart()
         {
@@ -34,7 +42,17 @@ namespace GroceryStore.Controllers
                 var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault(); //.SqlQuery("SELECT Customer_id from Customers Where UserID = @Id" + p1).FirstOrDefault();
                 int customerId = customer.Customer_id;
 
+                var product = db.products.FirstOrDefault(x => x.product_id == productId);
 
+                
+
+                if (product.StockAmount - 1 < 0)
+                {
+                    int roleId = Int32.Parse(Session["RoleID"].ToString());
+                    // 1 is admin role Id.
+                    _notificationService.AddNotificationForAdmin(1, userId, productId);
+                    return null;
+                }
 
                 if(requestCustomerId != customerId)
                 {
@@ -42,6 +60,9 @@ namespace GroceryStore.Controllers
                     list.CustomerID = customerId;
                     list.quantity = 1;
                     db.Lists.Add(list);
+
+                    product.StockAmount = product.StockAmount - 1;
+
                     db.SaveChanges();
                     return Json ( true );
                 }

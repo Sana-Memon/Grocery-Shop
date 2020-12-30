@@ -115,6 +115,14 @@
 
         $.post(window.location.origin + '/Cart/SubmitList', $(event.srcElement).serialize(),
             (data) => {
+
+                console.log('this is data ', Object.keys(data).length == 0);
+
+                if (Object.keys(data).length === 0) {
+                    window.generateToast();
+                    return;
+                }
+
                 if (data == true) {
                     $(child).children().get(0).textContent = messageRemove;
                     allProducts = allProducts + 1;

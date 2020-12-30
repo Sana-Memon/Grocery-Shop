@@ -8,12 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using GroceryStore.Controllers.Dto;
 using GroceryStore.Models;
+using GroceryStore.Services;
 
 namespace GroceryStore.Controllers
 {
     public class AllproductsController : Controller
     {
         private GroceryStoreEntities db = new GroceryStoreEntities();
+        private NotificationService notificationService = new NotificationService();
 
         // GET: Allproducts
         public ActionResult Index()
@@ -26,7 +28,7 @@ namespace GroceryStore.Controllers
             int id = Int32.Parse(Session["userID"].ToString());
             var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
 
-            return View(new UserProducts { Products = products.ToList(), User = user }) ;
+            return View(new UserDto { Products = products.ToList(), User = user }) ;
         }
 
         // GET: Allproducts/Details/5
@@ -108,14 +110,24 @@ namespace GroceryStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "product_id,product_name,category_id,ImageFilePath,SellingPrice,CostPrice,DiscountPrice,FullDescription,StockAmount,SkuId,MartLocation,ImageFilePath2")] product product)
         {
+
+            if (Session["userID"] == null) return RedirectToAction("Auth", "Auth"); 
+
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+
+                int? userId = (Session["userID"] != null) ? Int32.Parse(Session["userID"].ToString()) : 0;
+                notificationService.AddNotificationForCustomer(product.product_id);
+
                 return RedirectToAction("Index");
             }
             ViewBag.category_id = new SelectList(db.Categories, "category_id", "category1", product.category_id);
             ViewBag.SkuId = new SelectList(db.SKUs, "SkuId", "Description", product.SkuId);
+
+            
+
             return View(product);
         }
 

@@ -51,5 +51,7 @@ namespace GroceryStore.Models
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<ProductNotification> ProductNotifications { get; set; }
     }
 }

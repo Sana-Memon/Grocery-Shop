@@ -19,6 +19,8 @@ namespace GroceryStore.Models
         {
             this.Customers = new HashSet<Customer>();
             this.OurTeams = new HashSet<OurTeam>();
+            this.Notifications = new HashSet<Notification>();
+            this.ProductNotifications = new HashSet<ProductNotification>();
         }
     
         public int UserID { get; set; }
@@ -39,5 +41,9 @@ namespace GroceryStore.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OurTeam> OurTeams { get; set; }
         public virtual Role Role1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductNotification> ProductNotifications { get; set; }
     }
 }

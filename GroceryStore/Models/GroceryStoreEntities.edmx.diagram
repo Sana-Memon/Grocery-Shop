@@ -55,6 +55,13 @@
         <AssociationConnector Association="GroceryStoreModel.FK__orders__AddressI__4830B400" />
         <AssociationConnector Association="GroceryStoreModel.FK__Address__Country__53A266AC" />
         <AssociationConnector Association="GroceryStoreModel.FK__Address__CityId__54968AE5" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Notification" Width="1.5" PointX="15.75" PointY="11.875" />
+        <EntityTypeShape EntityType="GroceryStoreModel.ProductNotification" Width="1.5" PointX="13.5" PointY="8.75" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Notificat__Produ__689D8392" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Notificat__RoleI__67A95F59" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Notificat__UserI__66B53B20" />
+        <AssociationConnector Association="GroceryStoreModel.FK__ProductNo__Produ__61F08603" />
+        <AssociationConnector Association="GroceryStoreModel.FK__ProductNo__UserI__62E4AA3C" />
       </Diagram>
       <Diagram DiagramId="eb6f651eed5a4b8c8923af8db3ecc98a" Name="Diagram2" >
         <EntityTypeShape EntityType="GroceryStoreModel.order" Width="1.5" PointX="0.75" PointY="0.75" />

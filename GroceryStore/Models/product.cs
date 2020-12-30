@@ -21,6 +21,7 @@ namespace GroceryStore.Models
             this.Lists = new HashSet<List>();
             this.orderProductsPriors = new HashSet<orderProductsPrior>();
             this.Review_Ratings = new HashSet<Review_Ratings>();
+            this.ProductNotifications = new HashSet<ProductNotification>();
         }
     
         public int product_id { get; set; }
@@ -46,5 +47,7 @@ namespace GroceryStore.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review_Ratings> Review_Ratings { get; set; }
         public virtual SKU SKU { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductNotification> ProductNotifications { get; set; }
     }
 }

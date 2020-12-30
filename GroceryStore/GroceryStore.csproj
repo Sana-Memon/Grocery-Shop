@@ -262,6 +262,9 @@
     <Compile Include="Models\List.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\order.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
@@ -281,6 +284,9 @@
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\product.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductNotification.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product_Location.cs">
@@ -305,6 +311,7 @@
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Utilities\AppRoles.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -122,6 +122,17 @@ warning 6002: The table/view 'GroceryStore.dbo.Customer_Complaints' does not hav
     <Property Name="quantity" Type="int" />
     <Property Name="CustomerID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="ProductNotificationId" Type="int" />
+    <Property Name="IsRecieved" Type="bit" />
+  </EntityType>
   <EntityType Name="orderProductsPrior">
     <Key>
       <PropertyRef Name="order_id" />
@@ -201,6 +212,15 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     </Key>
     <Property Name="position_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="position" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductNotification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="IsCompleted" Type="bit" />
   </EntityType>
   <EntityType Name="products">
     <Key>
@@ -310,6 +330,30 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
       </Principal>
       <Dependent Role="orders">
         <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductNo__Produ__147C05D0">
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="ProductNotification" Type="Self.ProductNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="ProductNotification">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductNo__UserI__15702A09">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="ProductNotification" Type="Self.ProductNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProductNotification">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -590,11 +634,13 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     <EntitySet Name="DealAndDiscount" EntityType="Self.DealAndDiscount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Delivery-boy" EntityType="Self.Delivery-boy" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="List" EntityType="Self.List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orderProductsPrior" EntityType="Self.orderProductsPrior" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OurSatisfiedCustomers" EntityType="Self.OurSatisfiedCustomers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OurTeam" EntityType="Self.OurTeam" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_Location" EntityType="Self.Product_Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductNotification" EntityType="Self.ProductNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Review&amp;Ratings" EntityType="Self.Review&amp;Ratings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -639,6 +685,14 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     <AssociationSet Name="FK__orders__AddressI__4830B400" Association="Self.FK__orders__AddressI__4830B400">
       <End Role="Address" EntitySet="Address" />
       <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductNo__Produ__147C05D0" Association="Self.FK__ProductNo__Produ__147C05D0">
+      <End Role="products" EntitySet="products" />
+      <End Role="ProductNotification" EntitySet="ProductNotification" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductNo__UserI__15702A09" Association="Self.FK__ProductNo__UserI__15702A09">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProductNotification" EntitySet="ProductNotification" />
     </AssociationSet>
     <AssociationSet Name="FK__Review&amp;Ra__produ__6ABAD62E" Association="Self.FK__Review&amp;Ra__produ__6ABAD62E">
       <End Role="products" EntitySet="products" />

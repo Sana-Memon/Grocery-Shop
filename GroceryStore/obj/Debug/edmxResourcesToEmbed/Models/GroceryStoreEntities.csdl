@@ -173,6 +173,7 @@
     <NavigationProperty Name="orderProductsPriors" Relationship="Self.FK_orderProductsPrior_products" FromRole="products" ToRole="orderProductsPrior" />
     <NavigationProperty Name="Review_Ratings" Relationship="Self.FK__Review_Ra__produ__6ABAD62E" FromRole="products" ToRole="Review_Ratings" />
     <NavigationProperty Name="SKU" Relationship="Self.FK_products_SKUs" FromRole="products" ToRole="SKUs" />
+    <NavigationProperty Name="ProductNotifications" Relationship="GroceryStoreModel.FK__ProductNo__Produ__61F08603" FromRole="product" ToRole="ProductNotification" />
   </EntityType>
   <EntityType Name="Review_Ratings">
     <Key>
@@ -194,6 +195,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Users" Relationship="Self.FK_UserRole" FromRole="Role" ToRole="Users" />
+    <NavigationProperty Name="Notifications" Relationship="GroceryStoreModel.FK__Notificat__RoleI__67A95F59" FromRole="Role" ToRole="Notification" />
   </EntityType>
   <EntityType Name="SKU">
     <Key>
@@ -229,6 +231,8 @@
     <NavigationProperty Name="Delivery_boy" Relationship="Self.FK_Delivery_boy_Users" FromRole="Users" ToRole="Delivery_boy" />
     <NavigationProperty Name="OurTeams" Relationship="Self.FK_OurTeam_Users" FromRole="Users" ToRole="OurTeam" />
     <NavigationProperty Name="Role1" Relationship="Self.FK_UserRole" FromRole="Users" ToRole="Role" />
+    <NavigationProperty Name="Notifications" Relationship="GroceryStoreModel.FK__Notificat__UserI__66B53B20" FromRole="User" ToRole="Notification" />
+    <NavigationProperty Name="ProductNotifications" Relationship="GroceryStoreModel.FK__ProductNo__UserI__62E4AA3C" FromRole="User" ToRole="ProductNotification" />
   </EntityType>
   <EntityType Name="Customer_Complaints">
     <Key>
@@ -636,6 +640,28 @@
       <End Role="City" EntitySet="Cities" />
       <End Role="Address" EntitySet="Addresses" />
     </AssociationSet>
+    <EntitySet Name="Notifications" EntityType="GroceryStoreModel.Notification" />
+    <EntitySet Name="ProductNotifications" EntityType="GroceryStoreModel.ProductNotification" />
+    <AssociationSet Name="FK__Notificat__Produ__689D8392" Association="GroceryStoreModel.FK__Notificat__Produ__689D8392">
+      <End Role="ProductNotification" EntitySet="ProductNotifications" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Notificat__RoleI__67A95F59" Association="GroceryStoreModel.FK__Notificat__RoleI__67A95F59">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Notificat__UserI__66B53B20" Association="GroceryStoreModel.FK__Notificat__UserI__66B53B20">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductNo__Produ__61F08603" Association="GroceryStoreModel.FK__ProductNo__Produ__61F08603">
+      <End Role="product" EntitySet="products" />
+      <End Role="ProductNotification" EntitySet="ProductNotifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductNo__UserI__62E4AA3C" Association="GroceryStoreModel.FK__ProductNo__UserI__62E4AA3C">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ProductNotification" EntitySet="ProductNotifications" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="sysdiagram">
     <Key>
@@ -712,6 +738,92 @@
       </Principal>
       <Dependent Role="Address">
         <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="ProductNotificationId" Type="Int32" />
+    <Property Name="IsRecieved" Type="Boolean" />
+    <NavigationProperty Name="ProductNotification" Relationship="GroceryStoreModel.FK__Notificat__Produ__689D8392" FromRole="Notification" ToRole="ProductNotification" />
+    <NavigationProperty Name="Role" Relationship="GroceryStoreModel.FK__Notificat__RoleI__67A95F59" FromRole="Notification" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="GroceryStoreModel.FK__Notificat__UserI__66B53B20" FromRole="Notification" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ProductNotification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="IsCompleted" Type="Boolean" />
+    <NavigationProperty Name="Notifications" Relationship="GroceryStoreModel.FK__Notificat__Produ__689D8392" FromRole="ProductNotification" ToRole="Notification" />
+    <NavigationProperty Name="product" Relationship="GroceryStoreModel.FK__ProductNo__Produ__61F08603" FromRole="ProductNotification" ToRole="product" />
+    <NavigationProperty Name="User" Relationship="GroceryStoreModel.FK__ProductNo__UserI__62E4AA3C" FromRole="ProductNotification" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__Notificat__Produ__689D8392">
+    <End Type="GroceryStoreModel.ProductNotification" Role="ProductNotification" Multiplicity="0..1" />
+    <End Type="GroceryStoreModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductNotification">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="ProductNotificationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Notificat__RoleI__67A95F59">
+    <End Type="GroceryStoreModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="GroceryStoreModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Notificat__UserI__66B53B20">
+    <End Type="GroceryStoreModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="GroceryStoreModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductNo__Produ__61F08603">
+    <End Type="GroceryStoreModel.product" Role="product" Multiplicity="0..1" />
+    <End Type="GroceryStoreModel.ProductNotification" Role="ProductNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="ProductNotification">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductNo__UserI__62E4AA3C">
+    <End Type="GroceryStoreModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="GroceryStoreModel.ProductNotification" Role="ProductNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProductNotification">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
