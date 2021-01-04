@@ -185,6 +185,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\Admin\CategoriesController.cs" />
+    <Compile Include="Controllers\Cashier\Cashier_CounterController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\Customer\AddNewAddressController.cs" />
@@ -2392,10 +2393,14 @@
     <Content Include="Views\EndedStock\Details.cshtml" />
     <Content Include="Views\EndedStock\Edit.cshtml" />
     <Content Include="Views\EndedStock\Index.cshtml" />
+    <Content Include="Views\Cashier_Counter\Create.cshtml" />
+    <Content Include="Views\Cashier_Counter\Delete.cshtml" />
+    <Content Include="Views\Cashier_Counter\Details.cshtml" />
+    <Content Include="Views\Cashier_Counter\Edit.cshtml" />
+    <Content Include="Views\Cashier_Counter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Cashier\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
