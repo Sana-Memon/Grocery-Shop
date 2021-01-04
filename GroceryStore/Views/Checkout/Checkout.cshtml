@@ -1,13 +1,17 @@
 ﻿@model GroceryStore.Controllers.Dto.UserDto
+
 @{ ViewBag.Title = "Checkout";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/banner3.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
             <div class="col-md-9 ftco-animate mb-5 text-center">
-                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="../Home/Index">Home <i class="fa fa-chevron-right"></i></a></span> <span>Checkout <i class="fa fa-chevron-right"></i></span></p>
+                <p class="breadcrumbs mb-0">
+                    <span class="mr-2"><a href="../Home/Index">Home <i class="fa fa-chevron-right"></i></a></span>
+                    <span>Checkout <i class="fa fa-chevron-right"></i></span>
+                </p>
                 <h2 class="mb-0 bread">Checkout</h2>
             </div>
         </div>
@@ -20,54 +24,56 @@
             <div class="col-xl-10 ftco-animate">
                 <!-- END -->
 
-                            <div class="form-group">
+                <div class="form-group">
+                    <label>Select Address</label>
 
-
-                                <label>Select Address</label>
-                                @using (Html.BeginForm("StoreOrder", "Checkout", FormMethod.Post))
-                                {
-                <select class="form-control" name="addressId" id="addressId" required>
-
-                    @foreach (var address in Model.Address)
+                    @using (Html.BeginForm("StoreOrder", "Checkout", FormMethod.Post))
                     {
-            <option value="@address.Id">@address.Name</option>
-}
+                        <select class="form-control" name="AddressId" id="address" required>
+
+                            @foreach (var address in Model.Address)
+                            {
+                            
+                                <option value="@address.Id">@address.Name</option>
+
+                            }
 
 
-                </select>}
-                                <h1>@ViewBag.saveresult</h1>
+                         </select>
 
+                           <input id="submit-button" type="submit" value="Place an order" class="button2">
+                    }
 
-                            </div>
-                                            <a href="../AddNewAddress/AddNewAddress">Want to add another Address?</a>
+                    <h1>@ViewBag.saveresult</h1>
 
-                                                            <div class="row mt-5 pt-3 d-flex">
-                                                                <div class="col-md-6 d-flex">
-                                                                    <div class="cart-detail cart-total p-3 p-md-4">
-                                                                        <h3 class="billing-heading mb-4">Cart Total</h3>
-                                                                        <p class="d-flex">
-                                                                            <span>Subtotal</span>
-                                                                            <span>$20.60</span>
-                                                                        </p>
-                                                                        <p class="d-flex">
-                                                                            <span>Delivery</span>
-                                                                            <span>$0.00</span>
-                                                                        </p>
-                                                                        <p class="d-flex">
-                                                                            <span>Discount</span>
-                                                                            <span>$3.00</span>
-                                                                        </p>
-                                                                        <hr>
-                                                                        <p class="d-flex total-price">
-                                                                            <span>Total</span>
-                                                                            <span>$17.60</span>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- .col-md-8 -->
-                                                            </div>
-                                                                            <p><a href="../Checkout/StoreOrder" class="btn btn-primary py-3 px-4">Place an order</a></p>
-                                                                                        </div>
+                </div>
+                <a href="../AddNewAddress/AddNewAddress">Want to add another Address?</a>
+
+                <div class="row mt-5 pt-3 d-flex">
+                    <div class="col-md-6 d-flex">
+                        <div class="cart-detail cart-total p-3 p-md-4">
+                            <h3 class="billing-heading mb-4">Cart Total</h3>
+                            <p class="d-flex">
+                                <span>Subtotal</span>
+                                <span>$20.60</span>
+                            </p>
+                            <p class="d-flex">
+                                <span>Delivery</span>
+                                <span>$0.00</span>
+                            </p>
+                            <p class="d-flex">
+                                <span>Discount</span>
+                                <span>$3.00</span>
+                            </p>
+                            <hr>
+                            <p class="d-flex total-price">
+                                <span>Total</span>
+                                <span>$17.60</span>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- .col-md-8 -->
+
 
 </section>
 

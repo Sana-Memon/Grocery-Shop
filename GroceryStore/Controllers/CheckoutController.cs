@@ -11,6 +11,7 @@ namespace GroceryStore.Controllers
     public class CheckoutController : Controller
     {
         GroceryStoreEntities db = new GroceryStoreEntities();
+
         // GET: Checkout
         public ActionResult Checkout()
         {
@@ -25,41 +26,30 @@ namespace GroceryStore.Controllers
 
             var city = db.Cities.ToList();
 
-            //My try to get id of drop down
-            Address a = new Address();
-         //   a.AllAddresses = db.Addresses.ToList<Address>();
-
-
-
-            //my try end
-
             var address = db.Addresses.Include("City").Where(x => x.CustomerID == id).ToList();
-            // .Include(x => x. ); //.Where()
 
             return View(new UserDto() { User = user, Cities = city, Address = address });
         }
-        
-        // POST: place an order
-        public ActionResult StoreOrder(UserDto MV)
+
+
+        [HttpPost]
+        public ActionResult StoreOrder()
         {
             GroceryStoreEntities db = new GroceryStoreEntities();
 
             var userId = Int32.Parse(Session["userID"]?.ToString());
             var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
             IList<List> lists = db.Lists.Include("product").Where(x => x.CustomerID == customer.Customer_id).ToList();
-            int? addressID = (Request.Form["addressId"] != null) ? (int?)int.Parse(Request.Form["addressId"].ToString()) : null;
+            int? addressID = (Request.Form["AddressId"] != null) ? (int?)int.Parse(Request.Form["AddressId"].ToString()) : null;
 
             order order = new order();
-            string SelectedValue = MV.SelectedAddress ;
-
-            //order.order_id = 0;
 
             order.customerr_id = customer.Customer_id;
             order.order_number = "123123";
             order.date = DateTime.Now;
             order.OrderStatus = "PENDING";
             order.AddressId = addressID;
-            List <orderProductsPrior> orderProducts = new List<orderProductsPrior>();
+            List<orderProductsPrior> orderProducts = new List<orderProductsPrior>();
 
             for (int i = 0; i < lists.Count; i++)
             {
@@ -78,7 +68,6 @@ namespace GroceryStore.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Thanyou", "Thankyou");
-
         }
     }
 }

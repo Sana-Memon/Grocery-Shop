@@ -27,15 +27,17 @@ namespace GroceryStore.Controllers.Customer
                 return RedirectToAction("Auth", "Auth");
 
             List<OrderDto> allOrder = (from orders in db.orders
-                               join address in db.Addresses on new { pid = orders.order_id } equals new { pid = address.Id } into yG
-                               from y1 in yG.DefaultIfEmpty()
-                               where (orders.customerr_id == customer.Customer_id)
-                               select new OrderDto() {
-                                   order_id = orders.order_id,
-                                   OrderStatus = orders.OrderStatus,
-                                   date = ""+orders.date,
-                                   CustomerID = orders.customerr_id
-                               }).ToList();
+                                       join address in db.Addresses on new { pid = orders.order_id } equals new { pid = address.Id } into yG
+                                       from y1 in yG.DefaultIfEmpty()
+                                       where (orders.customerr_id == customer.Customer_id)
+                                       select new OrderDto()
+                                       {
+                                           order_id = orders.order_id,
+                                           OrderStatus = orders.OrderStatus,
+                                           date = "" + orders.date,
+                                           CustomerID = orders.customerr_id,
+                                           AddressName = orders.Address.Name
+                                       }).ToList();
 
             //if (rolename == AppRoles.Admin)
             //{
@@ -45,7 +47,7 @@ namespace GroceryStore.Controllers.Customer
             return View(new UserDto { User = user, OrderDto = allOrder });
         }
 
-        public ActionResult ChangeStatus() 
+        public ActionResult ChangeStatus()
         {
             string queryString = Request.QueryString["status"];
             string orderId = Request.QueryString["id"];
@@ -61,7 +63,7 @@ namespace GroceryStore.Controllers.Customer
 
             GroceryStoreEntities db = new GroceryStoreEntities();
 
-             var first = db.orders.Where(a => a.order_id == orderIdInt).FirstOrDefault();
+            var first = db.orders.Where(a => a.order_id == orderIdInt).FirstOrDefault();
 
             first.OrderStatus = queryString;
 
