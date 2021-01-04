@@ -1,7 +1,7 @@
 ﻿@model GroceryStore.Models.Category
 
 @{
-    //Layout = "~/Views/Shared/AdminDashboard.cshtml";
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
     Layout = null;
 }
 
@@ -39,7 +39,7 @@
                 </dl>
             </div>
             <p>
-                @Html.ActionLink("Edit", "Edit", new { id = Model.category_id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = Model.category_id })
                 @Html.ActionLink("Back to List", "Index")
             </p>
         </div>

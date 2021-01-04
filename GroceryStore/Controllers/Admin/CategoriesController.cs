@@ -26,7 +26,6 @@ namespace GroceryStore.Controllers
             int id = Int32.Parse(Session["userID"].ToString());
             var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
             return View(new UserDto { categories = categories.ToList(), User=user });
-
         }
 
         // GET: Categories/Details/5
