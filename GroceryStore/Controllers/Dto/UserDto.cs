@@ -23,7 +23,7 @@ namespace GroceryStore.Controllers.Dto
         public List<order> orders { get; set; }
         public List<OrderDto> OrderDto { get; set; }
         
-        public IEnumerable<Cashier_Counter> Cashier_Counters { get; set; }
+        public List<Cashier_Counter> Cashier_Counters { get; set; }
 
 
     }
