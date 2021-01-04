@@ -51,14 +51,18 @@ namespace GroceryStore.Controllers.Cashier
         // GET: Cashier_Counter/Create
         public ActionResult Create()
         {
-            return View();
+            int? userId = (Session["userID"] != null) ? Int32.Parse(Session["userID"].ToString()) : 0;
+
+            GroceryStoreEntities db = new GroceryStoreEntities();
+            var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
+
+            return View(new UserDto { User = user });
         }
 
         // POST: Cashier_Counter/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Location,MaxOrderLimit")] Cashier_Counter cashier_Counter)
         {
             if (ModelState.IsValid)
@@ -83,7 +87,11 @@ namespace GroceryStore.Controllers.Cashier
             {
                 return HttpNotFound();
             }
-            return View(cashier_Counter);
+
+            UserDto user = new UserDto();
+            user.cashier = cashier_Counter;
+
+            return View(user);
         }
 
         // POST: Cashier_Counter/Edit/5
