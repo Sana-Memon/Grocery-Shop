@@ -48,11 +48,12 @@ namespace GroceryStore.Models
         public virtual DbSet<Review_Ratings> Review_Ratings { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<SKU> SKUs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Town> Towns { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<orderProductsTrain> orderProductsTrains { get; set; }
         public virtual DbSet<OrderToDeliver> OrderToDelivers { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<Cashier_Counter> Cashier_Counter { get; set; }
+        public virtual DbSet<Counter_Records> Counter_Records { get; set; }
     }
 }

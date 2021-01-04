@@ -94,6 +94,7 @@
     <NavigationProperty Name="Lists" Relationship="Self.FK_List_Customers" FromRole="Customers" ToRole="List" />
     <NavigationProperty Name="OurSatisfiedCustomers" Relationship="Self.FK_OurSatisfiedCustomers_Customers" FromRole="Customers" ToRole="OurSatisfiedCustomers" />
     <NavigationProperty Name="orders" Relationship="Self.Customer_Order" FromRole="Customers" ToRole="orders" />
+    <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Custo__367C1819" FromRole="Customer" ToRole="Counter_Records" />
   </EntityType>
   <EntityType Name="DealAndDiscount">
     <Key>
@@ -172,6 +173,7 @@
     <NavigationProperty Name="orderProductsPriors" Relationship="Self.FK_orderProductsPrior_orders1" FromRole="orders" ToRole="orderProductsPrior" />
     <NavigationProperty Name="OrderToDelivers" Relationship="Self.FK_OrderToDeliver_orders" FromRole="orders" ToRole="OrderToDeliver" />
     <NavigationProperty Name="Customers" Relationship="Self.Customer_Order" FromRole="orders" ToRole="Customers" />
+    <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" FromRole="order" ToRole="Counter_Records" />
   </EntityType>
   <EntityType Name="OurSatisfiedCustomer">
     <Key>
@@ -268,16 +270,6 @@
     <Property Name="SkuId" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="products" Relationship="Self.FK_products_SKUs" FromRole="SKUs" ToRole="products" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Town">
     <Key>
@@ -671,7 +663,6 @@
     <EntitySet Name="Review_Ratings" EntityType="Self.Review_Ratings" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="SKUs" EntityType="Self.SKU" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Towns" EntityType="Self.Town" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="orderProductsTrains" EntityType="Self.orderProductsTrain" />
@@ -777,5 +768,78 @@
       <End Role="Customers" EntitySet="Customers" />
       <End Role="orders" EntitySet="orders" />
     </AssociationSet>
+    <EntitySet Name="Cashier_Counter" EntityType="GroceryStoreModel.Cashier_Counter" />
+    <EntitySet Name="Counter_Records" EntityType="GroceryStoreModel.Counter_Records" />
+    <AssociationSet Name="FK__Counter_R__Cashi__3493CFA7" Association="GroceryStoreModel.FK__Counter_R__Cashi__3493CFA7">
+      <End Role="Cashier_Counter" EntitySet="Cashier_Counter" />
+      <End Role="Counter_Records" EntitySet="Counter_Records" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Counter_R__Custo__367C1819" Association="GroceryStoreModel.FK__Counter_R__Custo__367C1819">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Counter_Records" EntitySet="Counter_Records" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Counter_R__Order__3587F3E0" Association="GroceryStoreModel.FK__Counter_R__Order__3587F3E0">
+      <End Role="order" EntitySet="orders" />
+      <End Role="Counter_Records" EntitySet="Counter_Records" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Cashier_Counter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="MaxOrderLimit" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Cashi__3493CFA7" FromRole="Cashier_Counter" ToRole="Counter_Records" />
+  </EntityType>
+  <EntityType Name="Counter_Records">
+    <Key>
+      <PropertyRef Name="CashierId" />
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CashierId" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="TakeAwayTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Cashier_Counter" Relationship="GroceryStoreModel.FK__Counter_R__Cashi__3493CFA7" FromRole="Counter_Records" ToRole="Cashier_Counter" />
+    <NavigationProperty Name="Customer" Relationship="GroceryStoreModel.FK__Counter_R__Custo__367C1819" FromRole="Counter_Records" ToRole="Customer" />
+    <NavigationProperty Name="order" Relationship="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" FromRole="Counter_Records" ToRole="order" />
+  </EntityType>
+  <Association Name="FK__Counter_R__Cashi__3493CFA7">
+    <End Type="GroceryStoreModel.Cashier_Counter" Role="Cashier_Counter" Multiplicity="1" />
+    <End Type="GroceryStoreModel.Counter_Records" Role="Counter_Records" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cashier_Counter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Counter_Records">
+        <PropertyRef Name="CashierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Counter_R__Custo__367C1819">
+    <End Type="GroceryStoreModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="GroceryStoreModel.Counter_Records" Role="Counter_Records" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Counter_Records">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Counter_R__Order__3587F3E0">
+    <End Type="GroceryStoreModel.order" Role="order" Multiplicity="1" />
+    <End Type="GroceryStoreModel.Counter_Records" Role="Counter_Records" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="Counter_Records">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -28,7 +28,6 @@
         <EntityTypeShape EntityType="GroceryStoreModel.Review_Ratings" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.Role" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.SKU" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GroceryStoreModel.sysdiagram" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.Town" Width="1.5" PointX="12.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.User" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GroceryStoreModel.orderProductsTrain" Width="1.5" PointX="2.75" PointY="13" IsExpanded="true" />
@@ -59,6 +58,11 @@
         <AssociationConnector Association="GroceryStoreModel.FK_products_SKUs" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.FK_UserRole" ManuallyRouted="false" />
         <AssociationConnector Association="GroceryStoreModel.Customer_Order" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Cashier_Counter" Width="1.5" PointX="8.25" PointY="34.125" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Counter_Records" Width="1.5" PointX="10.5" PointY="24.75" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Counter_R__Cashi__3493CFA7" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Counter_R__Custo__367C1819" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

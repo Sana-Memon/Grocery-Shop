@@ -12,25 +12,19 @@ namespace GroceryStore.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Address
+    public partial class Cashier_Counter
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Address()
+        public Cashier_Counter()
         {
-            this.orders = new HashSet<order>();
+            this.Counter_Records = new HashSet<Counter_Records>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Postcode { get; set; }
-        public Nullable<int> CustomerID { get; set; }
-        public string OtherDetails { get; set; }
-        public Nullable<int> CountryId { get; set; }
-        public Nullable<int> CityId { get; set; }
+        public string Location { get; set; }
+        public int MaxOrderLimit { get; set; }
     
-        public virtual City City { get; set; }
-        public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<order> orders { get; set; }
+        public virtual ICollection<Counter_Records> Counter_Records { get; set; }
     }
 }

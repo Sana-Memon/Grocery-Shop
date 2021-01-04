@@ -223,6 +223,9 @@
     <Compile Include="Models\Address.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cashier_Counter.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
@@ -230,6 +233,9 @@
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Complaint_Type.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Counter_Records.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Country.cs">
@@ -309,9 +315,6 @@
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SKU.cs">
-      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Town.cs">
@@ -2392,6 +2395,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Cashier\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -11,9 +11,7 @@ namespace GroceryStore.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,29 +22,12 @@ namespace GroceryStore.Models
             this.OurTeams = new HashSet<OurTeam>();
             this.ProductNotifications = new HashSet<ProductNotification>();
         }
-
+    
         public int UserID { get; set; }
-
-        [Required(ErrorMessage = "This Field is Required")]
         public string FullName { get; set; }
-
-        [Required(ErrorMessage = "This is Reqired Field")]
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "This is Reqired Field")]
         public string UserName { get; set; }
-
-        [DataType(DataType.Password)]
-        [Required(ErrorMessage = "This Field is Required")]
         public string Password { get; set; }
-
-        [Required(ErrorMessage = "This Field is Required")]
-        [DisplayName("Confirm Password")]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
-        public string LoginErrorMsg { get; set; }
-
-        [Required(ErrorMessage = "This Field is Required")]
         public string ContactNo { get; set; }
         public Nullable<bool> Subscription { get; set; }
         public string Home_Address { get; set; }
@@ -54,6 +35,9 @@ namespace GroceryStore.Models
         public string Other_Address { get; set; }
         public Nullable<int> Role { get; set; }
         public string code { get; set; }
+
+        public string LoginErrorMsg { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer_Complaints> Customer_Complaints { get; set; }
