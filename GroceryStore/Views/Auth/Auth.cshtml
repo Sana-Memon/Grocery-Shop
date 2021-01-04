@@ -1,0 +1,209 @@
+﻿
+@model GroceryStore.Models.User
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Auth</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/images/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <!--===============================================================================================-->
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../css/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/startmin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="./fontawesome-free-5.14.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!--Custom Css-->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                @using (Html.BeginForm("Authorise", "Auth", FormMethod.Post, new { @class = "login100-form validate-form" }))
+                {
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+                    <h2>Grocery Store</h2>
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                        @*<label for="Email" class="form-control">Email</label>*@
+                        <input id="email" class="input100" data-val="true" data-val-required="This is Reqired Field" id="Email" name="Email" type="text" value="">
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input id="password" class="input100" type="password" name="Password">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" type="submit">
+                                <a href="#" style="color: white;">
+                                    Login
+                                </a>
+
+                            </button>
+                        </div>
+                    </div>
+
+                    @Html.DisplayFor(item => item.LoginErrorMsg)
+
+                    <div class="text-center p-t-115">
+                        <span class="txt1">
+                            Don’t have an account?
+                        </span>
+
+                        <a class="txt2" href="../Signup/Signup">
+                            Sign Up
+                        </a>
+                    </div>
+                    <br/>
+                    <div class="text-center">
+                        <span class="txt1">
+                            Didn't Remember your password
+                        </span>
+
+                        <a class="txt2" href="../Auth/forgotPassword">
+                            forget password
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+
+    <script src="js/main-login.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+</body>
+</html>
+
+
+@*<div class="wrap-login100">
+    <form class="login100-form validate-form">
+        <span class="login100-form-title p-b-26">
+            Welcome
+        </span>
+        <h2>Grocery Store</h2>
+
+        <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+            <input class="input100" type="text" name="email">
+            <span class="focus-input100" data-placeholder="Email"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter password">
+            <span class="btn-show-pass">
+                <i class="zmdi zmdi-eye"></i>
+            </span>
+            <input class="input100" type="password" name="pass">
+            <span class="focus-input100" data-placeholder="Password"></span>
+        </div>
+
+        <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                <button class="login100-form-btn">
+                    <a href="../dashboard/index.html" style="color: white;">
+                        Login
+                    </a>
+
+                </button>
+            </div>
+        </div>
+
+        <div class="text-center p-t-115">
+            <span class="txt1">
+                Don’t have an account?
+            </span>
+
+            <a class="txt2" href="../sign up/index.html">
+                Sign Up
+            </a>
+        </div>
+    </form>
+</div>*@
+
+<style>
+    .input100:focus + .focus-input100::after {
+        top: -15px !important;
+    }
+    input[type=text]:focus + .focus-input100::after {
+        top: -15px !important;
+    }
+
+    .input-hover + .focus-input100::after{
+        top: -15px !important;
+    }
+
+</style>
+
+<script>
+    @*document.getElementById("#username").keypress = (event) => {
+        console.log(event);
+    };*@
+    $("#email").keyup(setHover);
+    $("#password").keyup(setHover);
+
+    function setHover() {
+        if ($(this).val() != "") {
+            console.log('added');
+            $(this).addClass("input-hover");
+        } else {
+            console.log('removed');
+            $(this).removeClass("input-hover");
+        }
+    }
+
+</script>

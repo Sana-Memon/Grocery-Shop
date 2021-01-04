@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="99695f6165594527b1d66a8539b94fd9" Name="Diagram1">
+        <EntityTypeShape EntityType="GroceryStoreModel.about" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Address" Width="1.5" PointX="6" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Category" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.City" Width="1.5" PointX="3.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Complaint_Type" Width="1.5" PointX="8.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Country" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Customer_Complaints" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Customer_Referals" Width="1.5" PointX="8.25" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Customer" Width="1.5" PointX="6" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.DealAndDiscount" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Delivery_boy" Width="1.5" PointX="10.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.List" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Notification" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.orderProductsPrior" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.order" Width="1.5" PointX="8.25" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.OurSatisfiedCustomer" Width="1.5" PointX="8.25" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.OurTeam" Width="1.5" PointX="10.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Product_Location" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.ProductNotification" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.product" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Review_Ratings" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Role" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.SKU" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.sysdiagram" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Town" Width="1.5" PointX="12.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.User" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.orderProductsTrain" Width="1.5" PointX="2.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.OrderToDeliver" Width="1.5" PointX="12.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceryStoreModel.ProductCategory" Width="1.5" PointX="12.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Address__CityId__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Address__Country__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK__orders__AddressI__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_departments_aisles" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_Customer_Complaints_Complaint_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_Customer_Complaints_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_Customer_Referals_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_Customers_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_List_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_OurSatisfiedCustomers_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_DealAndDiscount_products" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_Delivery_boy_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_OrderToDeliver_Delivery_boy" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_List_products" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_orderProductsPrior_orders1" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_orderProductsPrior_products" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_OrderToDeliver_orders" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_OurTeam_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK__ProductNo__Produ__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK__ProductNo__UserI__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Review_Ra__produ__6ABAD62E" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_products_SKUs" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.FK_UserRole" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceryStoreModel.Customer_Order" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

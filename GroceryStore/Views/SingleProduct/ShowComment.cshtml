@@ -1,0 +1,14 @@
+﻿@model IEnumerable<GroceryStore.Models.ViewModel.CommentViewModel>
+
+@{
+    ViewBag.Title = "ShowComment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowComment</h2>
+
+@foreach(var item in Model)
+{
+    @Html.Partial("_CommentPartial",item)
+}
+

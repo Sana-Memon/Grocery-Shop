@@ -285,3 +285,35 @@
     </div>
     <!-- /.row -->
 </div>
+
+<script>
+    window.onload = function () {
+        $.get(window.location.origin + '/AdminDashboard/GetNotifications', (data) => {
+
+            data.forEach(x => {
+                document.getElementById('notify-data').innerHTML += `<li>
+
+                                <a href="#">
+                                    <div>
+                                <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+
+                                        ${x.Message}
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>`
+            });
+
+            document.getElementById('notify-data').innerHTML += `<li>
+                <a class="text-center" href="#">
+                    <strong>See All Alerts</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>`; 
+
+            document.getElementById('icon-number').innerText = (data.length > 10) ? '10+' : data.length.toString() 
+
+            console.log(data);
+        });
+    }
+</script>

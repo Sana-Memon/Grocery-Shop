@@ -1,0 +1,50 @@
+﻿@model GroceryStore.Models.Category
+
+@{
+    //Layout = "~/Views/Shared/AdminDashboard.cshtml";
+    Layout = null;
+}
+
+<div id="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div>
+                <h4>Category</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.category1)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.category1)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ImageFilePath)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ImageFilePath)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Product_Location.position)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Product_Location.position)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.category_id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>

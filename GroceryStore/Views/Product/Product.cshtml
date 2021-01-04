@@ -1,8 +1,13 @@
-﻿
-@{
-    ViewBag.Title = "Product";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@*@model IEnumerable<GroceryStore.Controllers.Dto.ProductDto>*@
+
+@using GroceryStore.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<GroceryStore.Controllers.Dto.ProductDto>
+
+@{ ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
 
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/banner3.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -15,29 +20,34 @@
         </div>
     </div>
 </section>
-<section class="ftco-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <div class="row mb-4">
-                    <div class="col-md-12 d-flex justify-content-between align-items-center">
-                        <h4 class="product-select">Select Category of Products</h4>
-                        <select class="selectpicker" multiple>
-                            <option>Lipton</option>
-                            <option>Spirit</option>
-                            <option>Vim</option>
-                            <option>Harpic</option>
-                            <option>Comfort</option>
-                            <option>Zeeba</option>
-                        </select>
+<center>
+    @*<section class="ftco-section">
+            <div class="container">
+                <div class="row">
+                    <div class="form-group">
+                        @Html.DropDownList("Category", "Select Category")
                     </div>
+
                 </div>
+        </section>*@
 
+    @using (Html.BeginForm("Product", "Product", FormMethod.Post))
+    {
+
+        <p>
+            <div class="form-group">
+                <div id="Search">
+                    Search Product:
+                    @Html.TextBox("searchText", null, new { @class = "form-control", @style = "max-width:40%" })
+                    @*<input type="text" name="searchText" class="form-control" style="max-width:40%" />*@
+                    <button type="submit" class="btn button2" value="Find">Search</button>
+                </div>
             </div>
-        </div>
+        </p>
 
+    }
 
-</section>
+</center>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -54,107 +64,289 @@
 
 
 <div class="container">
-    <h3 class="h3">All Product Categories</h3>
+    <h3 class="h3">Our Products </h3>
 
-    @{Html.RenderAction("Shop");}
 
+    @if (true)
+    {
+        <a id="proceed-checkout" href="../Cart/Cart" style="position: relative; z-index: 10000; visibility: @( Model.Where(x => x.customerId > 0).ToList().Count > 0 ?"visible":"hidden")">
+            <button id="proceed-button" type="submit" class="btn btn-primary" style="position: fixed; bottom: 12px; width: 180px; right: 25px; padding: 10px;"><span style=" display: inline-block; margin-right: 12px; font-size: 1.8em; font-weight: 900;">Proceed</span> <span style="font-size: 1.8em; font-weight: bold; position: relative; top: 2px;">&#10132;</span></button>
+        </a>
+    }
+
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid" style="height: 400px;">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="@item.ImageFilePath">
+                        <img class="pic-2" src="@item.ImageFilePath2">
+                    </a>
+
+                    <ul class="social">
+                        <li><a data-tip="Quick View" class="search"> <i class="fa fa-search"></i></a></li>
+                        <li><a href="../SingleProduct/SingleProduct?product_id=@item.product_id" data-tip="Product Detail"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="../SingleProduct/ShowComment?product_id=@item.product_id" data-tip="Check Reviews"><i class="fa fa-star"></i></a></li>
+
+                        @*@Html.ActionLink("Add/View Comment", "ShowComment", new { product_id = item.product_id })*@
+                        @*<li><a href="../SingleProduct/ShowComment" data-tip="Check Reviews"><i class="fa fa-shopping-cart"></i></a></li>*@
+                    </ul>
+
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">@item.DiscountPrice</span>
+
+                </div>
+
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+
+                <div class="product-content" style="padding: 0px;">
+                    <h3 class="title"><a href="#">@item.product_name</a></h3>
+                    <div class="price">@item.CostPrice<span>@item.DiscountPrice</span></div>
+                    <a class="price"> Location = @item.MartLocation</a>
+                </div>
+
+            </div>
+            <center>
+                @*action="../Cart/SubmitList"*@
+                <form onsubmit="submitProduct(event)">
+                    <input type="hidden" name="productId" value="@item.product_id">
+                    <input type="hidden" name="customerId" value="@item.customerId" />
+                    <a class="add-to-cart" href="#">
+                        @if (item.customerId > 0)
+                        {
+                            <button class="button2" style="padding: 10px 20px;">Remove</button> }
+                        else
+                        {
+                            <button class="button2" style="padding: 10px 20px;">Add to Cart</button>}
+                    </a>
+                    @*<input name="hidden" name="customerId" value="@item.cus">*@
+                </form>
+            </center>
+        </div>
+        <div class="product-view">
+            <div class="close-btn">X</div>
+            <div class="product-big-image">
+                <img src="@item.ImageFilePath">
+            </div>
+
+            <div class="product-big-desc">
+
+                <h2>@item.product_name</h2>
+                <h2>product Code: @item.product_id</h2>
+                <h5>category: Vegetables</h5>
+                <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
+                <div class="price">
+                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                </div>
+
+                <button class="button2">Click to Buy</button>
+                <br>
+                <p><b>Warrenty: </b> 1 day seller replacement </p>
+                <p><b>Shipping:</b> Dispatched with 2-3 days</p>
+            </div>
+        </div>}
+
+
+    <script>
+    let allProducts = @Model.Where(x => x.customerId > 0).ToList().Count;
+    let customerValue = @( @Model.Where(x => x.customerId > 0).ToList().FirstOrDefault() != null ? @Model.Where(x => x.customerId > 0).ToList().FirstOrDefault().customerId : 0 )
+
+    console.log(allProducts);
+    console.log(customerValue);
+    const submitProduct = (event) => {
+        event.preventDefault();
+        const messageRemove = "Remove";
+        const messageAdd = "Add to Cart";
+
+        let element = $(event.srcElement);
+        let deleteValue = 0;
+
+        const child = $(element.children().get(2));
+
+
+        @*if ($(child).children().get(0).textContent == messageRemove) {
+            deleteValue = 1;
+        } else {
+            deleteValue = 0;
+        }*@
+
+        $.post(window.location.origin + '/Cart/SubmitList', $(event.srcElement).serialize(),
+            (data) => {
+                if (data == true) {
+                    $(child).children().get(0).textContent = messageRemove;
+                    allProducts = allProducts + 1;
+                    $($(event.srcElement).children().get(1)).attr("value", customerValue.toString());
+                    @*$($(child).children().get(1)).attr('value', customerValue.toString());*@
+                }
+                else if (data == false) {
+                    $(child).children().get(0).textContent = messageAdd;
+                    allProducts = allProducts - 1;
+                    console.log($($(child).children().get(1)));
+                    $($(event.srcElement).children().get(1)).attr("value", "0");
+                }
+                console.log($($(child).children()));
+                //console.log(allProducts);
+
+                if (allProducts == 0) {
+                    $("#proceed-button").css('visibility', 'hidden');
+
+                } else if (allProducts > 0) {
+                    $("#proceed-button").css('visibility', 'visible');
+                }
+
+                console.log("doc is append");
+                //document.body.innerHTML +=('<a href="../Cart/Cart"> < button id = "proceed-button" type = "submit" class= "btn btn-primary" style = "position: fixed; bottom: 12px; width: 200px; right: 25px; padding: 10px;" > <span style=" display: inline-block; margin-right: 12px; font-size: 2em; font-weight: 900;">proceed</span> <span style="font-size: 2em; font-weight: bold; position: relative; top: 2px;">&#10132;</span></button ></a>')
+
+                @*console.log("data has been uploaded ");
+                console.log(data);
+                console.log(element.parent().parent());
+                element.parent().parent().remove();*@
+            }
+        );
+
+
+    }
+    </script>
+
+    <style>
+        @@media screen and (max-width: 600px) {
+            #proceed-checkout button {
+                width: 120px !important;
+            }
+
+                #proceed-checkout button span {
+                    font-size: 1.2em !important;
+                }
+        }
+    </style>
 
 </div>
 <br>
 <br>
-<div class="col text-center">
-    <div class="block-27">
-        <ul>
-            <li><a href="#">&lt;</a></li>
-            <li class="active"><span>1</span></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&gt;</a></li>
-        </ul>
-    </div>
-</div>
 
-<br>
-<br>
-
-
-
-
-
-
-<div class="">
-    <div class="nbs-flexisel-container">
-        <div class="nbs-flexisel-inner">
-            <ul id="flexiselDemo1" class="nbs-flexisel-ul">
-
-
-                <li class="nbs-flexisel-item" style="width: 262px;">
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single.html">
-                                <img src="../images/s5.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single.html">Sprite, 2.25L (Pack of 2)</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>Rs.180.00</h6>
-                                \
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>										</fieldset>
-
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nbs-flexisel-item" style="width: 262px;">
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single2.html">
-                                <img src="../images/s9.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single2.html">Lakme Eyeconic Kajal, 0.35 g</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>Rs.153.00</h6>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nbs-flexisel-item" style="width: 262px;">
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single.html">
-                                <img src="../images/s5.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single.html">Sprite, 2.25L (Pack of 2)</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>Rs.180.00</h6>
-                                \
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>										</fieldset>
-
-                            </div>
-                        </div>
-                    </div>
-                </li>
+<center>
+    <div class="col text-center">
+        <div class="block-27">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, Page_No => Url.Action("Product", new { Page_No, Filter_Value = ViewBag.FilterValue }))
         </div>
     </div>
+    <br>
+    <br>
+</center>
+
+
+
+
+
+
+<h3 class="h3">Recommended for you</h3>
+
+@*Try Carousel start*@
+
+@*Try carousel end*@
+
+<div class="nbs-flexisel-container">
+    <div class="nbs-flexisel-inner">
+        <ul id="flexiselDemo1" class="nbs-flexisel-ul">
+
+
+            <li class="nbs-flexisel-item" style="width: 262px;">
+                <div class="w3l-specilamk">
+                    <div class="speioffer-agile">
+                        <a href="single.html">
+                            <img src="../images/s5.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="product-name-w3l">
+                        <h4>
+                            <a href="single.html">Sprite, 2.25L (Pack of 2)</a>
+                        </h4>
+                        <div class="w3l-pricehkj">
+                            <h6>Rs.180.00</h6>
+
+                        </div>
+                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                            <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>										</fieldset>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nbs-flexisel-item" style="width: 262px;">
+                <div class="w3l-specilamk">
+                    <div class="speioffer-agile">
+                        <a href="single2.html">
+                            <img src="../images/s9.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="product-name-w3l">
+                        <h4>
+                            <a href="single2.html">Lakme Eyeconic Kajal</a>
+                        </h4>
+                        <div class="w3l-pricehkj">
+                            <h6>Rs.153.00</h6>
+                        </div>
+                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                            <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nbs-flexisel-item" style="width: 262px;">
+                <div class="w3l-specilamk">
+                    <div class="speioffer-agile">
+                        <a href="single.html">
+                            <img src="../images/s5.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="product-name-w3l">
+                        <h4>
+                            <a href="single.html">Sprite, 2.25L (Pack of 2)</a>
+                        </h4>
+                        <div class="w3l-pricehkj">
+                            <h6>Rs.180.00</h6>
+
+                        </div>
+                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                            <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>										</fieldset>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nbs-flexisel-item" style="width: 262px;">
+                <div class="w3l-specilamk">
+                    <div class="speioffer-agile">
+                        <a href="single2.html">
+                            <img src="../images/s9.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="product-name-w3l">
+                        <h4>
+                            <a href="single2.html">Lakme Eyeconic Kajal</a>
+                        </h4>
+                        <div class="w3l-pricehkj">
+                            <h6>Rs.153.00</h6>
+                        </div>
+                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                            <a href="cart.html" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+    </div>
+</div>
 </div>
