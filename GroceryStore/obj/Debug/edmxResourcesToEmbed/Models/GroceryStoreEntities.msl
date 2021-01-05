@@ -323,6 +323,7 @@
     <EntitySetMapping Name="Cashier_Counter">
       <EntityTypeMapping TypeName="GroceryStoreModel.Cashier_Counter">
         <MappingFragment StoreEntitySet="Cashier_Counter">
+          <ScalarProperty Name="Current_Order_Count" ColumnName="Current_Order_Count" />
           <ScalarProperty Name="MaxOrderLimit" ColumnName="MaxOrderLimit" />
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="Id" ColumnName="Id" />

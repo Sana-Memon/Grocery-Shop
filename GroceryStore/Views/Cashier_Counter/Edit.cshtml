@@ -25,12 +25,13 @@
                             <div class="row">
                                 <div class="col-lg-6">
 
-                                    <form action="/Cashier_CounterController/Edit" method="post">
+                                    <form action="/Cashier_Counter/Edit" method="post">
                                         <div class="form-horizontal">
                                             <h4>Cashier_Counter</h4>
                                             <hr />
+                                            @Html.AntiForgeryToken()
                                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            @Html.HiddenFor(model => model.cashier.Id)
+                                            @Html.HiddenFor(Model => Model.cashier.Id)
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-2" for="CashierCounter_Location">Location</label>
@@ -43,7 +44,7 @@
                                                 <label class="control-label col-md-2" for="CashierCounter_Location">MaxOrderLimit</label>
                                                 <div class="col-md-10">
                                                     <input type="number" name="MaxOrderLimit" value="@Model.cashier.MaxOrderLimit" class="form-control" required />
-                                                    @*@Html.EditorFor(model => model.CashierCounter.MaxOrderLimit, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                    <input type="hidden" name="Id" value="@Model.cashier.Id"  class="form-control" />
                                                 </div>
                                             </div>
 
