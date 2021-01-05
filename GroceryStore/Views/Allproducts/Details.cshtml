@@ -1,0 +1,115 @@
+﻿@model GroceryStore.Controllers.Dto.UserDto
+
+@{
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
+    //Layout = null;
+}
+
+<div id="page-wrapper">
+    <div class="container">
+        <div class="row">
+
+            <div>
+                <h4>product</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.product_id)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.product_name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.ImageFilePath)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.ImageFilePath)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.SellingPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.SellingPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.CostPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.CostPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.DiscountPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.DiscountPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.FullDescription)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.FullDescription)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.StockAmount)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.StockAmount)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.MartLocation)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.MartLocation)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.ImageFilePath2)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.ImageFilePath2)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.Category.category1)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.Category.category1)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.product.SKU.Description)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.product.SKU.Description)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.product.product_id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>

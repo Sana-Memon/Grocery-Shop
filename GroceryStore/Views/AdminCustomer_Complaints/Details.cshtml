@@ -1,0 +1,59 @@
+﻿@model GroceryStore.Models.Customer_Complaints
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer_Complaints</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Complaint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Complaint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Complaint_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Complaint_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Complaint_Type.Complaint_Tpe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Complaint_Type.Complaint_Tpe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Complaint_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

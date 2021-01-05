@@ -1,8 +1,6 @@
-﻿
-@{
-    ViewBag.Title = "OrderHistory";
-    Layout = "~/Views/Shared/CustomerDashboard.cshtml";
-}
+﻿@model GroceryStore.Controllers.Dto.UserDto
+@{ ViewBag.Title = "OrderHistory";
+    Layout = "~/Views/Shared/CustomerDashboard.cshtml"; }
 
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -20,56 +18,99 @@
                                 <th>Date</th>
                                 <th>Order Id</th>
                                 <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Shipping Charges</th>
-                                <th>Total</th>
+                                @*<th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total</th>*@
                                 <th>Billing Address</th>
+                                <th>Order Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
 
+                            @foreach (var item in Model.OrderDto)
+                            {
+                <tr class="active-row">
+                    <td>@item.date</td>
+                    <td>@item.order_id</td>
+                    <td>@item.CustomerID</td>
+                    @*<td>@item.quantity</td>
+                        <td>@item.CostPrice</td>*@
+                    @*<td>@((item.quantity * item.CostPrice))</td>*@
+                    <td>
+                        @if (item.AddressName != null && item.AddressName != "")
+                        {
+        @item.AddressName }
+                        else
+                        {
+        <span>NA</span>}
+                    </td>
+                    <td>
+                        @item.OrderStatus
+                    </td>
+                    <td>
+                        <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
+                            <li class="dropdown navbar-inverse">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span>&#9776;</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
+                                    @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED")
+                                    {
+                    <li>
+                        <a href="../OrderHistory/ChangeStatus?status=CANCEL&id=@item.order_id">
+                            <div>
+                                <span class="pull-right text-muted small">
+                                    Cancel
+                                </span>
+                            </div>
+                        </a>
+                    </li>
 
-                            <tr class="active-row">
-                                <td> 2020-10-01</td>
-                                <td>1</td>
-                                <td>Dairy Milk</td>
-                                <td>2</td>
-                                <td>Rs.88</td>
-                                <td>Rs.200</td>
-                                <td>Rs.376</td>
-                                <td>
-                                    Anusha <br> 159 Honey Creek Court
-                                    Delray Beach, FL 33445 <br>0333-3124666
-                                </td>
-                            </tr>
-                            <tr class="active-row">
-                                <td> 2020-10-11</td>
-                                <td>2</td>
-                                <td>Harpic Cleaner</td>
-                                <td>1</td>
-                                <td>Rs.72</td>
-                                <td>Rs.200</td>
-                                <td>Rs.272</td>
-                                <td>
-                                    Anusha <br> 159 Honey Creek Court
-                                    Delray Beach, FL 33445 <br>0333-3124666
-                                </td>
-                            </tr>
+                                        <li>
+                                            <a href="../OrderHistory/ChangeStatus?status=DELETED&id=@item.order_id">
+                                                <div>
+                                                    <span class="pull-right text-muted small">
+                                                        Deleted
+                                                    </span>
+                                                    @*<span class="pull-right text-muted small">Deleted</span>*@
+                                                </div>
+                                            </a>
+                                        </li>}
 
-                            <tr class="active-row">
-                                <td> 2020-10-13</td>
-                                <td>3</td>
-                                <td>Surf Excel</td>
-                                <td>3</td>
-                                <td>Rs.52</td>
-                                <td>Rs.200</td>
-                                <td>Rs.356</td>
-                                <td>
-                                    Sana <br> 690 Augusta Dr.
-                                    Brockton, MA 02301 <br>0333-3124656
-                                </td>
-                            </tr>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>}
+
+                            @*<tr class="active-row">
+                                    <td> 2020-10-11</td>
+                                    <td>2</td>
+                                    <td>Harpic Cleaner</td>
+                                    <td>1</td>
+                                    <td>Rs.72</td>
+                                    <td>Rs.200</td>
+                                    <td>Rs.272</td>
+                                    <td>
+                                        Anusha <br> 159 Honey Creek Court
+                                        Delray Beach, FL 33445 <br>0333-3124666
+                                    </td>
+                                </tr>
+
+                                <tr class="active-row">
+                                    <td> 2020-10-13</td>
+                                    <td>3</td>
+                                    <td>Surf Excel</td>
+                                    <td>3</td>
+                                    <td>Rs.52</td>
+                                    <td>Rs.200</td>
+                                    <td>Rs.356</td>
+                                    <td>
+                                        Sana <br> 690 Augusta Dr.
+                                        Brockton, MA 02301 <br>0333-3124656
+                                    </td>
+                                </tr>*@
                         </tbody>
                     </table>
                 </center>

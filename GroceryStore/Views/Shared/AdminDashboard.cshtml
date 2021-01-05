@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model GroceryStore.Controllers.Dto.UserDto
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -57,8 +58,9 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
+                    <span style="position: absolute; top: 2px; left: 22px; background-color:#ffb380; width: 20px; height: 20px; border-radius: 50%; text-align: center; font-size: 12px; color: white; line-height: 20px;" id="icon-number"></span>
+                    <ul id="notify-data" class="dropdown-menu dropdown-alerts">
+                        @*<li>
                             <a href="#">
                                 <div>
                                     <i class="fa fa-comment fa-fw"></i> New Reviews
@@ -81,24 +83,16 @@
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
-                        </li>
-                        <li>
+                        </li>*@
+
+                        @*<li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                    Admin please do something there is a problem product out of stock
                                 </div>
                             </a>
                         </li>
-
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-
+                        <li class="divider"></li>*@
 
                     </ul>
                 </li>
@@ -108,11 +102,12 @@
 
 
 
-
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> Sanaa <b class="caret"></b>
-
+                        @if (Model.User != null)
+                        {
+                            <i class="fa fa-user fa-fw"></i> @Model.User.UserName <b class="caret"></b>
+                        }
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
@@ -123,7 +118,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="../Login/Login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a href="../Auth/Auth"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                 </li>
@@ -152,16 +147,16 @@
 
 
                         <li>
-                            <a href="../ViewProduct/ViewProduct"><i class="fa fa-edit fa-fw"></i> Products</a>
+                            <a href="../allproducts/index"><i class="fa fa-edit fa-fw"></i> Products</a>
                         </li>
 
                         <li>
-                            <a href="../Categories/Categories"><i class="fa fa-edit fa-fw"></i> Categories</a>
+                            <a href="../Categories/Index"><i class="fa fa-edit fa-fw"></i> Categories</a>
 
                         </li>
 
                         <li>
-                            <a href="../ViewAllComplaints/ViewAllComplaints"><i class="fa fa-user-o"></i> Customer Complaints</a>
+                            <a href="../AdminCustomer_Complaints/Index"><i class="fa fa-user-o"></i> Customer Complaints</a>
                         </li>
 
 
@@ -180,22 +175,16 @@
                             <a href="../OrderTrack/OrderTrack"><i class="fa fa-cart-plus"></i> Order Tracking</a>
                         </li>
 
+
                         <li>
-                            <a href="../DeliveryMan/DeliveryMan"><i class="fa fa-user-o"></i> Delivery Boy</a>
+                            <a href="EndedStock/Index"><i class="fa fa-user-o"></i> Ended  Stock</a>
 
                         </li>
 
                         <li>
-                            <a href="../AvailableSttock/AvailableSttock"><i class="fa fa-user-o"></i>Available Stock</a>
+                            <a href="../Cashier_Counter/Index"><i class="fa fa-user-o"></i> Cashier</a>
 
                         </li>
-
-                        <li>
-                            <a href="../Stockend/Stockend"><i class="fa fa-user-o"></i> Ended  Stock</a>
-
-                        </li>
-
-
                     </ul>
                 </div>
             </div>

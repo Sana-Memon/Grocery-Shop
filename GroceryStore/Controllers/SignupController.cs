@@ -19,7 +19,7 @@ namespace GroceryStore.Controllers
         [HttpPost]
         public ActionResult Signup(User userModel)
         {
-            using (GroceryShopModels db = new GroceryShopModels())
+            using (GroceryStoreEntities db = new GroceryStoreEntities())
             {
                 db.Users.Add(userModel);
                 db.SaveChanges();

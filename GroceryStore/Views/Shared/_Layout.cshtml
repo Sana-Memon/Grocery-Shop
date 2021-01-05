@@ -17,6 +17,165 @@
     <link rel="stylesheet" href="~/css/flaticon.css">
     <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+    <style>
+
+        .toast {
+            @*display: flex;
+  justify-content: start;*@
+            height: fit-content;
+            background: #f7f7f7;
+            border-radius: 10px;
+            box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: slide-in .5s ease-out forwards;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            z-index: 10000;
+        }
+        .toast-content {
+            display: flex;
+            /* align-items: center; */
+            /* justify-content: start; */
+            height: 90px;
+            width: 270px;
+            background-color: #ff5252;
+        }
+/*
+.toast-content::before {
+  align-self: center;
+  content: '';
+  width: 5px;
+  height: 80px;
+  position: absolute;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: #a2de96;
+} */
+.before {
+  width: 5px;
+  height: 80px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: #a2de96;
+}
+
+
+.toast .icon {
+/*   transform: translate(30px,0); */
+  margin-left: 30px;
+  width: 35px;
+  height: 35px;
+  background: #79d70f;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white
+}
+
+        .text {
+            width: 100%;
+            align-self: flex-start;
+            flex-wrap: wrap;
+            display: flex;
+            align-items: start;
+            overflow: hidden;
+            color: white;
+            margin-left: 30px;
+            font-family: Tahoma,Arial,"Hiragino Sans GB","simsun",sans-serif;
+        }
+
+.text > * {
+  margin: 0;
+  width: 400px;
+}
+
+.toast p:first-child {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+        .message {
+            margin-top: 4px;
+            font-size: 1.5em;
+            color: white;
+        }
+
+.close {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  user-select: none;
+  transform: translate(10px,-5px);
+  font-size: 2.5em;
+/*   transform: scaleX(1.2); */
+  color: #dddddd;
+  cursor:pointer;
+}
+
+/* .close:before {
+  content: '';
+  align-self: stretch;
+  transform: translate(-10px,-10px);
+  height: 90px;
+  width:.5px;
+  position: absolute;
+  background: #aaaaaa;
+  filter: drop-shadow(1px 0px 1px #878787);
+  cursor: default;
+} */
+
+@@keyframes toast {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0,-10px);
+    opacity: 0;
+  }
+}
+
+.toast-area {
+  z-index:2;
+  height: 80vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+
+}
+
+.toast-area > * {
+  margin-top: 1em;
+}
+
+.toast button {
+  background: #f7f7f7;
+  width: 150px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+  transition: all .2s ease;
+}
+
+@@keyframes slide-in {
+  0% {
+    transform: translate(0,-10px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.toast button:hover {
+  background: #ffd36b;
+}
+    </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
 
@@ -44,7 +203,23 @@
                         </p>
                     </div>
                     <div class="reg">
-                        <p class="mb-0"><a href="../Signup/Signup" class="mr-2">Sign Up</a> <a href="../Login/Login">Log In</a></p>
+                        <p class="mb-0">
+
+                            @if (Session["userId"] == null)
+                            {
+                <a href="../Signup/Signup" class="mr-2">Sign Up</a> <span style="color: white;">|</span>
+                                <a href="../Auth/Auth">Log In</a> }
+                            else if (Session["RoleName"].ToString() == "Admin")
+                            {
+                <a href="../AdminDashboard/AdminDashboard">Dashboard</a> <span style="color: white;">|</span> }
+            else if (Session["RoleName"].ToString() == "Customer")
+            {
+<a href="../CustomerDashboard/CustomerDashboard">Dashboard</a> <span style="color: white;">|</span>}
+
+                            @if (Session["userId"] != null)
+                            {
+                <a style="margin-left: 5px;" href="../Auth/Auth">Log Out</a>}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -56,10 +231,7 @@
         <div class="container">
             <a class="navbar-brand" href="../Home/Index">Grocery <span>store</span></a>
             <div class="order-lg-last btn-group">
-                <a href="#" class="btn-cart dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="flaticon-shopping-bag"></span>
-                    <div class="d-flex justify-content-center align-items-center"><small>3</small></div>
-                </a>
+
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-item d-flex align-items-start" href="#">
                         <div class="img" style="background-image: url(~/images/prod-1.jpg);"></div>
@@ -97,23 +269,11 @@
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item "><a href="../Home/Index" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="../About/About" class="nav-link">About</a></li>
-                    <li class="nav-item dropdown">
-
-
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Products
-                        </a>
-                     
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="../Product/Product">Products</a>
-                            <a class="dropdown-item" href="../SingleProduct/SingleProduct">Single Product</a>
-                            <a class="dropdown-item" href="../Cart/Cart">Cart</a>
-                            <a class="dropdown-item" href="../Checkout/Checkout">Checkout</a>
-                        </div>
-                    </li>
+                    <li class="nav-item active"><a href="../Home/Index" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="../About/About" class="nav-link">About</a></li>
+                    <li class="nav-item active"><a href="../Product/Product" class="nav-link">Product</a></li>
                     <li class="nav-item active"><a href="../Contact/Contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item active"><a href="../Home/FAQs" class="nav-link">FAQs</a></li>
 
 
                 </ul>
@@ -211,6 +371,26 @@
 
     </footer>
 
+    @*This is toaster*@
+    <div class="" id="toasts" style="width: fit-content;">
+        <div style="display: none">
+            <div class="toast" id="clonemother">
+                <div class="toast-content">
+                    @*<div class="icon">✔</div>*@
+                    <div class="text"><p style="font-size: 2em;">Erorr</p><p class="message">Product Out Of Stock</p></div>
+                    @*<div onclick="deletethis()" class="close">×</div>*@
+                </div>
+            </div>
+        </div>
+        @*<div class="toast" id="clonemother">
+                <div class="toast-content">
+
+                    <div class="text"><p style="font-size: 2em;">Erorr</p><p class="message">Product Out Of Stock</p></div>
+                </div>
+            </div>*@
+    </div>
+
+
 
 
     <!-- loader -->
@@ -252,11 +432,59 @@
         });
     </script>
 
+    <script>
+
+        function generateToast() {
+            var child = document.getElementById('clonemother');
+            var clone = child.cloneNode(true);
+            // console.log(clone);
+            // document.querySelector('.toast-area').appendChild(child.firstChild);
+            var node = document.getElementById("toasts").appendChild(clone);
+            console.log(node.childNodes);
+            setTimeout(function () {
+                if (node) {
+                    node.childNodes[1].childNodes[5].childNodes[1].innerHTML = "Product out of stock"
+                }
+            }, 1000);
+            setTimeout(function () {
+                if (node) {
+                    node.style.animation = "toast .5s ease-out forwards";
+                    setTimeout(() => { node.remove(); }, 500);
+                }
+            }, 2000);
+        }
+
+        @*document.querySelector('.button').addEventListener('click', function () {
+
+        })*@
+
+        // document.querySelectorAll('.close').forEach(function(t) {t.addEventListener('click',function(e) {
+        //   var grand = e.target.parentNode.parentNode;
+        //   grand.style.animation = "toast .5s ease-out forwards";
+        //   setTimeout(() => {grand.remove();} ,500);
+        // })})
+
+        function deletethis() {
+            var e = window.event;
+            var grand = e.target.parentNode.parentNode;
+            grand.style.animation = "toast .5s ease-out forwards";
+            setTimeout(() => { grand.remove(); }, 500);
+        }
+    </script>
+
 
     <!-- for bootstrap working -->
     <script src="~/js/bootstrap.js"></script>
     <!-- //for bootstrap working -->
     <!-- //js-files -->
+
+    <script>
+        function getAdminNotifications() {
+            $.get(window.location.origin + '/AdminDashboard/GetNotifications', (data) => {
+                console.log(data);
+            });
+        }
+    </script>
 
 
 
