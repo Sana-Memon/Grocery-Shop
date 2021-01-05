@@ -22,5 +22,6 @@ namespace GroceryStore.Models
         public virtual Cashier_Counter Cashier_Counter { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual order order { get; set; }
+        public virtual User User { get; set; }
     }
 }

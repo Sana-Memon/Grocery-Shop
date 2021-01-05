@@ -300,6 +300,7 @@
     <NavigationProperty Name="OurTeams" Relationship="Self.FK_OurTeam_Users" FromRole="Users" ToRole="OurTeam" />
     <NavigationProperty Name="ProductNotifications" Relationship="Self.FK__ProductNo__UserI__628FA481" FromRole="Users" ToRole="ProductNotification" />
     <NavigationProperty Name="Role1" Relationship="Self.FK_UserRole" FromRole="Users" ToRole="Role" />
+    <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK_Customer_User" FromRole="User" ToRole="Counter_Records" />
   </EntityType>
   <EntityType Name="orderProductsTrain">
     <Key>
@@ -782,6 +783,10 @@
       <End Role="order" EntitySet="orders" />
       <End Role="Counter_Records" EntitySet="Counter_Records" />
     </AssociationSet>
+    <AssociationSet Name="FK_Customer_User" Association="GroceryStoreModel.FK_Customer_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Counter_Records" EntitySet="Counter_Records" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cashier_Counter">
     <Key>
@@ -791,6 +796,7 @@
     <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="MaxOrderLimit" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Cashi__3493CFA7" FromRole="Cashier_Counter" ToRole="Counter_Records" />
+    <Property Name="Current_Order_Count" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Counter_Records">
     <Key>
@@ -805,6 +811,7 @@
     <NavigationProperty Name="Cashier_Counter" Relationship="GroceryStoreModel.FK__Counter_R__Cashi__3493CFA7" FromRole="Counter_Records" ToRole="Cashier_Counter" />
     <NavigationProperty Name="Customer" Relationship="GroceryStoreModel.FK__Counter_R__Custo__367C1819" FromRole="Counter_Records" ToRole="Customer" />
     <NavigationProperty Name="order" Relationship="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" FromRole="Counter_Records" ToRole="order" />
+    <NavigationProperty Name="User" Relationship="GroceryStoreModel.FK_Customer_User" FromRole="Counter_Records" ToRole="User" />
   </EntityType>
   <Association Name="FK__Counter_R__Cashi__3493CFA7">
     <End Type="GroceryStoreModel.Cashier_Counter" Role="Cashier_Counter" Multiplicity="1" />
@@ -839,6 +846,18 @@
       </Principal>
       <Dependent Role="Counter_Records">
         <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_User">
+    <End Type="GroceryStoreModel.User" Role="User" Multiplicity="1" />
+    <End Type="GroceryStoreModel.Counter_Records" Role="Counter_Records" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Counter_Records">
+        <PropertyRef Name="CustomerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

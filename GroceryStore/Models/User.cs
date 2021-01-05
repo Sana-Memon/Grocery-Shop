@@ -21,6 +21,7 @@ namespace GroceryStore.Models
             this.Customers = new HashSet<Customer>();
             this.OurTeams = new HashSet<OurTeam>();
             this.ProductNotifications = new HashSet<ProductNotification>();
+            this.Counter_Records = new HashSet<Counter_Records>();
         }
     
         public int UserID { get; set; }
@@ -35,10 +36,9 @@ namespace GroceryStore.Models
         public string Other_Address { get; set; }
         public Nullable<int> Role { get; set; }
         public string code { get; set; }
-
+        
         public string LoginErrorMsg { get; set; }
-
-
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer_Complaints> Customer_Complaints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -49,5 +49,7 @@ namespace GroceryStore.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductNotification> ProductNotifications { get; set; }
         public virtual Role Role1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Counter_Records> Counter_Records { get; set; }
     }
 }
