@@ -1,0 +1,16 @@
+﻿@model IEnumerable<GroceryStore.Models.ViewModel.ProductViewModel>
+@{
+    ViewBag.Title = "Comments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Comments</h2>
+
+@foreach(var item in Model)
+{
+    @item.product_id
+    @item.product_name
+    @item.FullDescription
+
+    @Html.ActionLink("Add/View Comment","ShowComment", new { product_id = item.product_id})
+}

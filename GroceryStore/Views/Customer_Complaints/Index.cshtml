@@ -1,0 +1,80 @@
+﻿@model GroceryStore.Controllers.Dto.UserDto
+@*//Customer Complaint View*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/CustomerDashboard.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">My Complaints</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        All Complaints
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <p>
+                                    @Html.ActionLink("Create New", "Create")
+                                </p>
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint_Status)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].date)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint_Type)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.User.FullName)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model.Customer_Complaints)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Complaint)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Complaint_Status)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.date)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Complaint_Type.Complaint_Tpe)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User.FullName)
+                                            </td>
+                                            
+                                        </tr>
+                                    }
+
+                                </table>
+
+                            </div>
+                            <!-- /.container-fluid -->
+                        </div>
+                        <!-- /#page-wrapper -->
+
+                    </div>

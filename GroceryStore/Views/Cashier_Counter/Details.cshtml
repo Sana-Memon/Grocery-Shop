@@ -1,0 +1,35 @@
+﻿@model GroceryStore.Models.Cashier_Counter
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cashier_Counter</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxOrderLimit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxOrderLimit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -290,3 +290,32 @@
     </div>
     <!-- /.col-lg-4 -->
 </div>
+
+<script>
+    window.onload = function () {
+        $.get(window.location.origin + '/CustomerDashboard/GetNotifications', (data) => {
+
+            data.forEach(x => {
+                document.getElementById('notify-data').innerHTML += `<li>
+                                <a href="#">
+                                    <div>
+                                <i style='color: green;' class="fa fa-check-circle" aria-hidden="true"></i>
+                                        ${x.Message}
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>`
+            });
+
+            this.document.getElementById('icon-number').innerText = (data.length > 10) ? '10+' : data.length;
+
+            document.getElementById('notify-data').innerHTML += `<li>
+                <a class="text-center" href="#">
+                    <strong>See All Alerts</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>`;
+            console.log(data);
+        });
+    }
+</script>

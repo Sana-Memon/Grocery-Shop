@@ -1,0 +1,114 @@
+﻿@model GroceryStore.Models.product
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.product_name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.product_name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ImageFilePath)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ImageFilePath)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SellingPrice)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SellingPrice)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CostPrice)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CostPrice)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DiscountPrice)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DiscountPrice)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FullDescription)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FullDescription)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.StockAmount)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StockAmount)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MartLocation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MartLocation)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ImageFilePath2)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ImageFilePath2)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.category1)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Category.category1)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SKU.Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SKU.Description)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.product_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

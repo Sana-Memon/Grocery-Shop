@@ -9,9 +9,10 @@ namespace GroceryStore.Controllers
 {
     public class HomeController : Controller
     {
-        GroceryShopModels db = new GroceryShopModels();
+        GroceryStoreEntities db = new GroceryStoreEntities();
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -34,6 +35,11 @@ namespace GroceryStore.Controllers
             var TopRatedProduct = (from d in db.products
                                          select d).Take(6).ToList();
             return PartialView(TopRatedProduct);
+        }
+
+        public ActionResult FAQs()
+        {
+            return View();
         }
     }
 }

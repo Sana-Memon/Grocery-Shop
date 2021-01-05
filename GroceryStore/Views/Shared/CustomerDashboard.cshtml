@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@model GroceryStore.Controllers.Dto.UserDto
+<!DOCTYPE html>
+<html lang="en">    
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,47 +60,25 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Reviews
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class.="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
+                    <span style="position: absolute; top: 2px; left: 22px; background-color:#ffb380; width: 20px; height: 20px; border-radius: 50%; text-align: center; font-size: 12px; color: white; line-height: 20px;" id="icon-number"></span>
+                    <ul id="notify-data" class="dropdown-menu dropdown-alerts" style="max-height: 200px; overflow: auto;">
+                        
+                        <!--<li>
+    <a href="#">
+        <div>
+            <i class.="fa fa-tasks fa-fw"></i> Product Vegetables is out of stock please maker sure to add one-->
+                        @*<span class="pull-right text-muted small">4 minutes ago</span>*@
+                        <!--</div>
+        </a>
+    </li>-->
 
                         <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
+                        @*<li>
+            <a class="text-center" href="#">
+                <strong>See All Alerts</strong>
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </li>*@
 
 
                     </ul>
@@ -118,7 +97,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> Sanaa <b class="caret"></b>
+                        <i class="fa fa-user fa-fw"></i> @Model.User.UserName <b class="caret"></b>
 
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -158,29 +137,24 @@
                         </li>
 
                         <li>
-                            <a href="../Home/Index"><i class="fa fa-table fa-fw"></i> Shop Now </a>
+                            <a href="../Product/Product"><i class="fa fa-table fa-fw"></i>Prepare Product List </a>
 
                         </li>
                         <li>
                             <a href="../AddNewAddress/AddNewAddress"><i class="fa fa-home "></i> My addresses</a>
                         </li>
-                        <li>
-                            <a href="todo.html"><i class="fa fa-list"></i> Mart List</a>
-                        </li>
 
                         <li>
-                            <a href="../ReferFriend/ReferFriend"><i class="fa fa-male"></i>  Refer a Friend</a>
-                        </li>
-                        <li>
-                            <a href="../CustomerComplaint/CustomerComplaint"><i class="fa fa-user-o"></i> My Complaints</a>
+                            <a href="../Customer_Complaints/Create"><i class="fa fa-user-o"></i> Register New Complaint</a>
 
                         </li>
+                        </li>
                         <li>
-                            <a href="../ComplaintHistory/ComplaintHistory"><i class="fa fa-user-o"></i> Complaint History</a>
+                            <a href="../Customer_Complaints/Index"><i class="fa fa-user-o"></i> Complaint History</a>
 
                         </li>
                         <li>
-                            <a href="../CustomerShoppingList/CustomerShoppingList"><i class="fa fa-male"></i> Customer Shopping List</a>
+                            <a href="../Cart/Cart"><i class="fa fa-male"></i> Customer Shopping List</a>
                         </li>
 
 
@@ -194,7 +168,7 @@
             </div>
         </nav>
         <br><br><br>
-    @RenderBody()
+        @RenderBody()
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->

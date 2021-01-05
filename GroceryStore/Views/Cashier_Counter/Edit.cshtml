@@ -1,0 +1,71 @@
+﻿@model GroceryStore.Controllers.Dto.UserDto
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
+}
+
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Add New Product</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Add New Products
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <form action="/Cashier_CounterController/Edit" method="post">
+                                        <div class="form-horizontal">
+                                            <h4>Cashier_Counter</h4>
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(model => model.cashier.Id)
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2" for="CashierCounter_Location">Location</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" name="Location" value="@Model.cashier.Location" class="form-control" required />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2" for="CashierCounter_Location">MaxOrderLimit</label>
+                                                <div class="col-md-10">
+                                                    <input type="number" name="MaxOrderLimit" value="@Model.cashier.MaxOrderLimit" class="form-control" required />
+                                                    @*@Html.EditorFor(model => model.CashierCounter.MaxOrderLimit, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Save" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+
+                                    <div>
+                                        @Html.ActionLink("Back to List", "Index")
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
