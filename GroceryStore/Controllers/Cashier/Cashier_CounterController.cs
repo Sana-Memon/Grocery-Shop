@@ -78,6 +78,8 @@ namespace GroceryStore.Controllers.Cashier
         // GET: Cashier_Counter/Edit/5
         public ActionResult Edit(int? id)
         {
+            GroceryStoreEntities db = new GroceryStoreEntities();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -88,10 +90,10 @@ namespace GroceryStore.Controllers.Cashier
                 return HttpNotFound();
             }
 
-            UserDto user = new UserDto();
-            user.cashier = cashier_Counter;
+            int? userId = (Session["userID"] != null) ? Int32.Parse(Session["userID"].ToString()) : 0;
 
-            return View(user);
+            var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
+            return View(new UserDto { User = user, cashier=cashier_Counter });
         }
 
         // POST: Cashier_Counter/Edit/5
@@ -122,7 +124,10 @@ namespace GroceryStore.Controllers.Cashier
             {
                 return HttpNotFound();
             }
-            return View(cashier_Counter);
+            int? userId = (Session["userID"] != null) ? Int32.Parse(Session["userID"].ToString()) : 0;
+
+            var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
+            return View(new UserDto { User = user, cashier = cashier_Counter });
         }
 
         // POST: Cashier_Counter/Delete/5

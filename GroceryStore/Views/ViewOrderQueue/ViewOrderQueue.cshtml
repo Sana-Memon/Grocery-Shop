@@ -15,27 +15,20 @@
 
             <div class="col-lg-12">
 
-
-
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            View All products
-                        </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        View All products
+                    </div>
+                    <div class="panel-body">
                         <div class="container">
                             <table class="table table-hover" id="table">
                                 <thead>
                                     <tr>
                                         <th>Date</th>
                                         <th>Order Id</th>
-                                        @*<th>Product Name</th>
                                         <th>Quantity</th>
-                                        <th>Price</th>
-                                        <th>Total</th>*@
+                                        @*<th>Price</th>*@
+                                        @*<th>Total</th>*@
                                         <th>Billing Address</th>
                                         <th>Order Status</th>
                                         <th>Actions</th>
@@ -44,156 +37,68 @@
                                 <tbody>
                                     @foreach (var item in Model.OrderDto)
                                     {
-                                        <tr class="active-row">
-                                            <td>@item.date</td>
-                                            <td>@item.order_id</td>
-                                            @*<td>@item.product_name</td>
-                                            <td>@item.quantity</td>
-                                            <td>@item.CostPrice</td>*@
-                                            @*<td>@((item.quantity * item.CostPrice))</td>*@
-                                            <td>@item.Name</td>
-                                            <td>
-                                                @item.OrderStatus
-                                            </td>
-                                            <td>
+                                    <tr class="active-row">
+                                        <td>@item.date</td>
+                                        <td>@item.order_id</td>
+                                        <td>@((item.quantity))</td>
+                                        @*@<td>@((item.quantity * item.CostPrice))</td>*@
 
-                                                <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
-                                                    <li class="dropdown navbar-inverse">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            <span>&#9776;</span>
-                                                        </a>
-                                                        <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
+                                        <td>@item.Name</td>
+                                        <td>
+                                            @item.OrderStatus
+                                        </td>
+                                        <td>
 
-                                                            @if (item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "CANCEL")
-                                                            {
+                                            <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
+                                                <li class="dropdown navbar-inverse">
+                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                        <span>&#9776;</span>
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
 
-                                                        <li>
-                                                            <a href="../ViewOrderQueue/ChangeStatus?status=CANCEL&id=@item.order_id">
-                                                                <div>
-                                                                    <span class="pull-right text-muted small">
-                                                                        Cancel
-                                                                    </span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                                            <li>
-                                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DELIVERED&id=@item.order_id">
-                                                                                    <div>
-                                                                                        <span class="pull-right text-muted small">
-                                                                                            DILEVERED
-                                                                                        </span>
-                                                                                        @*<span class="pull-right text-muted small">Deleted</span>*@
-                                                                                    </div>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DISPATCHED&id=@item.order_id">
-                                                                                    <div>
-                                                                                        <span class="pull-right text-muted small">
-                                                                                            DISPATCHED
-                                                                                        </span>
-                                                                                        @*<span class="pull-right text-muted small">Deleted</span>*@
-                                                                                    </div>
-                                                                                </a>
-                                                                            </li>}
+                                                        @if (item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "CANCEL")
+                                                        {
 
-                                                        </ul>
-                                                    </li>
-                                                </ul>
+                                                            <li>
+                                                                <a href="../ViewOrderQueue/ChangeStatus?status=CANCEL&id=@item.order_id">
+                                                                    <div>
+                                                                        <span class="pull-right text-muted small">
+                                                                            Cancel
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DELIVERED&id=@item.order_id">
+                                                                    <div>
+                                                                        <span class="pull-right text-muted small">
+                                                                            DILEVERED
+                                                                        </span>
+                                                                        @*<span class="pull-right text-muted small">Deleted</span>*@
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DISPATCHED&id=@item.order_id">
+                                                                    <div>
+                                                                        <span class="pull-right text-muted small">
+                                                                            DISPATCHED
+                                                                        </span>
+                                                                        @*<span class="pull-right text-muted small">Deleted</span>*@
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        }
 
-                                            </td>
-                                        </tr>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+
+                                        </td>
+                                    </tr>
                                     }
-                                    @*<tr>
-            <td>2</td>
-            <td>Prd002</td>
-            <td>Ghafoor</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>Cancelled</td>
 
 
-
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Prd003</td>
-            <td>Daniyal</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>Pending</td>
-
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Prd004</td>
-            <td>Yaseen</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>Assign DElivery boy</td>
-
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Zeeba Rice</td>
-            <td>Yaseen</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>pending</td>
-
-
-        </tr>
-
-        <tr>
-            <td>1</td>
-            <td>Prd001</td>
-            <td>Jawad</td>
-
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>Pending</td>
-
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Prd002</td>
-            <td>Ghafoor</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>Pending</td>
-
-
-
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Prd003</td>
-            <td>Daniyal</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>Delivered</td>
-
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Prd004</td>
-            <td>Yaseen</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>Dispatched</td>
-
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Zeeba Rice</td>
-            <td>Yaseen</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-            <td>Pending</td>
-
-
-        </tr>
-
-        <tr>
-            <td>11</td>
-            <td>Prd003</td>
-            <td>James</td>
-            <td><a href="../OrderQueue/OrderQueue">View Detail</a></td>
-
-            <td>Delivered</td>
-
-        </tr>*@
                                 </tbody>
                             </table>
                         </div>
@@ -201,12 +106,13 @@
                     </div>
                     <!-- /.panel -->
                 </div>
-                <!-- /.col-lg-12 -->
+
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+            
+           
+
+       
+
     </div>
-    <!-- /#page-wrapper -->
 
 </div>
