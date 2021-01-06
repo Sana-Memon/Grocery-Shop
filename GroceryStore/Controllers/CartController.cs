@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GroceryStore.Services;
 using GroceryStore.Utilities;
+using GroceryStore.Controllers.Dto;
 
 namespace GroceryStore.Controllers
 {
@@ -24,8 +25,19 @@ namespace GroceryStore.Controllers
             var userId = Int32.Parse(Session["userID"]?.ToString());
             var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
             IEnumerable<List> lists = db.Lists.Include("product").Where(x => x.CustomerID == customer.Customer_id).ToList();
+            
+            // Calculating data for Cart
+            decimal price = 0;
+            foreach (var item in lists)
+            {
+                price = price + item.product.CostPrice;
+            }
 
-            return View(lists);
+            decimal delivery = 20;
+            decimal discount = 10;
+            decimal total = price + delivery + discount;
+
+            return View(new CartDto { product_list = lists, SubTotal=price, Delivery=delivery, Discount=discount, Total=total });
         }
 
         [HttpPost]
@@ -127,12 +139,5 @@ namespace GroceryStore.Controllers
             return null;
         }
 
-        /*public PartialViewResult GetList()
-        {
-           
-
-            return PartialView(lists);
-
-        }*/
     }
 }

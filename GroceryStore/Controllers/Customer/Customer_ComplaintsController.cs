@@ -24,13 +24,6 @@ namespace GroceryStore.Controllers
             }
             int id = Int32.Parse(Session["userID"].ToString());
             var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
-
-            //var myCustomer = db.Customers.FirstOrDefault(m=>m.UserID == id);
-            //int x;
-            //if (myCustomer != null)
-            //{
-            //    x= myCustomer.UserID;
-            //}
             var customer_Complaints = db.Customer_Complaints.Include(c => c.Complaint_Type).Include(c => c.User).Where(m => m.Customer_Id == id) ;
 
             return View(new UserDto {  Customer_Complaints= customer_Complaints.ToList(), User = user });
@@ -63,13 +56,8 @@ namespace GroceryStore.Controllers
             }
             int id = Int32.Parse(Session["userID"].ToString());
             var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
-            
-            var user_1 = new UserDto();
-            user_1.User = user;
 
-            //return View(new CustomerComplaintDto() {UserDto = user_1, Customer_Complaints = db.Complaint_Type} ); 
-            return View();
- 
+            return View(new UserDto {User = user }); 
         }
 
         // POST: Customer_Complaints/Create

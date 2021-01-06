@@ -26,14 +26,18 @@ namespace GroceryStore.Controllers.Admin
                 return RedirectToAction("Auth", "Auth");
 
             List<OrderDto> allOrder = (from orders in db.orders
-                                       join address in db.Addresses on new { pid = orders.order_id } equals new { pid = address.Id } into yG
+                                       join address in db.Addresses on new { pid = orders.order_id } equals new { pid = address.Id }
+                                       into yG
                                        from y1 in yG.DefaultIfEmpty()
                                        select new OrderDto()
                                        {
                                            order_id = orders.order_id,
                                            OrderStatus = orders.OrderStatus,
                                            date = ""+orders.date,
-                                           CustomerID = orders.customerr_id
+                                           CustomerID = orders.customerr_id,
+                                           Name = orders.Address.Name,
+                                           quantity = db.orderProductsPriors.Where(x => x.order_id == orders.order_id).Count()
+
                                        }).ToList();
 
 
