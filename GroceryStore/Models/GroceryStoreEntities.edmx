@@ -192,6 +192,7 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
           <Property Name="AddressId" Type="int" />
           <Property Name="total_cost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="remarks" Type="varchar" MaxLength="200" />
+          <Property Name="total_quantity" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1041,6 +1042,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" FromRole="order" ToRole="Counter_Records" />
           <Property Name="total_cost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="total_quantity" Type="Int32" />
         </EntityType>
         <EntityType Name="OurSatisfiedCustomer">
           <Key>
@@ -1880,6 +1882,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="GroceryStoreModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="total_quantity" ColumnName="total_quantity" />
                 <ScalarProperty Name="remarks" ColumnName="remarks" />
                 <ScalarProperty Name="total_cost" ColumnName="total_cost" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />

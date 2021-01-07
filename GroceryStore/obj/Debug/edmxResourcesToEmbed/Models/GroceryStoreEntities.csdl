@@ -176,6 +176,7 @@
     <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" FromRole="order" ToRole="Counter_Records" />
     <Property Name="total_cost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="total_quantity" Type="Int32" />
   </EntityType>
   <EntityType Name="OurSatisfiedCustomer">
     <Key>

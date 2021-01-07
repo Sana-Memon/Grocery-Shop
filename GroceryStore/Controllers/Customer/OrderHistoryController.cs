@@ -37,7 +37,7 @@ namespace GroceryStore.Controllers.Customer
                                            date = "" + orders.date,
                                            CustomerID = orders.customerr_id,
                                            AddressName = orders.Address.Name,
-                                           quantity = db.orderProductsPriors.Where(x => x.order_id == orders.order_id).Count(),
+                                           quantity = orders.total_quantity,
                                            CostPrice = (decimal)orders.total_cost
                                        }).ToList();
 

@@ -52,6 +52,7 @@ namespace GroceryStore.Controllers
             List<orderProductsPrior> orderProducts = new List<orderProductsPrior>();
 
             decimal total_cost = 0;
+            int total_quantity = 0;
 
             for (int i = 0; i < lists.Count; i++)
             {
@@ -59,12 +60,14 @@ namespace GroceryStore.Controllers
                 orderProduct.product_id = lists[i].ProductID;
                 orderProduct.quantity = lists[i].quantity;
                 total_cost = (decimal)(total_cost + (lists[i].product.SellingPrice * orderProduct.quantity) - (lists[i].product.DiscountPrice * orderProduct.quantity ));
+                total_quantity = (int)(total_quantity + orderProduct.quantity);
                 orderProducts.Add(orderProduct);
                 db.Lists.Remove(lists[i]);
             }
 
             order.orderProductsPriors = orderProducts;
             order.total_cost = total_cost;
+            order.total_quantity = total_quantity;
 
             db.orders.Add(order);
             db.SaveChanges();
