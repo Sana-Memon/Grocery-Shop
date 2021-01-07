@@ -55,10 +55,10 @@
                                                         <span>&#9776;</span>
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
-                                                        @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED")
+                                                        @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "DELIVERED")
                                                         {
                                                             <li>
-                                                                <a href="../OrderHistory/ChangeStatus?status=CANCEL&id=@item.order_id">
+                                                                <a href="../ViewOrderQueue/ChangeStatus?status=CANCEL&id=@item.order_id">
                                                                     <div>
                                                                         <span class="pull-right text-muted small">
                                                                             Cancel
@@ -68,10 +68,30 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="../OrderHistory/ChangeStatus?status=DELETED&id=@item.order_id">
+                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DELETED&id=@item.order_id">
                                                                     <div>
                                                                         <span class="pull-right text-muted small">
-                                                                            Deleted
+                                                                            Delete
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DISPATCHED&id=@item.order_id">
+                                                                    <div>
+                                                                        <span class="pull-right text-muted small">
+                                                                            Dispatched
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DELIVERED&id=@item.order_id">
+                                                                    <div>
+                                                                        <span class="pull-right text-muted small">
+                                                                            Delivered
                                                                         </span>
                                                                     </div>
                                                                 </a>

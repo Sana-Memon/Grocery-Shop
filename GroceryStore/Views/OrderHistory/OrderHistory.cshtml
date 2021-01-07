@@ -51,7 +51,7 @@
                                     <span>&#9776;</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
-                                    @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED")
+                                    @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED" && item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED")
                                     {
                                         <li>
                                             <a href="../OrderHistory/ChangeStatus?status=CANCEL&id=@item.order_id">
@@ -63,16 +63,6 @@
                                             </a>
                                         </li>
 
-                                        <li>
-                                            <a href="../OrderHistory/ChangeStatus?status=DELETED&id=@item.order_id">
-                                                <div>
-                                                    <span class="pull-right text-muted small">
-                                                        Deleted
-                                                    </span>
-                                                    @*<span class="pull-right text-muted small">Deleted</span>*@
-                                                </div>
-                                            </a>
-                                        </li>
                                      }
 
                                 </ul>
