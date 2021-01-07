@@ -343,6 +343,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bootstrap\bootstrap-grid.css" />
     <Content Include="css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="css\carousel.css" />
     <Content Include="css\creditly.css" />
     <Content Include="css\css\bootstrap-reboot.css" />
     <Content Include="css\css\mixins\_text-hide.css" />
