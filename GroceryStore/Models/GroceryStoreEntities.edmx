@@ -190,6 +190,8 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
           <Property Name="date" Type="date" />
           <Property Name="OrderStatus" Type="varchar" MaxLength="55" />
           <Property Name="AddressId" Type="int" />
+          <Property Name="total_cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="remarks" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1037,6 +1039,8 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <NavigationProperty Name="OrderToDelivers" Relationship="Self.FK_OrderToDeliver_orders" FromRole="orders" ToRole="OrderToDeliver" />
           <NavigationProperty Name="Customers" Relationship="Self.Customer_Order" FromRole="orders" ToRole="Customers" />
           <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" FromRole="order" ToRole="Counter_Records" />
+          <Property Name="total_cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OurSatisfiedCustomer">
           <Key>
@@ -1876,6 +1880,8 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="GroceryStoreModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="total_cost" ColumnName="total_cost" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="customerr_id" ColumnName="customerr_id" />
                 <ScalarProperty Name="eval_set" ColumnName="eval_set" />

@@ -185,6 +185,8 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
     <Property Name="date" Type="date" />
     <Property Name="OrderStatus" Type="varchar" MaxLength="55" />
     <Property Name="AddressId" Type="int" />
+    <Property Name="total_cost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="remarks" Type="varchar" MaxLength="200" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

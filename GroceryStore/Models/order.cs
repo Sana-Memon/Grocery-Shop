@@ -33,6 +33,8 @@ namespace GroceryStore.Models
         public Nullable<System.DateTime> date { get; set; }
         public string OrderStatus { get; set; }
         public Nullable<int> AddressId { get; set; }
+        public Nullable<decimal> total_cost { get; set; }
+        public string remarks { get; set; }
     
         public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

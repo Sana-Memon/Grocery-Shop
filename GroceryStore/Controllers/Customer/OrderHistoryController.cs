@@ -36,13 +36,10 @@ namespace GroceryStore.Controllers.Customer
                                            OrderStatus = orders.OrderStatus,
                                            date = "" + orders.date,
                                            CustomerID = orders.customerr_id,
-                                           AddressName = orders.Address.Name
+                                           AddressName = orders.Address.Name,
+                                           quantity = db.orderProductsPriors.Where(x => x.order_id == orders.order_id).Count(),
+                                           CostPrice = (decimal)orders.total_cost
                                        }).ToList();
-
-            //if (rolename == AppRoles.Admin)
-            //{
-            //    return View(new UserDto { User = user, OrderDto = allOrder });
-            //}
 
             return View(new UserDto { User = user, OrderDto = allOrder });
         }

@@ -4,63 +4,61 @@
     Layout = "~/Views/Shared/AdminDashboard.cshtml";
 }
 
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">All Orders</h1>
 
-<div id="page-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
 
-                <h1 class="page-header">All Orders</h1>
-            </div>
+                    <h1 class="Order-history">All Customer's Orders Summary</h1>
+                    <center>
+                        <table class="content-table">
+                            <thead>
 
-            <div class="col-lg-12">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Order Id</th>
+                                    <th>Customer Id</th>
+                                    <th>Quantity</th>
+                                    <th>Total Price</th>
+                                    <th>Billing Address</th>
+                                    <th>Order Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        View All products
-                    </div>
-                    <div class="panel-body">
-                        <div class="container">
-                            <table class="table table-hover" id="table">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Order Id</th>
-                                        <th>Quantity</th>
-                                        @*<th>Price</th>*@
-                                        @*<th>Total</th>*@
-                                        <th>Billing Address</th>
-                                        <th>Order Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.OrderDto)
-                                    {
+                                @foreach (var item in Model.OrderDto)
+                                {
                                     <tr class="active-row">
                                         <td>@item.date</td>
                                         <td>@item.order_id</td>
-                                        <td>@((item.quantity))</td>
-                                        @*@<td>@((item.quantity * item.CostPrice))</td>*@
-
-                                        <td>@item.Name</td>
+                                        <td>@item.CustomerID</td>
+                                        <td>@item.quantity</td>
+                                        <td>@item.CostPrice</td>
+                                        <td>
+                                            @if (item.AddressName != null && item.AddressName != "")
+                                            {
+                                                @item.AddressName }
+                                            else
+                                            {
+                                                <span>NA</span>}
+                                        </td>
                                         <td>
                                             @item.OrderStatus
                                         </td>
                                         <td>
-
                                             <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
                                                 <li class="dropdown navbar-inverse">
                                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                                         <span>&#9776;</span>
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
-
-                                                        @if (item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "CANCEL")
+                                                        @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED")
                                                         {
-
                                                             <li>
-                                                                <a href="../ViewOrderQueue/ChangeStatus?status=CANCEL&id=@item.order_id">
+                                                                <a href="../OrderHistory/ChangeStatus?status=CANCEL&id=@item.order_id">
                                                                     <div>
                                                                         <span class="pull-right text-muted small">
                                                                             Cancel
@@ -68,23 +66,13 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
+
                                                             <li>
-                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DELIVERED&id=@item.order_id">
+                                                                <a href="../OrderHistory/ChangeStatus?status=DELETED&id=@item.order_id">
                                                                     <div>
                                                                         <span class="pull-right text-muted small">
-                                                                            DILEVERED
+                                                                            Deleted
                                                                         </span>
-                                                                        @*<span class="pull-right text-muted small">Deleted</span>*@
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DISPATCHED&id=@item.order_id">
-                                                                    <div>
-                                                                        <span class="pull-right text-muted small">
-                                                                            DISPATCHED
-                                                                        </span>
-                                                                        @*<span class="pull-right text-muted small">Deleted</span>*@
                                                                     </div>
                                                                 </a>
                                                             </li>
@@ -93,26 +81,20 @@
                                                     </ul>
                                                 </li>
                                             </ul>
-
                                         </td>
                                     </tr>
-                                    }
+                                }
 
+                            </tbody>
+                        </table>
+                    </center>
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
                 </div>
-
+                <!-- /.col-lg-12 -->
             </div>
-            
-           
-
-       
-
+            <!-- /.row -->
+            <!-- cxvfdgtrhyx -->
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
     </div>
-
-</div>

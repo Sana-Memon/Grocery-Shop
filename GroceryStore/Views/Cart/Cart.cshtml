@@ -30,7 +30,7 @@
                         <th>Product</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>total</th>
+                        <th>Total with Discount</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
@@ -53,13 +53,16 @@
                                         <span>@item.product.FullDescription</span>
                                     </div>
                                 </td>
-                                <td>@item.product.CostPrice</td>
+                                <td>@item.product.SellingPrice</td>
+                                
                                 <td class="quantity">
                                     <div class="input-group">
-                                        <input type="text" name="quantity" class="quantity form-control input-number" value="@item.quantity" min="1" max="100">
+                                        <input onkeyup="updateProductQty(event)" id="Product-@item.ProductID" type="number" name="quantity" class="quantity form-control input-number" value="@item.quantity" min="1" max="100" required>
                                     </div>
                                 </td>
-                                <td>@(@item.product.CostPrice * item.quantity)</td>
+                                
+                                <td>@(@item.product.SellingPrice * item.quantity - item.product.DiscountPrice * item.quantity)</td>
+                                
                                 <td>
                                     <form onsubmit="deleteProduct(event)">
                                         <input type="hidden" name="productId" value="@item.ProductID">
@@ -82,7 +85,7 @@
                 <div class="cart-total mb-3">
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
-                        <span>Subtotal</span>
+                        <span>Subtotal without discount</span>
                         <span>@Model.SubTotal </span>
                     </p>
                     <p class="d-flex">
@@ -90,7 +93,7 @@
                         <span>@Model.Delivery</span>
                     </p>
                     <p class="d-flex">
-                        <span>Discount</span>
+                        <span>Tota Discount</span>
                         <span>@Model.Discount</span>
                     </p>
                     <hr>
@@ -115,7 +118,30 @@
             (data) => {
                 console.log(data);
                 $(event.srcElement).parent().parent().remove();
+                location.reload()
             }
         );
     }
+
+    function updateProductQty(event) {
+        const qty = parseInt(event.target.value);
+
+        if (!qty || isNaN(qty)) {
+            return false
+        }
+
+        let productId = $(event.target).attr("id");
+        productId = productId.split("Product-")[1];
+
+        $.post(window.location.origin + '/Cart/UpdateList',
+            {
+                quantity: qty,
+                productId: productId
+            },
+            (data) => {
+                location.reload()
+            }
+        );
+    }
+
 </script>

@@ -51,18 +51,20 @@ namespace GroceryStore.Controllers
             order.AddressId = addressID;
             List<orderProductsPrior> orderProducts = new List<orderProductsPrior>();
 
+            decimal total_cost = 0;
+
             for (int i = 0; i < lists.Count; i++)
             {
                 var orderProduct = new orderProductsPrior();
                 orderProduct.product_id = lists[i].ProductID;
                 orderProduct.quantity = lists[i].quantity;
-
+                total_cost = (decimal)(total_cost + (lists[i].product.SellingPrice * orderProduct.quantity) - (lists[i].product.DiscountPrice * orderProduct.quantity ));
                 orderProducts.Add(orderProduct);
                 db.Lists.Remove(lists[i]);
             }
 
             order.orderProductsPriors = orderProducts;
-
+            order.total_cost = total_cost;
 
             db.orders.Add(order);
             db.SaveChanges();
