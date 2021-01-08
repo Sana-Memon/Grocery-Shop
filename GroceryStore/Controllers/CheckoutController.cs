@@ -31,7 +31,6 @@ namespace GroceryStore.Controllers
             return View(new UserDto() { User = user, Cities = city, Address = address });
         }
 
-
         [HttpPost]
         public ActionResult StoreOrder()
         {
@@ -145,6 +144,6 @@ namespace GroceryStore.Controllers
 
             return RedirectToAction("Thanyou", "Thankyou");
         }
-
+        
     }
 }

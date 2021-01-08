@@ -68,5 +68,67 @@ namespace GroceryStore.Controllers.Customer
 
             return RedirectToAction("OrderHistory", "OrderHistory");
         }
+
+ 
+        public ActionResult RevertOrder()
+        {
+            /* Require OrderId:integer as query parameter */
+
+
+            // Value passed to this Api/method
+            int orderId = int.Parse(Request.QueryString["OrderId"]);
+
+            // Getting customer's object
+            GroceryStoreEntities db = new GroceryStoreEntities();
+            var userId = Int32.Parse(Session["userID"]?.ToString());
+            var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
+
+            // ------------- Reverting order to list
+            var product_ids_quantity = db.orderProductsPriors.Where(
+                x => x.order_id == orderId)
+                .Select(u => new { u.product_id, u.quantity})
+                .ToList();
+
+            if (product_ids_quantity != null) 
+            {
+                if (db.Lists.Where(x => x.CustomerID == customer.Customer_id).FirstOrDefault() != null)
+                {
+                    return RedirectToAction("OrderHistory", "OrderHistory");
+                }
+                
+                foreach (var each_product in product_ids_quantity)
+                {
+                    List list = new List();
+                    list.CustomerID = customer.Customer_id;
+                    list.ProductID = each_product.product_id;
+                    list.quantity = each_product.quantity;
+                    db.Lists.Add(list);
+                }
+
+                var counter_record_to_remove = db.Counter_Records.Where(
+                    x => x.CustomerId == customer.Customer_id)
+                    .Where(x => x.OrderId == orderId).FirstOrDefault();
+
+                var decrease_counter_current_count = db.Cashier_Counter.Where(
+                    x => x.Id == counter_record_to_remove.CashierId
+                    ).FirstOrDefault();
+
+                var orderToRemove = db.orders.Where(
+                    x => x.order_id == orderId)
+                    .Where(x => x.customerr_id == customer.Customer_id).FirstOrDefault();
+
+                // Decreasing current order count of Cashier_Counter
+                decrease_counter_current_count.Current_Order_Count = decrease_counter_current_count.Current_Order_Count - 1;
+
+                // Finally deleting records
+                db.orderProductsPriors.RemoveRange(
+                    db.orderProductsPriors.Where(x => x.order_id == orderId)
+                    );
+                db.Counter_Records.Remove(counter_record_to_remove);
+                db.orders.Remove(orderToRemove);
+                db.SaveChanges();
+            }
+            return RedirectToAction("OrderHistory", "OrderHistory");
+        }
     }
 }
