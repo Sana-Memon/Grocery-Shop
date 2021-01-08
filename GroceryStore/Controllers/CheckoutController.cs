@@ -80,6 +80,10 @@ namespace GroceryStore.Controllers
         {
 
             GroceryStoreEntities db = new GroceryStoreEntities();
+            
+            var dateTime = DateTime.ParseExact(
+                pickOrderTime, "H:mm", null, System.Globalization.DateTimeStyles.None
+                );
 
             var userId = Int32.Parse(Session["userID"]?.ToString());
             var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
@@ -130,7 +134,7 @@ namespace GroceryStore.Controllers
             counter_Records.CashierId = cashier_id;
             counter_Records.CustomerId = customer.Customer_id;
             counter_Records.OrderId = order.order_id;
-            counter_Records.TakeAwayTime = System.DateTime.Now;
+            counter_Records.TakeAwayTime = dateTime;
 
             db.Counter_Records.Add(counter_Records);
             db.SaveChanges();
