@@ -145,5 +145,9 @@ namespace GroceryStore.Controllers
             return null;
         }
 
+        public ActionResult PickUp()
+        {
+            return View();
+        }
     }
 }

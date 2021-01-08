@@ -2401,6 +2401,7 @@
     <Content Include="Views\Cashier_Counter\Details.cshtml" />
     <Content Include="Views\Cashier_Counter\Edit.cshtml" />
     <Content Include="Views\Cashier_Counter\Index.cshtml" />
+    <Content Include="Views\Cart\PickUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
