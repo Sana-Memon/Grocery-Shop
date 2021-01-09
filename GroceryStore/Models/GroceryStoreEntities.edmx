@@ -194,6 +194,7 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
           <Property Name="remarks" Type="varchar" MaxLength="200" />
           <Property Name="total_quantity" Type="int" />
           <Property Name="orderType" Type="varchar" MaxLength="200" />
+          <Property Name="status_date" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1107,6 +1108,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="total_quantity" Type="Int32" />
           <Property Name="orderType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="status_date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="OurSatisfiedCustomer">
           <Key>
@@ -1983,6 +1985,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="GroceryStoreModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="status_date" ColumnName="status_date" />
                 <ScalarProperty Name="orderType" ColumnName="orderType" />
                 <ScalarProperty Name="total_quantity" ColumnName="total_quantity" />
                 <ScalarProperty Name="remarks" ColumnName="remarks" />

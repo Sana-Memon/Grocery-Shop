@@ -10,8 +10,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Order</h1>
-
+                <h1 class="page-header">Order Details</h1>
                 <center>
                     <table class="content-table">
                         <thead>
@@ -29,6 +28,11 @@
 
                             @foreach (var item in Model.order_detail_dto.orderDetails)
                             {
+                                <tr>
+                                    <td>
+                                        <img src="../@item.ImageFilePath" alt="" width="60px" height="60px">
+                                    </td>
+                                </tr>
                                 <tr class="active-row">
                                     <td>@item.product_name</td>
                                     <td>@item.SellingPrice</td>
@@ -52,7 +56,7 @@
                             <thead>
                                 <tr>
                                     <th>Counter Location</th>
-                                    <th>Take Away time</th>
+                                    <th>Customer's choice time</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,7 +77,7 @@
             <!-- /.col-lg-12 -->
         </div>
         <div>
-            <a href="/ViewOrderQueue/ViewOrderQueue" class="align-content-center">Back to List</a>
+            <a href="/ViewOrderQueue/ViewOrderQueue" class=" button2 py-3 px-4">Back to List</a>
         </div>
         <!-- /.row -->
         <!-- cxvfdgtrhyx -->

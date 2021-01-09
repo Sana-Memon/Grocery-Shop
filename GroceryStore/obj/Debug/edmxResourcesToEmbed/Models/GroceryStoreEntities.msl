@@ -147,6 +147,7 @@
     <EntitySetMapping Name="orders">
       <EntityTypeMapping TypeName="GroceryStoreModel.order">
         <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="status_date" ColumnName="status_date" />
           <ScalarProperty Name="orderType" ColumnName="orderType" />
           <ScalarProperty Name="total_quantity" ColumnName="total_quantity" />
           <ScalarProperty Name="remarks" ColumnName="remarks" />

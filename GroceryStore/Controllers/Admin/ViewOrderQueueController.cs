@@ -38,7 +38,8 @@ namespace GroceryStore.Controllers.Admin
                                            AddressName = orders.Address.Name,
                                            quantity = orders.total_quantity,
                                            CostPrice = (decimal)orders.total_cost,
-                                           OrderType = orders.orderType
+                                           OrderType = orders.orderType,
+                                           status_date = orders.status_date.ToString()
                                        }).ToList();
 
             return View(new UserDto { User = user, OrderDto = allOrder });
@@ -63,6 +64,7 @@ namespace GroceryStore.Controllers.Admin
             var first = db.orders.Where(a => a.order_id == orderIdInt).FirstOrDefault();
 
             first.OrderStatus = queryString;
+            first.status_date = DateTime.Now;
 
             db.SaveChanges();
 
@@ -71,7 +73,7 @@ namespace GroceryStore.Controllers.Admin
 
         public ActionResult QueueOrderDetails()
         {
-            /* Require OrderId:integer as query parameter */
+            /* Require OrderId:integer, Customer_id:interger as query parameter */
 
 
             // Value passed to this Api/method
@@ -98,6 +100,34 @@ namespace GroceryStore.Controllers.Admin
             };
 
             return View(new UserDto { order_detail_dto = order_detail_dto, User = user });
+        }
+
+        public ActionResult FinalizePickUpOrder()
+        {
+            /* Require OrderId:integer, Customer_id:interger as query parameter */
+
+
+            // Value passed to this Api/method
+            int orderId = int.Parse(Request.QueryString["OrderId"]);
+            int Customer_id = int.Parse(Request.QueryString["CustomerId"]);
+
+            GroceryStoreEntities db = new GroceryStoreEntities();
+
+            // Getting order row/instance
+            var order_instance = db.orders.Where(
+                x => x.order_id == orderId && x.customerr_id == Customer_id).FirstOrDefault();
+
+            var counter_instance = db.Counter_Records.Where(
+                x => x.CustomerId == Customer_id && x.OrderId == orderId).FirstOrDefault();
+
+            var cashier_instance = db.Cashier_Counter.Where(
+                x => x.Id == counter_instance.CashierId).FirstOrDefault();
+
+            cashier_instance.Current_Order_Count = cashier_instance.Current_Order_Count - 1;
+            order_instance.OrderStatus = "DELIVERED";
+            order_instance.status_date = DateTime.Now;
+
+            return RedirectToAction("ViewOrderQueue", "ViewOrderQueue");
         }
     }
 }

@@ -39,7 +39,8 @@ namespace GroceryStore.Controllers.Customer
                                            AddressName = orders.Address.Name,
                                            quantity = orders.total_quantity,
                                            CostPrice = (decimal)orders.total_cost,
-                                           OrderType = orders.orderType
+                                           OrderType = orders.orderType,
+                                           status_date = orders.status_date.ToString()
                                        }).ToList();
 
             return View(new UserDto { User = user, OrderDto = allOrder });
@@ -64,7 +65,7 @@ namespace GroceryStore.Controllers.Customer
             var first = db.orders.Where(a => a.order_id == orderIdInt).FirstOrDefault();
 
             first.OrderStatus = queryString;
-
+            first.date = DateTime.Now;
             db.SaveChanges();
 
             return RedirectToAction("OrderHistory", "OrderHistory");
