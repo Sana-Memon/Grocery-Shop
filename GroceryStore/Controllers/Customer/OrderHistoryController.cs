@@ -71,7 +71,6 @@ namespace GroceryStore.Controllers.Customer
             return RedirectToAction("OrderHistory", "OrderHistory");
         }
 
- 
         public ActionResult RevertOrder()
         {
             /* Require OrderId:integer as query parameter */
@@ -155,10 +154,40 @@ namespace GroceryStore.Controllers.Customer
             var cashier_details = db.CashierDetails.Where(
                 x => x.Customer_id == customer.Customer_id && x.OrderId == orderId).FirstOrDefault();
 
+            var order_instance = db.orders.Where(
+                x => x.customerr_id == customer.Customer_id && x.order_id == orderId
+                ).FirstOrDefault();
+
             var order_detail_dto = new OrderDetailDto { 
-                orderDetails = order_details , counter_Records = cashier_details};
+                orderDetails = order_details , counter_Records = cashier_details
+                , order_instance = order_instance
+            };
 
             return View(new UserDto {order_detail_dto = order_detail_dto , User = user});
+        }
+
+        [HttpPost]
+        public ActionResult CancelOrder()
+        {
+            string remarks = (Request.Form["remarks"]).ToString();
+            int order_id = Int32.Parse(Request.Form["orderId"]);
+            string status = Request.Form["status"].ToString();
+
+            GroceryStoreEntities db = new GroceryStoreEntities();
+
+            var userId = Int32.Parse(Session["userID"]?.ToString());
+            var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
+            var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
+
+            // Getting order row/instance
+            var order_instance = db.orders.Where(
+                x => x.order_id == order_id && x.customerr_id == customer.Customer_id).FirstOrDefault();
+
+            order_instance.OrderStatus = status;
+            order_instance.status_date = DateTime.Now;
+            order_instance.remarks = remarks;
+            db.SaveChanges();
+            return RedirectToAction("OrderHistory", "OrderHistory");
         }
     }
 }

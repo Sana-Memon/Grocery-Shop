@@ -92,11 +92,16 @@ namespace GroceryStore.Controllers.Admin
 
             var cashier_details = db.CashierDetails.Where(
                 x => x.Customer_id == Customer_id && x.OrderId == orderId).FirstOrDefault();
+            
+            var order_instance = db.orders.Where(
+                x => x.customerr_id == Customer_id && x.order_id == orderId
+                ).FirstOrDefault();
 
             var order_detail_dto = new OrderDetailDto
             {
                 orderDetails = order_details,
-                counter_Records = cashier_details
+                counter_Records = cashier_details,
+                order_instance = order_instance
             };
 
             return View(new UserDto { order_detail_dto = order_detail_dto, User = user });
@@ -126,6 +131,28 @@ namespace GroceryStore.Controllers.Admin
             cashier_instance.Current_Order_Count = cashier_instance.Current_Order_Count - 1;
             order_instance.OrderStatus = "DELIVERED";
             order_instance.status_date = DateTime.Now;
+
+            db.SaveChanges();
+            return RedirectToAction("ViewOrderQueue", "ViewOrderQueue");
+        }
+
+        [HttpPost]
+        public ActionResult CancelOrder()
+        {
+            string remarks =  ( Request.Form["remarks"] ).ToString();
+            int customer_id = Int32.Parse(Request.Form["customerId"]);
+            int order_id = Int32.Parse(Request.Form["orderId"]);
+            string status = Request.Form["status"].ToString();
+
+            GroceryStoreEntities db = new GroceryStoreEntities();
+
+            // Getting order row/instance
+            var order_instance = db.orders.Where(
+                x => x.order_id == order_id && x.customerr_id == customer_id).FirstOrDefault();
+
+            order_instance.OrderStatus = status;
+            order_instance.status_date = DateTime.Now;
+            order_instance.remarks = remarks;
 
             db.SaveChanges();
             return RedirectToAction("ViewOrderQueue", "ViewOrderQueue");

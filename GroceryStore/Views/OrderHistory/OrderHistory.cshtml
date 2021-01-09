@@ -1,8 +1,8 @@
 ﻿@model GroceryStore.Controllers.Dto.UserDto
-@{ 
+@{
     ViewBag.Title = "OrderHistory";
-    Layout = "~/Views/Shared/CustomerDashboard.cshtml"; 
-    }
+    Layout = "~/Views/Shared/CustomerDashboard.cshtml";
+}
 
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -20,9 +20,8 @@
                                 <th>Order Type</th>
                                 <th>Billing Address</th>
                                 <th>Order Status</th>
-                                <th>Actions</th>
-                                <th>Status Date</th>
                                 <th>Click for details</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,6 +46,17 @@
                                 <td>
                                     @item.OrderStatus
                                 </td>
+
+                                <td>
+                                    <a href="../OrderHistory/OrderDetail?OrderId=@item.order_id">
+                                        <div>
+                                            <span class=" button3 py-2 px-1">
+                                                Details
+                                            </span>
+                                        </div>
+                                    </a>
+                                </td>
+
                                 <td>
                                     <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
                                         <li class="dropdown navbar-inverse">
@@ -59,9 +69,9 @@
                                                     if (item.OrderStatus != "NOT PICKED UP")
                                                     {
                                                         <li>
-                                                            <a href="../OrderHistory/ChangeStatus?status=CANCEL&id=@item.order_id">
+                                                            <a>
                                                                 <div>
-                                                                    <span class="pull-right text-muted small">
+                                                                    <span onclick="passOrderData(event)" orderId="@item.order_id" status="CANCEL" data-toggle="modal" data-target="#RemarksModal" class="pull-right text-muted small">
                                                                         Cancel
                                                                     </span>
                                                                 </div>
@@ -86,19 +96,6 @@
                                         </li>
                                     </ul>
                                 </td>
-                                
-                                <td>
-                                    @item.status_date
-                                </td>
-                                <td>
-                                    <a href="../OrderHistory/OrderDetail?OrderId=@item.order_id">
-                                        <div>
-                                            <span class=" button3 py-2 px-1">
-                                                Details
-                                            </span>
-                                        </div>
-                                    </a>
-                                </td>
                             </tr>
                             }
 
@@ -116,3 +113,57 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+@*This is modal for Customer remarks*@
+<div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="RemarksModal" role="dialog">
+        <div class="modal-dialog">
+
+            <input id="order-id" type="hidden" value="" />
+
+            <!-- Modal content-->
+            <form id="OrderLink" action="../OrderHistory/CancelOrder" method="post">
+
+                <input id="Orderstatus" type="hidden" name="status" value="" />
+                <input id="orderIdInput" type="hidden" name="orderId" value="" />
+
+                <div class="modal-content">
+                    <div class="modal-header" style="display: flex;">
+                        <button style="flex-basis: 32px; order: 2;" type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 style="flex: 1; order: 1; " class="modal-title">Remarks</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea name="remarks" id="UserRemarks" rows="5" style="width: 100%;" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function passOrderData(event) {
+        // the element is selected that is targeted by click listner (it contains caller itself)
+        let element = event.target;
+
+        let orderId = $(element).attr("orderId");
+        let status = $(element).attr("status");
+
+        // Assigning customerId, orderId, userRemarks to it's atribute's value
+        // ex orderIdInput = orderId
+        // "#orderIdInput" target an element
+        $("#orderIdInput").attr("value", orderId);
+        $("#Orderstatus").attr("value", status);
+
+    }
+</script>

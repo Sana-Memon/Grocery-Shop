@@ -11,5 +11,7 @@ namespace GroceryStore.Controllers.Dto
         public List<OrderDetail> orderDetails { get; set; }
 
         public CashierDetail counter_Records { get; set; }
+
+        public order order_instance { get; set; }
     }
 }
