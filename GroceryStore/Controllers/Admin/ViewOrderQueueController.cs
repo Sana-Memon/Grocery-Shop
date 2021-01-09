@@ -127,6 +127,7 @@ namespace GroceryStore.Controllers.Admin
             order_instance.OrderStatus = "DELIVERED";
             order_instance.status_date = DateTime.Now;
 
+            db.SaveChanges();
             return RedirectToAction("ViewOrderQueue", "ViewOrderQueue");
         }
     }
