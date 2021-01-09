@@ -55,5 +55,7 @@ namespace GroceryStore.Models
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Cashier_Counter> Cashier_Counter { get; set; }
         public virtual DbSet<Counter_Records> Counter_Records { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<CashierDetail> CashierDetails { get; set; }
     }
 }

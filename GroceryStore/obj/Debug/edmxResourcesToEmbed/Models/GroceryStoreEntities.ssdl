@@ -188,6 +188,7 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
     <Property Name="total_cost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="remarks" Type="varchar" MaxLength="200" />
     <Property Name="total_quantity" Type="int" />
+    <Property Name="orderType" Type="varchar" MaxLength="200" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -306,6 +307,45 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
     <Property Name="Other_Address" Type="nvarchar" MaxLength="100" />
     <Property Name="Role" Type="int" />
     <Property Name="code" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.CashierDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CashierDetails">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="Location" />
+      <PropertyRef Name="TakeAwayTime" />
+      <PropertyRef Name="Customer_id" />
+    </Key>
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="TakeAwayTime" Type="datetime" Nullable="false" />
+    <Property Name="Customer_id" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.OrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OrderDetails">
+    <Key>
+      <PropertyRef Name="Customer_id" />
+      <PropertyRef Name="order_id" />
+      <PropertyRef Name="product_name" />
+      <PropertyRef Name="SellingPrice" />
+      <PropertyRef Name="FullDescription" />
+      <PropertyRef Name="category" />
+      <PropertyRef Name="DiscountPrice" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="Customer_id" Type="int" Nullable="false" />
+    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="product_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="FullDescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MartLocation" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" />
+    <Property Name="category" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DiscountPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -724,6 +764,29 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
     [OrderToDeliver].[OrderStatus] AS [OrderStatus], 
     [OrderToDeliver].[Date] AS [Date]
     FROM [dbo].[OrderToDeliver] AS [OrderToDeliver]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CashierDetails" EntityType="Self.CashierDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CashierDetails].[OrderId] AS [OrderId], 
+    [CashierDetails].[Location] AS [Location], 
+    [CashierDetails].[TakeAwayTime] AS [TakeAwayTime], 
+    [CashierDetails].[Customer_id] AS [Customer_id]
+    FROM [dbo].[CashierDetails] AS [CashierDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OrderDetails].[Customer_id] AS [Customer_id], 
+    [OrderDetails].[order_id] AS [order_id], 
+    [OrderDetails].[quantity] AS [quantity], 
+    [OrderDetails].[product_name] AS [product_name], 
+    [OrderDetails].[SellingPrice] AS [SellingPrice], 
+    [OrderDetails].[FullDescription] AS [FullDescription], 
+    [OrderDetails].[MartLocation] AS [MartLocation], 
+    [OrderDetails].[ImageFilePath] AS [ImageFilePath], 
+    [OrderDetails].[category] AS [category], 
+    [OrderDetails].[DiscountPrice] AS [DiscountPrice], 
+    [OrderDetails].[Description] AS [Description]
+    FROM [dbo].[OrderDetails] AS [OrderDetails]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

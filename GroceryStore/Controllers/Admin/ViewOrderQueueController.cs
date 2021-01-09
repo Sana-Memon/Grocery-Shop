@@ -35,11 +35,11 @@ namespace GroceryStore.Controllers.Admin
                                            OrderStatus = orders.OrderStatus,
                                            date = ""+orders.date,
                                            CustomerID = orders.customerr_id,
-                                           Name = orders.Address.Name,
+                                           AddressName = orders.Address.Name,
                                            quantity = orders.total_quantity,
-                                           CostPrice = (decimal)orders.total_cost
+                                           CostPrice = (decimal)orders.total_cost,
+                                           OrderType = orders.orderType
                                        }).ToList();
-
 
             return View(new UserDto { User = user, OrderDto = allOrder });
         }
@@ -69,5 +69,35 @@ namespace GroceryStore.Controllers.Admin
             return RedirectToAction("ViewOrderQueue", "ViewOrderQueue");
         }
 
+        public ActionResult QueueOrderDetails()
+        {
+            /* Require OrderId:integer as query parameter */
+
+
+            // Value passed to this Api/method
+            int orderId = int.Parse(Request.QueryString["OrderId"]);
+            int Customer_id = int.Parse(Request.QueryString["CustomerId"]);
+
+            // Getting customer's object
+            GroceryStoreEntities db = new GroceryStoreEntities();
+            var userId = Int32.Parse(Session["userID"]?.ToString());
+            var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
+
+            // Retrieving order details 
+            var order_details = db.OrderDetails.Where(
+                x => x.Customer_id == Customer_id && x.order_id == orderId
+            ).ToList();
+
+            var cashier_details = db.CashierDetails.Where(
+                x => x.Customer_id == Customer_id && x.OrderId == orderId).FirstOrDefault();
+
+            var order_detail_dto = new OrderDetailDto
+            {
+                orderDetails = order_details,
+                counter_Records = cashier_details
+            };
+
+            return View(new UserDto { order_detail_dto = order_detail_dto, User = user });
+        }
     }
 }

@@ -22,40 +22,45 @@
                                     <th>Customer Id</th>
                                     <th>Quantity</th>
                                     <th>Total Price</th>
+                                    <th>Order Type</th>
                                     <th>Billing Address</th>
                                     <th>Order Status</th>
                                     <th>Actions</th>
+                                    <th>Click for details</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach (var item in Model.OrderDto)
                                 {
-                                    <tr class="active-row">
-                                        <td>@item.date</td>
-                                        <td>@item.order_id</td>
-                                        <td>@item.CustomerID</td>
-                                        <td>@item.quantity</td>
-                                        <td>@item.CostPrice</td>
-                                        <td>
-                                            @if (item.AddressName != null && item.AddressName != "")
-                                            {
-                                                @item.AddressName }
-                                            else
-                                            {
-                                                <span>NA</span>}
-                                        </td>
-                                        <td>
-                                            @item.OrderStatus
-                                        </td>
-                                        <td>
-                                            <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
-                                                <li class="dropdown navbar-inverse">
-                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                        <span>&#9776;</span>
-                                                    </a>
-                                                    <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
-                                                        @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "DELIVERED")
+                                <tr class="active-row">
+                                    <td>@item.date</td>
+                                    <td>@item.order_id</td>
+                                    <td>@item.CustomerID</td>
+                                    <td>@item.quantity</td>
+                                    <td>@item.CostPrice</td>
+                                    <td>@item.OrderType</td>
+                                    <td>
+                                        @if (item.AddressName != null && item.AddressName != "")
+                                        {
+                                            @item.AddressName }
+                                        else
+                                        {
+                                            <span>NA</span>}
+                                    </td>
+                                    <td>
+                                        @item.OrderStatus
+                                    </td>
+                                    <td>
+                                        <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
+                                            <li class="dropdown navbar-inverse">
+                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                    <span>&#9776;</span>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
+                                                    @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "DELIVERED")
+                                                    {
+                                                        if (item.OrderStatus != "NOT PICKED UP")
                                                         {
                                                             <li>
                                                                 <a href="../ViewOrderQueue/ChangeStatus?status=CANCEL&id=@item.order_id">
@@ -98,11 +103,34 @@
                                                             </li>
                                                         }
 
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
+                                                        if (item.OrderStatus == "NOT PICKED UP")
+                                                        {
+                                                            <li>
+                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DELIVERED&id=@item.order_id">
+                                                                    <div>
+                                                                        <span class="pull-right text-muted small">
+                                                                            Delivered
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        }
+                                                    }
+
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <a href="../ViewOrderQueue/QueueOrderDetails?OrderId=@item.order_id&CustomerId=@item.CustomerID">
+                                            <div>
+                                                <span class=" button3 py-2 px-1">
+                                                    Details
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
                                 }
 
                             </tbody>

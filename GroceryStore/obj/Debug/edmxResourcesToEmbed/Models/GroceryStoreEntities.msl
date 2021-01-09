@@ -147,6 +147,7 @@
     <EntitySetMapping Name="orders">
       <EntityTypeMapping TypeName="GroceryStoreModel.order">
         <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="orderType" ColumnName="orderType" />
           <ScalarProperty Name="total_quantity" ColumnName="total_quantity" />
           <ScalarProperty Name="remarks" ColumnName="remarks" />
           <ScalarProperty Name="total_cost" ColumnName="total_cost" />
@@ -340,6 +341,33 @@
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="CashierId" ColumnName="CashierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="GroceryStoreModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+          <ScalarProperty Name="MartLocation" ColumnName="MartLocation" />
+          <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashierDetails">
+      <EntityTypeMapping TypeName="GroceryStoreModel.CashierDetail">
+        <MappingFragment StoreEntitySet="CashierDetails">
+          <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="TakeAwayTime" ColumnName="TakeAwayTime" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

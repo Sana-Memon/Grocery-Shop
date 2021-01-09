@@ -26,5 +26,7 @@ namespace GroceryStore.Controllers.Dto
         public List<Cashier_Counter> Cashier_Counters { get; set; }
 
         public Cashier_Counter cashier { get; set; }
+
+        public OrderDetailDto order_detail_dto { get; set; }
     }
 }

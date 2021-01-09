@@ -193,6 +193,7 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
           <Property Name="total_cost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="remarks" Type="varchar" MaxLength="200" />
           <Property Name="total_quantity" Type="int" />
+          <Property Name="orderType" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -311,6 +312,45 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <Property Name="Other_Address" Type="nvarchar" MaxLength="100" />
           <Property Name="Role" Type="int" />
           <Property Name="code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.CashierDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CashierDetails">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="Location" />
+            <PropertyRef Name="TakeAwayTime" />
+            <PropertyRef Name="Customer_id" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="TakeAwayTime" Type="datetime" Nullable="false" />
+          <Property Name="Customer_id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.OrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="Customer_id" />
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="product_name" />
+            <PropertyRef Name="SellingPrice" />
+            <PropertyRef Name="FullDescription" />
+            <PropertyRef Name="category" />
+            <PropertyRef Name="DiscountPrice" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="Customer_id" Type="int" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="product_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FullDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MartLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" />
+          <Property Name="category" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DiscountPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -730,6 +770,29 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
     [OrderToDeliver].[Date] AS [Date]
     FROM [dbo].[OrderToDeliver] AS [OrderToDeliver]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="CashierDetails" EntityType="Self.CashierDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CashierDetails].[OrderId] AS [OrderId], 
+    [CashierDetails].[Location] AS [Location], 
+    [CashierDetails].[TakeAwayTime] AS [TakeAwayTime], 
+    [CashierDetails].[Customer_id] AS [Customer_id]
+    FROM [dbo].[CashierDetails] AS [CashierDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OrderDetails].[Customer_id] AS [Customer_id], 
+    [OrderDetails].[order_id] AS [order_id], 
+    [OrderDetails].[quantity] AS [quantity], 
+    [OrderDetails].[product_name] AS [product_name], 
+    [OrderDetails].[SellingPrice] AS [SellingPrice], 
+    [OrderDetails].[FullDescription] AS [FullDescription], 
+    [OrderDetails].[MartLocation] AS [MartLocation], 
+    [OrderDetails].[ImageFilePath] AS [ImageFilePath], 
+    [OrderDetails].[category] AS [category], 
+    [OrderDetails].[DiscountPrice] AS [DiscountPrice], 
+    [OrderDetails].[Description] AS [Description]
+    FROM [dbo].[OrderDetails] AS [OrderDetails]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ProductCategory].[category] AS [category], 
@@ -1043,6 +1106,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <Property Name="total_cost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="total_quantity" Type="Int32" />
+          <Property Name="orderType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OurSatisfiedCustomer">
           <Key>
@@ -1656,6 +1720,8 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             <End Role="User" EntitySet="Users" />
             <End Role="Counter_Records" EntitySet="Counter_Records" />
           </AssociationSet>
+          <EntitySet Name="OrderDetails" EntityType="GroceryStoreModel.OrderDetail" />
+          <EntitySet Name="CashierDetails" EntityType="GroceryStoreModel.CashierDetail" />
         </EntityContainer>
         <EntityType Name="Cashier_Counter">
           <Key>
@@ -1730,6 +1796,41 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Customer_id" />
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="product_name" />
+            <PropertyRef Name="SellingPrice" />
+            <PropertyRef Name="FullDescription" />
+            <PropertyRef Name="category" />
+            <PropertyRef Name="DiscountPrice" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="Customer_id" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="product_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FullDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageFilePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CashierDetail">
+          <Key>
+            <PropertyRef Name="Location" />
+            <PropertyRef Name="TakeAwayTime" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="Customer_id" />
+          </Key>
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TakeAwayTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Customer_id" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1882,6 +1983,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="GroceryStoreModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="orderType" ColumnName="orderType" />
                 <ScalarProperty Name="total_quantity" ColumnName="total_quantity" />
                 <ScalarProperty Name="remarks" ColumnName="remarks" />
                 <ScalarProperty Name="total_cost" ColumnName="total_cost" />
@@ -2075,6 +2177,33 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="CashierId" ColumnName="CashierId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="GroceryStoreModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+                <ScalarProperty Name="MartLocation" ColumnName="MartLocation" />
+                <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CashierDetails">
+            <EntityTypeMapping TypeName="GroceryStoreModel.CashierDetail">
+              <MappingFragment StoreEntitySet="CashierDetails">
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="TakeAwayTime" ColumnName="TakeAwayTime" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

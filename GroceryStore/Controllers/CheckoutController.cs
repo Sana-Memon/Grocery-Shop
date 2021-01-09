@@ -47,6 +47,7 @@ namespace GroceryStore.Controllers
             order.order_number = "123123";
             order.date = DateTime.Now;
             order.OrderStatus = "PENDING";
+            order.orderType = "Delivery";
             order.AddressId = addressID;
             List<orderProductsPrior> orderProducts = new List<orderProductsPrior>();
 
@@ -103,7 +104,8 @@ namespace GroceryStore.Controllers
             order.customerr_id = customer.Customer_id;
             order.order_number = "123123";
             order.date = DateTime.Now;
-            order.OrderStatus = "SELF PICKUP";
+            order.OrderStatus = "NOT PICKED UP";
+            order.orderType = "Take Away";
             List<orderProductsPrior> orderProducts = new List<orderProductsPrior>();
 
             decimal total_cost = 0;

@@ -38,7 +38,8 @@ namespace GroceryStore.Controllers.Customer
                                            CustomerID = orders.customerr_id,
                                            AddressName = orders.Address.Name,
                                            quantity = orders.total_quantity,
-                                           CostPrice = (decimal)orders.total_cost
+                                           CostPrice = (decimal)orders.total_cost,
+                                           OrderType = orders.orderType
                                        }).ToList();
 
             return View(new UserDto { User = user, OrderDto = allOrder });
@@ -129,6 +130,34 @@ namespace GroceryStore.Controllers.Customer
                 db.SaveChanges();
             }
             return RedirectToAction("OrderHistory", "OrderHistory");
+        }
+    
+        public ActionResult OrderDetail()
+        {
+            /* Require OrderId:integer as query parameter */
+
+
+            // Value passed to this Api/method
+            int orderId = int.Parse(Request.QueryString["OrderId"]);
+
+            // Getting customer's object
+            GroceryStoreEntities db = new GroceryStoreEntities();
+            var userId = Int32.Parse(Session["userID"]?.ToString());
+            var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
+            var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
+
+            // Retrieving order details 
+            var order_details = db.OrderDetails.Where(
+                x => x.Customer_id == customer.Customer_id && x.order_id == orderId
+            ).ToList();
+
+            var cashier_details = db.CashierDetails.Where(
+                x => x.Customer_id == customer.Customer_id && x.OrderId == orderId).FirstOrDefault();
+
+            var order_detail_dto = new OrderDetailDto { 
+                orderDetails = order_details , counter_Records = cashier_details};
+
+            return View(new UserDto {order_detail_dto = order_detail_dto , User = user});
         }
     }
 }

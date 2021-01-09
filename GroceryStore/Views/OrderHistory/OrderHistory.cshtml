@@ -6,9 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">My Order</h1>
-
-
+                <h1 class="page-header">My Orders</h1>
                 <h1 class="Order-history">Order Summary</h1>
                 <center>
                     <table class="content-table">
@@ -19,71 +17,86 @@
                                 <th>Order Id</th>
                                 <th>Quantity</th>
                                 <th>Total Price</th>
+                                <th>Order Type</th>
                                 <th>Billing Address</th>
                                 <th>Order Status</th>
                                 <th>Actions</th>
+                                <th>Click for details</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             @foreach (var item in Model.OrderDto)
                             {
-                <tr class="active-row">
-                    <td>@item.date</td>
-                    <td>@item.order_id</td>
-                    <td>@item.quantity</td>
-                        <td>@item.CostPrice</td>
-                    <td>
-                        @if (item.AddressName != null && item.AddressName != "")
-                        {
-        @item.AddressName }
-                        else
-                        {
-        <span>NA</span>}
-                    </td>
-                    <td>
-                        @item.OrderStatus
-                    </td>
-                    <td>
-                        <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
-                            <li class="dropdown navbar-inverse">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <span>&#9776;</span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
-                                    @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED" && item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "SELF PICKED UP")
+                            <tr class="active-row">
+                                <td>@item.date</td>
+                                <td>@item.order_id</td>
+                                <td>@item.quantity</td>
+                                <td>@item.CostPrice</td>
+                                <td>@item.OrderType</td>
+                                <td>
+                                    @if (item.AddressName != null && item.AddressName != "")
                                     {
-                                        if (item.OrderStatus != "SELF PICKUP")
-                                        {
-                                            <li>
-                                                <a href="../OrderHistory/ChangeStatus?status=CANCEL&id=@item.order_id">
-                                                    <div>
-                                                        <span class="pull-right text-muted small">
-                                                            Cancel
-                                                        </span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        }
-                                        else if (item.OrderStatus == "SELF PICKUP")
-                                        {
-                                            <li>
-                                                <a href="../OrderHistory/RevertOrder?OrderId=@item.order_id">
-                                                    <div>
-                                                        <span class="pull-right text-muted small">
-                                                            Revert
-                                                        </span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        }
-
+                                        @item.AddressName }
+                                    else
+                                    {
+                                        <span>NA</span>
                                     }
-                                </ul>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>}
+                                </td>
+                                <td>
+                                    @item.OrderStatus
+                                </td>
+                                <td>
+                                    <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
+                                        <li class="dropdown navbar-inverse">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <span>&#9776;</span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
+                                                @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED" && item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "SELF PICKED UP")
+                                                {
+                                                    if (item.OrderStatus != "NOT PICKED UP")
+                                                    {
+                                                        <li>
+                                                            <a href="../OrderHistory/ChangeStatus?status=CANCEL&id=@item.order_id">
+                                                                <div>
+                                                                    <span class="pull-right text-muted small">
+                                                                        Cancel
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                    else if (item.OrderStatus == "NOT PICKED UP")
+                                                    {
+                                                        <li>
+                                                            <a href="../OrderHistory/RevertOrder?OrderId=@item.order_id">
+                                                                <div>
+                                                                    <span class="pull-right text-muted small">
+                                                                        Revert
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    }
+
+                                                }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                               
+                                <td>
+                                    <a href="../OrderHistory/OrderDetail?OrderId=@item.order_id">
+                                        <div>
+                                            <span class=" button3 py-2 px-1">
+                                                Details
+                                            </span>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            }
 
                         </tbody>
                     </table>
