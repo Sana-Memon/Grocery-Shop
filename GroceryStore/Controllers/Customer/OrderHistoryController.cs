@@ -34,7 +34,7 @@ namespace GroceryStore.Controllers.Customer
                                        {
                                            order_id = orders.order_id,
                                            OrderStatus = orders.OrderStatus,
-                                           date = "" + orders.date,
+                                           date = orders.date.ToString(),
                                            CustomerID = orders.customerr_id,
                                            AddressName = orders.Address.Name,
                                            quantity = orders.total_quantity,
