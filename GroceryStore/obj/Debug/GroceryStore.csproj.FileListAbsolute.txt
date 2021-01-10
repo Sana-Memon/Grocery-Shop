@@ -1236,7 +1236,6 @@ C:\Users\Muhammad Mubeen\Music\fyp_git_code\GroceryStore\bin\System.Web.WebPages
 C:\Users\Muhammad Mubeen\Music\fyp_git_code\GroceryStore\bin\Newtonsoft.Json.xml
 C:\Users\Muhammad Mubeen\Music\fyp_git_code\GroceryStore\bin\Antlr3.Runtime.pdb
 C:\Users\Muhammad Mubeen\Music\fyp_git_code\GroceryStore\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Muhammad Mubeen\Music\fyp_git_code\GroceryStore\obj\Debug\GroceryStore.csprojAssemblyReference.cache
 C:\Users\Muhammad Mubeen\Music\fyp_git_code\GroceryStore\obj\Debug\GroceryStore.csproj.CoreCompileInputs.cache
 C:\Users\Muhammad Mubeen\Music\fyp_git_code\GroceryStore\obj\Debug\GroceryStore.csproj.CopyComplete
 C:\Users\Muhammad Mubeen\Music\fyp_git_code\GroceryStore\obj\Debug\GroceryStore.dll

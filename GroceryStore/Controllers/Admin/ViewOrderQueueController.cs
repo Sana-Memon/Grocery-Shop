@@ -28,6 +28,7 @@ namespace GroceryStore.Controllers.Admin
             List<OrderDto> allOrder = (from orders in db.orders
                                        join address in db.Addresses on new { pid = orders.order_id } equals new { pid = address.Id }
                                        into yG
+                                       where orders.OrderStatus != "DELIVERED"
                                        from y1 in yG.DefaultIfEmpty()
                                        select new OrderDto()
                                        {

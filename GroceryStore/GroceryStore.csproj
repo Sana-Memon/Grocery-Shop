@@ -177,7 +177,6 @@
     <Compile Include="Controllers\Admin\PastOrderController.cs" />
     <Compile Include="Controllers\Admin\OrderQueueController.cs" />
     <Compile Include="Controllers\Admin\OrderTrackController.cs" />
-    <Compile Include="Controllers\Admin\PastOrderDetailsController.cs" />
     <Compile Include="Controllers\Admin\StockDetailController.cs" />
     <Compile Include="Controllers\Admin\StockendController.cs" />
     <Compile Include="Controllers\Admin\ViewOrderQueueController.cs" />
@@ -2362,7 +2361,6 @@
     <Content Include="Views\NewOrder\NewOrder.cshtml" />
     <Content Include="Views\OrderStatus\OrderStatus.cshtml" />
     <Content Include="Views\PastOrder\PastOrder.cshtml" />
-    <Content Include="Views\PastOrderDetails\PastOrderDetails.cshtml" />
     <Content Include="Views\AvailableSttock\dfb.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Home\Product.cshtml" />
@@ -2411,6 +2409,7 @@
     <Content Include="Views\Cart\PickUp.cshtml" />
     <Content Include="Views\OrderHistory\OrderDetail.cshtml" />
     <Content Include="Views\ViewOrderQueue\QueueOrderDetails.cshtml" />
+    <Content Include="Views\PastOrder\PastOrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
