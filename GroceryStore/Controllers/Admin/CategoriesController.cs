@@ -87,7 +87,9 @@ namespace GroceryStore.Controllers
                 return HttpNotFound();
             }
             ViewBag.position_id = new SelectList(db.Product_Location, "position_id", "position", category.position_id);
-            return View(category);
+            
+            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+            return View(new UserDto { category = category, User = user });
         }
 
         [HttpPost]
@@ -116,7 +118,8 @@ namespace GroceryStore.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
+            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+            return View(new UserDto { category = category, User = user });
         }
 
         // POST: Categories/Delete/5
@@ -125,8 +128,12 @@ namespace GroceryStore.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Categories.Find(id);
+            try { 
             db.Categories.Remove(category);
             db.SaveChanges();
+            }
+            catch { 
+            }
             return RedirectToAction("Index");
         }
 

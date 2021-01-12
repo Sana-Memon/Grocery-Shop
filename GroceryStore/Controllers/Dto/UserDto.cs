@@ -29,5 +29,7 @@ namespace GroceryStore.Controllers.Dto
         public Cashier_Counter cashier { get; set; }
 
         public OrderDetailDto order_detail_dto { get; set; }
+
+        public Category category { get; set; }
     }
 }

@@ -126,7 +126,7 @@ namespace GroceryStore.Controllers
             product.category_id = Int32.Parse(Request.Form["category_id"]);
             product.SkuId = Int32.Parse(Request.Form["SkuId"]);
             if (Session["userID"] == null) return RedirectToAction("Auth", "Auth"); 
-
+           
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
