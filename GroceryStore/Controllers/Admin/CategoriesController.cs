@@ -51,18 +51,24 @@ namespace GroceryStore.Controllers
                 return RedirectToAction("Auth", "Auth");
             }
             ViewBag.position_id = new SelectList(db.Product_Location, "position_id", "position");
-            return View();
+
+            int u_id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == u_id).FirstOrDefault();
+            return View(new UserDto { User = user });
         }
 
      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "category_id,position_id,category1,ImageFilePath")] Category category)
+        public ActionResult Create([Bind(Include = "category1")] Category category)
         {
             if (Session["RoleName"] == null)
             {
                 return RedirectToAction("Auth", "Auth");
             }
+
+            category.category1 = Request.Form["category.category1"].ToString();
+
             if (ModelState.IsValid)
             {
                 db.Categories.Add(category);
