@@ -194,5 +194,22 @@ namespace GroceryStore.Controllers
 
             return View(OurProducts.ToPagedList(No_Of_Page, Size_Of_Page));
         }
+
+        public ActionResult SingleProductDetails()
+        {
+            int? userId = null;
+            try
+            {
+                userId = Int32.Parse(Session["userID"]?.ToString());
+            }
+            catch
+            {
+            }
+
+            var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
+            int? customerId = customer?.Customer_id;
+
+            return View();
+        }
     }
 }

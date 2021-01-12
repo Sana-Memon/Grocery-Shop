@@ -2410,6 +2410,7 @@
     <Content Include="Views\OrderHistory\OrderDetail.cshtml" />
     <Content Include="Views\ViewOrderQueue\QueueOrderDetails.cshtml" />
     <Content Include="Views\PastOrder\PastOrderDetails.cshtml" />
+    <Content Include="Views\Product\SingleProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
