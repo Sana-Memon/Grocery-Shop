@@ -77,6 +77,10 @@ namespace GroceryStore.Controllers
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["RoleName"] == null)
+            {
+                return RedirectToAction("Auth", "Auth");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,8 +91,9 @@ namespace GroceryStore.Controllers
                 return HttpNotFound();
             }
             ViewBag.position_id = new SelectList(db.Product_Location, "position_id", "position", category.position_id);
-            
-            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+
+            int u_id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == u_id).FirstOrDefault();
             return View(new UserDto { category = category, User = user });
         }
 
@@ -109,6 +114,10 @@ namespace GroceryStore.Controllers
         // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["RoleName"] == null)
+            {
+                return RedirectToAction("Auth", "Auth");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,7 +127,8 @@ namespace GroceryStore.Controllers
             {
                 return HttpNotFound();
             }
-            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+            int u_id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == u_id).FirstOrDefault();
             return View(new UserDto { category = category, User = user });
         }
 
