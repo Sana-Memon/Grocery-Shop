@@ -4,115 +4,201 @@
     Layout = "~/Views/Shared/AdminDashboard.cshtml";
 }
 
-
 <div id="page-wrapper">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
+                <h1 class="page-header">All Orders Queue</h1>
+                <center>
+                    <table class="content-table">
+                        <thead>
 
-                <h1 class="page-header">All Orders</h1>
-            </div>
+                            <tr>
+                                <th>Create Date</th>
+                                <th>Order Id</th>
+                                <th>Customer Id</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                                <th>Order Type</th>
+                                <th>Billing Address</th>
+                                <th>Order Status</th>
+                                <th>Click for details</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-            <div class="col-lg-12">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        View All products
-                    </div>
-                    <div class="panel-body">
-                        <div class="container">
-                            <table class="table table-hover" id="table">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Order Id</th>
-                                        <th>Quantity</th>
-                                        @*<th>Price</th>*@
-                                        @*<th>Total</th>*@
-                                        <th>Billing Address</th>
-                                        <th>Order Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.OrderDto)
+                            @foreach (var item in Model.OrderDto)
+                            {
+                            <tr class="active-row">
+                                <td>@item.date</td>
+                                <td>@item.order_id</td>
+                                <td>@item.CustomerID</td>
+                                <td>@item.quantity</td>
+                                <td>@item.CostPrice</td>
+                                <td>@item.OrderType</td>
+                                <td>
+                                    @if (item.AddressName != null && item.AddressName != "")
                                     {
-                                    <tr class="active-row">
-                                        <td>@item.date</td>
-                                        <td>@item.order_id</td>
-                                        <td>@((item.quantity))</td>
-                                        @*@<td>@((item.quantity * item.CostPrice))</td>*@
+                                        @item.AddressName }
+                                    else
+                                    {
+                                        <span>NA</span>}
+                                </td>
+                                <td>
+                                    @item.OrderStatus
+                                </td>
+                                <td>
+                                    <a href="../ViewOrderQueue/QueueOrderDetails?OrderId=@item.order_id&CustomerId=@item.CustomerID">
+                                        <div>
+                                            <span class=" button3 py-2 px-1">
+                                                Details
+                                            </span>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td>
+                                    <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
+                                        <li class="dropdown navbar-inverse">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <span>&#9776;</span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
+                                                @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "DELIVERED")
+                                                {
+                                                    if (item.OrderStatus != "NOT PICKED UP")
+                                                    {
+                                                        <li>
+                                                            <a>
+                                                                <div>
+                                                                    <span onclick="passOrderData(event)" customerId="@item.CustomerID" orderId="@item.order_id" status="CANCEL" data-toggle="modal" data-target="#RemarksModal" class="pull-right text-muted small">
+                                                                        Cancel
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
 
-                                        <td>@item.Name</td>
-                                        <td>
-                                            @item.OrderStatus
-                                        </td>
-                                        <td>
+                                                        <li>
+                                                            <a href="../ViewOrderQueue/ChangeStatus?status=DELETED&id=@item.order_id">
+                                                                <div>
+                                                                    <span class="pull-right text-muted small">
+                                                                        Delete
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
 
-                                            <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
-                                                <li class="dropdown navbar-inverse">
-                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                        <span>&#9776;</span>
-                                                    </a>
-                                                    <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
+                                                        <li>
+                                                            <a href="../ViewOrderQueue/ChangeStatus?status=DISPATCHED&id=@item.order_id">
+                                                                <div>
+                                                                    <span class="pull-right text-muted small">
+                                                                        Dispatched
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
 
-                                                        @if (item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "CANCEL")
-                                                        {
+                                                        <li>
+                                                            <a href="../ViewOrderQueue/ChangeStatus?status=DELIVERED&id=@item.order_id">
+                                                                <div>
+                                                                    <span class="pull-right text-muted small">
+                                                                        Delivered
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    }
 
-                                                            <li>
-                                                                <a href="../ViewOrderQueue/ChangeStatus?status=CANCEL&id=@item.order_id">
-                                                                    <div>
-                                                                        <span class="pull-right text-muted small">
-                                                                            Cancel
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DELIVERED&id=@item.order_id">
-                                                                    <div>
-                                                                        <span class="pull-right text-muted small">
-                                                                            DILEVERED
-                                                                        </span>
-                                                                        @*<span class="pull-right text-muted small">Deleted</span>*@
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="../ViewOrderQueue/ChangeStatus?status=DISPATCHED&id=@item.order_id">
-                                                                    <div>
-                                                                        <span class="pull-right text-muted small">
-                                                                            DISPATCHED
-                                                                        </span>
-                                                                        @*<span class="pull-right text-muted small">Deleted</span>*@
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        }
+                                                    if (item.OrderStatus == "NOT PICKED UP")
+                                                    {
+                                                        <li>
+                                                            <a href="../ViewOrderQueue/FinalizePickUpOrder?OrderId=@item.order_id&CustomerId=@item.CustomerID">
+                                                                <div>
+                                                                    <span class="pull-right text-muted small">
+                                                                        Delivered
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                }
 
-                                                    </ul>
-                                                </li>
                                             </ul>
+                                        </li>
+                                    </ul>
+                                </td>
 
-                                        </td>
-                                    </tr>
-                                    }
+                            </tr>
+                            }
 
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
+                        </tbody>
+                    </table>
+                </center>
 
             </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <!-- cxvfdgtrhyx -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+@*This is modal for admin remarks*@
+<div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="RemarksModal" role="dialog">
+        <div class="modal-dialog">
             
-           
+            <input id="order-id" type="hidden" value="" />
 
-       
+            <!-- Modal content-->
+            <form id="OrderLink" action="../ViewOrderQueue/CancelOrder" method="post">
 
+                <input id="Orderstatus" type="hidden" name="status" value="" />
+                <input id="customerIdInput" type="hidden" name="customerId" value="" />
+                <input id="orderIdInput" type="hidden" name="orderId" value="" />
+              
+                <div class="modal-content">
+                    <div class="modal-header" style="display: flex;">
+                        <button style="flex-basis: 32px; order: 2;" type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 style="flex: 1; order: 1; " class="modal-title">Remarks</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea name="remarks" id="UserRemarks" rows="5" style="width: 100%;" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
+
+        </div>
     </div>
 
 </div>
+
+<script>
+    function passOrderData(event) {
+        // the element is selected that is targeted by click listner (it contains caller itself)
+        let element = event.target;
+
+        // get customer and order Id's
+        let customerId = $(element).attr("customerId");
+        let orderId = $(element).attr("orderId");
+        let status = $(element).attr("status");
+
+        // Assigning customerId, orderId, userRemarks to it's atribute's value
+        // ex customerIdInput = customerId
+        // "#customerIdInput" target an element
+        $("#customerIdInput").attr("value", customerId);
+        $("#orderIdInput").attr("value", orderId);
+        $("#Orderstatus").attr("value", status);
+
+    }
+</script>

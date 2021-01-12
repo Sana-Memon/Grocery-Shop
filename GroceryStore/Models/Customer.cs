@@ -22,6 +22,7 @@ namespace GroceryStore.Models
             this.OurSatisfiedCustomers = new HashSet<OurSatisfiedCustomer>();
             this.orders = new HashSet<order>();
             this.Counter_Records = new HashSet<Counter_Records>();
+            this.Customer_Complaints = new HashSet<Customer_Complaints>();
         }
     
         public int Customer_id { get; set; }
@@ -38,5 +39,7 @@ namespace GroceryStore.Models
         public virtual ICollection<order> orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Counter_Records> Counter_Records { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer_Complaints> Customer_Complaints { get; set; }
     }
 }

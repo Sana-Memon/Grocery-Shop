@@ -64,6 +64,9 @@
         <AssociationConnector Association="GroceryStoreModel.FK__Counter_R__Custo__367C1819" />
         <AssociationConnector Association="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" />
         <AssociationConnector Association="GroceryStoreModel.FK_Customer_User" />
+        <EntityTypeShape EntityType="GroceryStoreModel.OrderDetail" Width="1.5" PointX="5.375" PointY="12.75" />
+        <EntityTypeShape EntityType="GroceryStoreModel.CashierDetail" Width="1.5" PointX="13.375" PointY="8.75" />
+        <AssociationConnector Association="GroceryStoreModel.FK__Customer___Custo__72C60C4A" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

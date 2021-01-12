@@ -15,8 +15,11 @@ namespace GroceryStore.Controllers.Dto
         public int? quantity { get; set; }
         public string Name { get; set; }
 
+        public string OrderType { get; set; }
         public int CustomerID { get; set; }
 
         public string AddressName { get; set; }
+
+        public string status_date { get; set; }
     }
 }

@@ -36,9 +36,9 @@ namespace GroceryStore.Models
         public string Other_Address { get; set; }
         public Nullable<int> Role { get; set; }
         public string code { get; set; }
-        
+
         public string LoginErrorMsg { get; set; }
-        
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer_Complaints> Customer_Complaints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

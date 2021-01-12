@@ -1,28 +1,26 @@
 ﻿@model GroceryStore.Controllers.Dto.UserDto
-@{ ViewBag.Title = "OrderHistory";
-    Layout = "~/Views/Shared/CustomerDashboard.cshtml"; }
+@{
+    ViewBag.Title = "OrderHistory";
+    Layout = "~/Views/Shared/CustomerDashboard.cshtml";
+}
 
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">My Order</h1>
-
-
-                <h1 class="Order-history">Order Summary</h1>
+                <h1 class="page-header">My Orders</h1>
                 <center>
                     <table class="content-table">
                         <thead>
-
                             <tr>
-                                <th>Date</th>
+                                <th>Create Date</th>
                                 <th>Order Id</th>
-                                <th>Product Name</th>
-                                @*<th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Total</th>*@
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                                <th>Order Type</th>
                                 <th>Billing Address</th>
                                 <th>Order Status</th>
+                                <th>Click for details</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -30,87 +28,77 @@
 
                             @foreach (var item in Model.OrderDto)
                             {
-                <tr class="active-row">
-                    <td>@item.date</td>
-                    <td>@item.order_id</td>
-                    <td>@item.CustomerID</td>
-                    @*<td>@item.quantity</td>
-                        <td>@item.CostPrice</td>*@
-                    @*<td>@((item.quantity * item.CostPrice))</td>*@
-                    <td>
-                        @if (item.AddressName != null && item.AddressName != "")
-                        {
-        @item.AddressName }
-                        else
-                        {
-        <span>NA</span>}
-                    </td>
-                    <td>
-                        @item.OrderStatus
-                    </td>
-                    <td>
-                        <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
-                            <li class="dropdown navbar-inverse">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <span>&#9776;</span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
-                                    @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED")
+                            <tr class="active-row">
+                                <td>@item.date</td>
+                                <td>@item.order_id</td>
+                                <td>@item.quantity</td>
+                                <td>@item.CostPrice</td>
+                                <td>@item.OrderType</td>
+                                <td>
+                                    @if (item.AddressName != null && item.AddressName != "")
                                     {
-                    <li>
-                        <a href="../OrderHistory/ChangeStatus?status=CANCEL&id=@item.order_id">
-                            <div>
-                                <span class="pull-right text-muted small">
-                                    Cancel
-                                </span>
-                            </div>
-                        </a>
-                    </li>
+                                        @item.AddressName }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </td>
+                                <td>
+                                    @item.OrderStatus
+                                </td>
 
-                                        <li>
-                                            <a href="../OrderHistory/ChangeStatus?status=DELETED&id=@item.order_id">
-                                                <div>
-                                                    <span class="pull-right text-muted small">
-                                                        Deleted
-                                                    </span>
-                                                    @*<span class="pull-right text-muted small">Deleted</span>*@
-                                                </div>
+                                <td>
+                                    <a href="../OrderHistory/OrderDetail?OrderId=@item.order_id">
+                                        <div>
+                                            <span class=" button3 py-2 px-1">
+                                                Details
+                                            </span>
+                                        </div>
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
+                                        <li class="dropdown navbar-inverse">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <span>&#9776;</span>
                                             </a>
-                                        </li>}
+                                            <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
+                                                @if (item.OrderStatus != "CANCEL" && item.OrderStatus != "DELETED" && item.OrderStatus != "DELIVERED" && item.OrderStatus != "DISPATCHED" && item.OrderStatus != "SELF PICKED UP")
+                                                {
+                                                    if (item.OrderStatus != "NOT PICKED UP")
+                                                    {
+                                                        <li>
+                                                            <a>
+                                                                <div>
+                                                                    <span onclick="passOrderData(event)" orderId="@item.order_id" status="CANCEL" data-toggle="modal" data-target="#RemarksModal" class="pull-right text-muted small">
+                                                                        Cancel
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                    else if (item.OrderStatus == "NOT PICKED UP")
+                                                    {
+                                                        <li>
+                                                            <a href="../OrderHistory/RevertOrder?OrderId=@item.order_id">
+                                                                <div>
+                                                                    <span class="pull-right text-muted small">
+                                                                        Revert
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    }
 
-                                </ul>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>}
+                                                }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            }
 
-                            @*<tr class="active-row">
-                                    <td> 2020-10-11</td>
-                                    <td>2</td>
-                                    <td>Harpic Cleaner</td>
-                                    <td>1</td>
-                                    <td>Rs.72</td>
-                                    <td>Rs.200</td>
-                                    <td>Rs.272</td>
-                                    <td>
-                                        Anusha <br> 159 Honey Creek Court
-                                        Delray Beach, FL 33445 <br>0333-3124666
-                                    </td>
-                                </tr>
-
-                                <tr class="active-row">
-                                    <td> 2020-10-13</td>
-                                    <td>3</td>
-                                    <td>Surf Excel</td>
-                                    <td>3</td>
-                                    <td>Rs.52</td>
-                                    <td>Rs.200</td>
-                                    <td>Rs.356</td>
-                                    <td>
-                                        Sana <br> 690 Augusta Dr.
-                                        Brockton, MA 02301 <br>0333-3124656
-                                    </td>
-                                </tr>*@
                         </tbody>
                     </table>
                 </center>
@@ -125,3 +113,57 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+@*This is modal for Customer remarks*@
+<div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="RemarksModal" role="dialog">
+        <div class="modal-dialog">
+
+            <input id="order-id" type="hidden" value="" />
+
+            <!-- Modal content-->
+            <form id="OrderLink" action="../OrderHistory/CancelOrder" method="post">
+
+                <input id="Orderstatus" type="hidden" name="status" value="" />
+                <input id="orderIdInput" type="hidden" name="orderId" value="" />
+
+                <div class="modal-content">
+                    <div class="modal-header" style="display: flex;">
+                        <button style="flex-basis: 32px; order: 2;" type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 style="flex: 1; order: 1; " class="modal-title">Remarks</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea name="remarks" id="UserRemarks" rows="5" style="width: 100%;" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function passOrderData(event) {
+        // the element is selected that is targeted by click listner (it contains caller itself)
+        let element = event.target;
+
+        let orderId = $(element).attr("orderId");
+        let status = $(element).attr("status");
+
+        // Assigning customerId, orderId, userRemarks to it's atribute's value
+        // ex orderIdInput = orderId
+        // "#orderIdInput" target an element
+        $("#orderIdInput").attr("value", orderId);
+        $("#Orderstatus").attr("value", status);
+
+    }
+</script>

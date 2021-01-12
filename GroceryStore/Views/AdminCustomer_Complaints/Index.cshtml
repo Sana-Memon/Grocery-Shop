@@ -3,84 +3,135 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/AdminDashboard.cshtml";
-    //Layout = null;
 }
-
-
 
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">All Complaints</h1>
+                <center>
+                    <table class="content-table">
+                        <thead>
+
+                            <tr>
+                                <th>Create Date</th>
+                                <th>Customer id</th>
+                                <th>Complaint Description</th>
+                                <th>Complaint type</th>
+                                <th>Complaint status</th>
+                                <th>Status date</th>
+                                <th>Actions</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.Customer_Complaints)
+                            {
+                            <tr class="active-row">
+                                <td>@item.date</td>
+                                <td>@item.Customer_Id</td>
+                                <td>@item.Complaint</td>
+                                <td>@item.Complaint_Type.Complaint_Tpe</td>
+                                <td>@item.Complaint_Status</td>
+                                <td>@item.status_date</td>
+
+                                <td>
+                                    <ul class="nav navbar-right navbar-top-links" style="text-align: center; position: relative; left: -20px;">
+                                        <li class="dropdown navbar-inverse">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <span>&#9776;</span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-alerts" style="width: 80px !important;">
+                                                @if (!item.Complaint_Status.Contains("RESOLVED"))
+                                                {
+                                                    
+                                                    <li>
+                                                        <a>
+                                                            <div>
+                                                                <span onclick="passOrderData(event)" complaintId="@item.Complaint_Id" customerId="@item.Customer_Id" status="RESOLVED" data-toggle="modal" data-target="#RemarksModal" class="pull-right text-muted small">
+                                                                    Resolved
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>@item.remakrs</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </center>
+
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Add New Products
+        <!-- cxvfdgtrhyx -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+
+<div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="RemarksModal" role="dialog">
+        <div class="modal-dialog">
+
+            <input id="order-id" type="hidden" value="" />
+
+            <!-- Modal content-->
+            <form id="OrderLink" action="../AdminCustomer_Complaints/ResolveComplaint" method="post">
+
+                <input id="complaintStatus" type="hidden" name="status" value="" />
+                <input id="customerIdInput" type="hidden" name="customerId" value="" />
+                <input id="complaintIdInput" type="hidden" name="complaintId" value="" />
+
+                <div class="modal-content">
+                    <div class="modal-header" style="display: flex;">
+                        <button style="flex-basis: 32px; order: 2;" type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 style="flex: 1; order: 1; " class="modal-title">Remarks</h4>
                     </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-
-                                <p>
-                                    @Html.ActionLink("Create New", "Create")
-                                </p>
-                                <table class="table">
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint_Status)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].date)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint_Type.Complaint_Tpe)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.User.FullName)
-                                        </th>
-                                        <th></th>
-                                    </tr>
-
-                                    @foreach (var item in Model.Customer_Complaints)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Complaint)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Complaint_Status)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.date)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Complaint_Type.Complaint_Tpe)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.User.FullName)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.Complaint_Id })
-                                                @Html.ActionLink("Details", "Details", new { id = item.Complaint_Id }) 
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.Complaint_Id })
-                                            </td>
-                                        </tr>
-                                    }
-
-                                </table>
-
-                            </div>
-                            <!-- /.container-fluid -->
-                        </div>
-                        <!-- /#page-wrapper -->
-
+                    <div class="modal-body">
+                        <textarea name="remarks" id="UserRemarks" rows="5" style="width: 100%;" required></textarea>
                     </div>
+                    <div class="modal-footer">
+                        <button type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function passOrderData(event) {
+        // the element is selected that is targeted by click listner (it contains caller itself)
+        let element = event.target;
+
+        // get customer and order Id's
+        let customerId = $(element).attr("customerId");
+        let complaintId = $(element).attr("complaintId");
+        let complaintStatus = $(element).attr("status");
+
+        // Assigning customerId, orderId, userRemarks to it's atribute's value
+        // ex customerIdInput = customerId
+        // "#customerIdInput" target an element
+        $("#customerIdInput").attr("value", customerId);
+        $("#complaintIdInput").attr("value", complaintId);
+        $("#complaintStatus").attr("value", complaintStatus);
+
+    }
+</script>

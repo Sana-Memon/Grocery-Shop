@@ -86,7 +86,9 @@
           <Property Name="Complaint_type_Id" Type="int" Nullable="false" />
           <Property Name="Complaint" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Complaint_Status" Type="nchar" MaxLength="10" />
-          <Property Name="date" Type="date" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="remakrs" Type="varchar" MaxLength="200" />
+          <Property Name="status_date" Type="datetime" />
         </EntityType>
         <EntityType Name="Customer_Order">
           <Key>
@@ -187,9 +189,14 @@ warning 6002: The table/view 'GroceryStore.dbo.orderProductsTrain' does not have
           <Property Name="order_dow" Type="varchar" MaxLength="50" />
           <Property Name="order_hour_of_day" Type="varchar" MaxLength="50" />
           <Property Name="days_since_prior_order" Type="varchar" MaxLength="50" />
-          <Property Name="date" Type="date" />
+          <Property Name="date" Type="datetime" />
           <Property Name="OrderStatus" Type="varchar" MaxLength="55" />
           <Property Name="AddressId" Type="int" />
+          <Property Name="total_cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="remarks" Type="varchar" MaxLength="200" />
+          <Property Name="total_quantity" Type="int" />
+          <Property Name="orderType" Type="varchar" MaxLength="200" />
+          <Property Name="status_date" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -310,6 +317,45 @@ warning 6002: The table/view 'GroceryStore.dbo.OrderToDeliver' does not have a p
           <Property Name="code" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.CashierDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CashierDetails">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="Location" />
+            <PropertyRef Name="TakeAwayTime" />
+            <PropertyRef Name="Customer_id" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="TakeAwayTime" Type="datetime" Nullable="false" />
+          <Property Name="Customer_id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GroceryStore.dbo.OrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="Customer_id" />
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="product_name" />
+            <PropertyRef Name="SellingPrice" />
+            <PropertyRef Name="FullDescription" />
+            <PropertyRef Name="category" />
+            <PropertyRef Name="DiscountPrice" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="Customer_id" Type="int" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="product_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FullDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MartLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageFilePath" Type="nvarchar" MaxLength="100" />
+          <Property Name="category" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DiscountPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProductCategory">
           <Key>
@@ -334,7 +380,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <Property Name="MartLocation" Type="nvarchar" MaxLength="50" />
           <Property Name="ImageFilePath2" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__Address__CityId__534D60F1">
+        <Association Name="FK__Address__CityId__4F7CD00D">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -346,7 +392,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Address__Country__5441852A">
+        <Association Name="FK__Address__Country__5070F446">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -358,7 +404,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Counter_R__Cashi__5629CD9C">
+        <Association Name="FK__Counter_R__Cashi__52593CB8">
           <End Role="Cashier_Counter" Type="Self.Cashier_Counter" Multiplicity="1" />
           <End Role="Counter_Records" Type="Self.Counter_Records" Multiplicity="*" />
           <ReferentialConstraint>
@@ -370,7 +416,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Counter_R__Order__571DF1D5">
+        <Association Name="FK__Counter_R__Order__534D60F1">
           <End Role="orders" Type="Self.orders" Multiplicity="1" />
           <End Role="Counter_Records" Type="Self.Counter_Records" Multiplicity="*" />
           <ReferentialConstraint>
@@ -382,7 +428,19 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__orders__AddressI__6477ECF3">
+        <Association Name="FK__Customer___Custo__72C60C4A">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Customer_Complaints" Type="Self.Customer_Complaints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Customer_id" />
+            </Principal>
+            <Dependent Role="Customer_Complaints">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__AddressI__60A75C0F">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
           <End Role="orders" Type="Self.orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -394,7 +452,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductNo__Produ__693CA210">
+        <Association Name="FK__ProductNo__Produ__656C112C">
           <End Role="products" Type="Self.products" Multiplicity="0..1" />
           <End Role="ProductNotification" Type="Self.ProductNotification" Multiplicity="*" />
           <ReferentialConstraint>
@@ -406,7 +464,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductNo__UserI__6A30C649">
+        <Association Name="FK__ProductNo__UserI__66603565">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="ProductNotification" Type="Self.ProductNotification" Multiplicity="*" />
           <ReferentialConstraint>
@@ -439,18 +497,6 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Principal>
             <Dependent Role="Customer_Complaints">
               <PropertyRef Name="Complaint_type_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_Complaints_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Customer_Complaints" Type="Self.Customer_Complaints" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Customer_Complaints">
-              <PropertyRef Name="Customer_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -490,12 +536,12 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customer_User">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+        <Association Name="FK_CustomerId">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
           <End Role="Counter_Records" Type="Self.Counter_Records" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
+            <Principal Role="Customers">
+              <PropertyRef Name="Customer_id" />
             </Principal>
             <Dependent Role="Counter_Records">
               <PropertyRef Name="CustomerId" />
@@ -727,6 +773,29 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
     [OrderToDeliver].[Date] AS [Date]
     FROM [dbo].[OrderToDeliver] AS [OrderToDeliver]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="CashierDetails" EntityType="Self.CashierDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CashierDetails].[OrderId] AS [OrderId], 
+    [CashierDetails].[Location] AS [Location], 
+    [CashierDetails].[TakeAwayTime] AS [TakeAwayTime], 
+    [CashierDetails].[Customer_id] AS [Customer_id]
+    FROM [dbo].[CashierDetails] AS [CashierDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OrderDetails].[Customer_id] AS [Customer_id], 
+    [OrderDetails].[order_id] AS [order_id], 
+    [OrderDetails].[quantity] AS [quantity], 
+    [OrderDetails].[product_name] AS [product_name], 
+    [OrderDetails].[SellingPrice] AS [SellingPrice], 
+    [OrderDetails].[FullDescription] AS [FullDescription], 
+    [OrderDetails].[MartLocation] AS [MartLocation], 
+    [OrderDetails].[ImageFilePath] AS [ImageFilePath], 
+    [OrderDetails].[category] AS [category], 
+    [OrderDetails].[DiscountPrice] AS [DiscountPrice], 
+    [OrderDetails].[Description] AS [Description]
+    FROM [dbo].[OrderDetails] AS [OrderDetails]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ProductCategory].[category] AS [category], 
@@ -742,31 +811,35 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
     [ProductCategory].[ImageFilePath2] AS [ImageFilePath2]
     FROM [dbo].[ProductCategory] AS [ProductCategory]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Address__CityId__534D60F1" Association="Self.FK__Address__CityId__534D60F1">
+          <AssociationSet Name="FK__Address__CityId__4F7CD00D" Association="Self.FK__Address__CityId__4F7CD00D">
             <End Role="City" EntitySet="City" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Address__Country__5441852A" Association="Self.FK__Address__Country__5441852A">
+          <AssociationSet Name="FK__Address__Country__5070F446" Association="Self.FK__Address__Country__5070F446">
             <End Role="Country" EntitySet="Country" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Counter_R__Cashi__5629CD9C" Association="Self.FK__Counter_R__Cashi__5629CD9C">
+          <AssociationSet Name="FK__Counter_R__Cashi__52593CB8" Association="Self.FK__Counter_R__Cashi__52593CB8">
             <End Role="Cashier_Counter" EntitySet="Cashier_Counter" />
             <End Role="Counter_Records" EntitySet="Counter_Records" />
           </AssociationSet>
-          <AssociationSet Name="FK__Counter_R__Order__571DF1D5" Association="Self.FK__Counter_R__Order__571DF1D5">
+          <AssociationSet Name="FK__Counter_R__Order__534D60F1" Association="Self.FK__Counter_R__Order__534D60F1">
             <End Role="orders" EntitySet="orders" />
             <End Role="Counter_Records" EntitySet="Counter_Records" />
           </AssociationSet>
-          <AssociationSet Name="FK__orders__AddressI__6477ECF3" Association="Self.FK__orders__AddressI__6477ECF3">
+          <AssociationSet Name="FK__Customer___Custo__72C60C4A" Association="Self.FK__Customer___Custo__72C60C4A">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__AddressI__60A75C0F" Association="Self.FK__orders__AddressI__60A75C0F">
             <End Role="Address" EntitySet="Address" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductNo__Produ__693CA210" Association="Self.FK__ProductNo__Produ__693CA210">
+          <AssociationSet Name="FK__ProductNo__Produ__656C112C" Association="Self.FK__ProductNo__Produ__656C112C">
             <End Role="products" EntitySet="products" />
             <End Role="ProductNotification" EntitySet="ProductNotification" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductNo__UserI__6A30C649" Association="Self.FK__ProductNo__UserI__6A30C649">
+          <AssociationSet Name="FK__ProductNo__UserI__66603565" Association="Self.FK__ProductNo__UserI__66603565">
             <End Role="Users" EntitySet="Users" />
             <End Role="ProductNotification" EntitySet="ProductNotification" />
           </AssociationSet>
@@ -776,10 +849,6 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           </AssociationSet>
           <AssociationSet Name="FK_Customer_Complaints_Complaint_Type" Association="Self.FK_Customer_Complaints_Complaint_Type">
             <End Role="Complaint_Type" EntitySet="Complaint_Type" />
-            <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_Complaints_Users" Association="Self.FK_Customer_Complaints_Users">
-            <End Role="Users" EntitySet="Users" />
             <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
           </AssociationSet>
           <AssociationSet Name="FK_Customer_Order_Customers" Association="Self.FK_Customer_Order_Customers">
@@ -794,8 +863,8 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Customer_Referals" EntitySet="Customer_Referals" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
-            <End Role="Users" EntitySet="Users" />
+          <AssociationSet Name="FK_CustomerId" Association="Self.FK_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
             <End Role="Counter_Records" EntitySet="Counter_Records" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_Users1" Association="Self.FK_Customers_Users1">
@@ -932,9 +1001,12 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <Property Name="Complaint_type_Id" Type="Int32" Nullable="false" />
           <Property Name="Complaint" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Complaint_Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Complaint_Type" Relationship="Self.FK_Customer_Complaints_Complaint_Type" FromRole="Customer_Complaints" ToRole="Complaint_Type" />
           <NavigationProperty Name="User" Relationship="Self.FK_Customer_Complaints_Users" FromRole="Customer_Complaints" ToRole="Users" />
+          <NavigationProperty Name="Customer" Relationship="GroceryStoreModel.FK__Customer___Custo__72C60C4A" FromRole="Customer_Complaints" ToRole="Customer" />
+          <Property Name="remakrs" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="status_date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Customer_Referals">
           <Key>
@@ -958,6 +1030,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <NavigationProperty Name="OurSatisfiedCustomers" Relationship="Self.FK_OurSatisfiedCustomers_Customers" FromRole="Customers" ToRole="OurSatisfiedCustomers" />
           <NavigationProperty Name="orders" Relationship="Self.Customer_Order" FromRole="Customers" ToRole="orders" />
           <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Custo__367C1819" FromRole="Customer" ToRole="Counter_Records" />
+          <NavigationProperty Name="Customer_Complaints" Relationship="GroceryStoreModel.FK__Customer___Custo__72C60C4A" FromRole="Customer" ToRole="Customer_Complaints" />
         </EntityType>
         <EntityType Name="DealAndDiscount">
           <Key>
@@ -1029,7 +1102,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <Property Name="order_dow" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="order_hour_of_day" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="days_since_prior_order" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="date" Type="DateTime" Precision="3" />
           <Property Name="OrderStatus" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
           <Property Name="AddressId" Type="Int32" />
           <NavigationProperty Name="Address" Relationship="Self.FK__orders__AddressI__5CD6CB2B" FromRole="orders" ToRole="Address" />
@@ -1037,6 +1110,11 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <NavigationProperty Name="OrderToDelivers" Relationship="Self.FK_OrderToDeliver_orders" FromRole="orders" ToRole="OrderToDeliver" />
           <NavigationProperty Name="Customers" Relationship="Self.Customer_Order" FromRole="orders" ToRole="Customers" />
           <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Order__3587F3E0" FromRole="order" ToRole="Counter_Records" />
+          <Property Name="total_cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="total_quantity" Type="Int32" />
+          <Property Name="orderType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="status_date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="OurSatisfiedCustomer">
           <Key>
@@ -1650,6 +1728,12 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             <End Role="User" EntitySet="Users" />
             <End Role="Counter_Records" EntitySet="Counter_Records" />
           </AssociationSet>
+          <EntitySet Name="OrderDetails" EntityType="GroceryStoreModel.OrderDetail" />
+          <EntitySet Name="CashierDetails" EntityType="GroceryStoreModel.CashierDetail" />
+          <AssociationSet Name="FK__Customer___Custo__72C60C4A" Association="GroceryStoreModel.FK__Customer___Custo__72C60C4A">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cashier_Counter">
           <Key>
@@ -1724,6 +1808,53 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Customer_id" />
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="product_name" />
+            <PropertyRef Name="SellingPrice" />
+            <PropertyRef Name="FullDescription" />
+            <PropertyRef Name="category" />
+            <PropertyRef Name="DiscountPrice" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="Customer_id" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="product_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FullDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageFilePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CashierDetail">
+          <Key>
+            <PropertyRef Name="Location" />
+            <PropertyRef Name="TakeAwayTime" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="Customer_id" />
+          </Key>
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TakeAwayTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Customer_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Customer___Custo__72C60C4A">
+          <End Type="GroceryStoreModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="GroceryStoreModel.Customer_Complaints" Role="Customer_Complaints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_id" />
+            </Principal>
+            <Dependent Role="Customer_Complaints">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1791,6 +1922,8 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <EntitySetMapping Name="Customer_Complaints">
             <EntityTypeMapping TypeName="GroceryStoreModel.Customer_Complaints">
               <MappingFragment StoreEntitySet="Customer_Complaints">
+                <ScalarProperty Name="status_date" ColumnName="status_date" />
+                <ScalarProperty Name="remakrs" ColumnName="remakrs" />
                 <ScalarProperty Name="Complaint_Id" ColumnName="Complaint_Id" />
                 <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
                 <ScalarProperty Name="Complaint_type_Id" ColumnName="Complaint_type_Id" />
@@ -1876,6 +2009,11 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="GroceryStoreModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="status_date" ColumnName="status_date" />
+                <ScalarProperty Name="orderType" ColumnName="orderType" />
+                <ScalarProperty Name="total_quantity" ColumnName="total_quantity" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="total_cost" ColumnName="total_cost" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="customerr_id" ColumnName="customerr_id" />
                 <ScalarProperty Name="eval_set" ColumnName="eval_set" />
@@ -2066,6 +2204,33 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="CashierId" ColumnName="CashierId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="GroceryStoreModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="ImageFilePath" ColumnName="ImageFilePath" />
+                <ScalarProperty Name="MartLocation" ColumnName="MartLocation" />
+                <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CashierDetails">
+            <EntityTypeMapping TypeName="GroceryStoreModel.CashierDetail">
+              <MappingFragment StoreEntitySet="CashierDetails">
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="TakeAwayTime" ColumnName="TakeAwayTime" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

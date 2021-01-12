@@ -77,6 +77,10 @@ namespace GroceryStore.Controllers
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["RoleName"] == null)
+            {
+                return RedirectToAction("Auth", "Auth");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,7 +91,10 @@ namespace GroceryStore.Controllers
                 return HttpNotFound();
             }
             ViewBag.position_id = new SelectList(db.Product_Location, "position_id", "position", category.position_id);
-            return View(category);
+
+            int u_id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == u_id).FirstOrDefault();
+            return View(new UserDto { category = category, User = user });
         }
 
         [HttpPost]
@@ -107,6 +114,10 @@ namespace GroceryStore.Controllers
         // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["RoleName"] == null)
+            {
+                return RedirectToAction("Auth", "Auth");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -116,7 +127,9 @@ namespace GroceryStore.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
+            int u_id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == u_id).FirstOrDefault();
+            return View(new UserDto { category = category, User = user });
         }
 
         // POST: Categories/Delete/5
@@ -125,8 +138,12 @@ namespace GroceryStore.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Categories.Find(id);
+            try { 
             db.Categories.Remove(category);
             db.SaveChanges();
+            }
+            catch { 
+            }
             return RedirectToAction("Index");
         }
 
