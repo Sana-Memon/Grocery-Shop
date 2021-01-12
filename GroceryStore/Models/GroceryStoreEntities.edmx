@@ -86,7 +86,7 @@
           <Property Name="Complaint_type_Id" Type="int" Nullable="false" />
           <Property Name="Complaint" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Complaint_Status" Type="nchar" MaxLength="10" />
-          <Property Name="date" Type="date" />
+          <Property Name="date" Type="datetime" />
           <Property Name="remakrs" Type="varchar" MaxLength="200" />
           <Property Name="status_date" Type="datetime" />
         </EntityType>
@@ -1001,7 +1001,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
           <Property Name="Complaint_type_Id" Type="Int32" Nullable="false" />
           <Property Name="Complaint" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Complaint_Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Complaint_Type" Relationship="Self.FK_Customer_Complaints_Complaint_Type" FromRole="Customer_Complaints" ToRole="Complaint_Type" />
           <NavigationProperty Name="User" Relationship="Self.FK_Customer_Complaints_Users" FromRole="Customer_Complaints" ToRole="Users" />
           <NavigationProperty Name="Customer" Relationship="GroceryStoreModel.FK__Customer___Custo__72C60C4A" FromRole="Customer_Complaints" ToRole="Customer" />

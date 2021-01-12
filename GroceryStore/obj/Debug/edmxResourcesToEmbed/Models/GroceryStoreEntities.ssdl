@@ -81,7 +81,7 @@
     <Property Name="Complaint_type_Id" Type="int" Nullable="false" />
     <Property Name="Complaint" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Complaint_Status" Type="nchar" MaxLength="10" />
-    <Property Name="date" Type="date" />
+    <Property Name="date" Type="datetime" />
     <Property Name="remakrs" Type="varchar" MaxLength="200" />
     <Property Name="status_date" Type="datetime" />
   </EntityType>
