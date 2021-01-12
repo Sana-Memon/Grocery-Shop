@@ -3,86 +3,56 @@
 @{
     ViewBag.User = Model.User;
     Layout = "~/Views/Shared/AdminDashboard.cshtml";
-    @*Layout = null;*@
-
 }
-
 
 
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Stock About to End</h1>
+                <h1 class="page-header">Ended Stock Products</h1>
+
+                <center>
+                    <table class="content-table">
+                        <thead>
+
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Stock ammount</th>
+                                <th>Mart Location</th>
+                                <th>Product Category</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.Products)
+                            {
+                                <tr class="active-row">
+                                    <td>
+                                        <img src="@Html.DisplayFor(modelItem => item.ImageFilePath)" alt="" width="80px" height="80px" />
+                                    </td>
+                                    <td>@item.product_name</td>
+                                    <td>@item.StockAmount</td>
+                                    <td>@item.MartLocation</td>
+                                    <td>@item.Category.category1</td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "../allproducts/Edit", new { id = item.product_id })
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </center>
+
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Stock About to End
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-
-                              
-                                @if (Model.Products.Count() > 0)
-                                {
-                                    <table class="table">
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Products[0].product_name)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Products[0].ImageFilePath)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Products[0].StockAmount)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Products[0].MartLocation)
-                                            </th>
-
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Products[0].Category.category1)
-                                            </th>
-
-                                            <th></th>
-                                        </tr>
-
-                                        @foreach (var item in Model.Products)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.product_name)
-                                                </td>
-                                                <td>
-                                                    <img src="@Html.DisplayFor(modelItem => item.ImageFilePath)" alt="" width="50px" height="50px" />
-                                                </td>
-
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.StockAmount)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.MartLocation)
-                                                </td>
-
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Category.category1)
-                                                </td>
-
-                                            </tr>
-                                        }
-
-                                    </table>
-
-                                }
-                            </div>
-                            <!-- /.container-fluid -->
-                        </div>
-                        <!-- /#page-wrapper -->
-
-                    </div>
+        <!-- cxvfdgtrhyx -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
