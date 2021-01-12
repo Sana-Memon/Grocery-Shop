@@ -1,0 +1,144 @@
+﻿@model GroceryStore.Controllers.Dto.UserDto
+
+@{
+    Layout = "~/Views/Shared/AdminDashboard.cshtml";
+}
+
+<style>
+    .order-detail {
+        padding: 0px 10px;
+        width: 350px;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 1px 1px 2px #333;
+        margin: 0px 10px 0px 0px;
+    }
+
+        .order-detail p {
+            margin: 0px;
+            padding: 5px 0px;
+        }
+</style>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Order Details</h1>
+
+                <div class="wrapper">
+                    <div class="section order-detail" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                        <p>Order ID</p>
+                        <p>@Model.order_detail_dto.order_instance.order_id</p>
+                    </div>
+                    <div class="section order-detail">
+                        <p>Customer Id</p>
+                        <p>@Model.order_detail_dto.order_instance.customerr_id</p>
+                    </div>
+                    <div class="section order-detail">
+                        <p>Order Create Date</p>
+                        <p>@Model.order_detail_dto.order_instance.date</p>
+                    </div>
+                    <div class="section order-detail">
+                        <p>Status</p>
+                        <p>@Model.order_detail_dto.order_instance.OrderStatus</p>
+                    </div>
+                    <div class="section order-detail">
+                        <p>Status Date</p>
+                        <p>@Model.order_detail_dto.order_instance.status_date</p>
+                    </div>
+                    <div class="section order-detail">
+                        <p>Total Quantity</p>
+                        <p>@Model.order_detail_dto.order_instance.total_quantity</p>
+                    </div>
+                    <div class="section order-detail">
+                        <p>Total Cost</p>
+                        <p>@Model.order_detail_dto.order_instance.total_cost</p>
+                    </div>
+
+                    <div class="section order-detail" style="border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; margin-bottom: 10px;">
+                        <p>Remarks</p>
+                        <p>@Model.order_detail_dto.order_instance.remarks</p>
+                    </div>
+
+                    @if (Model.order_detail_dto.counter_Records != null)
+                    {
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th>Counter Location</th>
+                                    <th>Customer's choice time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                <tr class="active-row">
+                                    <td>@Model.order_detail_dto.counter_Records.Location</td>
+                                    <td>@Model.order_detail_dto.counter_Records.TakeAwayTime</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    }
+
+                </div>
+
+                <hr>
+
+                <center>
+                    <table class="content-table" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Location</th>
+                                <th>Category</th>
+                                <th>Discount per product</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.order_detail_dto.orderDetails)
+                            {
+
+                                <tr class="active-row">
+                                    <td>
+                                        <img src="../@item.ImageFilePath" alt="" width="60px" height="60px">
+                                    </td>
+                                    <td>@item.product_name</td>
+                                    <td>@item.SellingPrice</td>
+                                    <td>@item.quantity</td>
+                                    <td>@item.MartLocation</td>
+                                    <td>@item.category</td>
+                                    <td>@item.DiscountPrice</td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </center>
+
+
+            </div>
+            <!-- /.col-lg-12 -->
+            <div>
+
+                <a href="/PastOrder/PastOrder" class=" button2 py-3 px-4">Back to List</a>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <!-- cxvfdgtrhyx -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->

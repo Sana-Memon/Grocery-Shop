@@ -10,71 +10,61 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">My Complaints</h1>
+                <h1 class="page-header">Complaint History</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
+        <a href="../Customer_Complaints/Create">
+            <div>
+                <span class=" button3 py-2 px-1">
+                    Create new
+                </span>
+            </div>
+        </a>
+        
+        <hr>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        All Complaints
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-6">
 
-                                <p>
-                                    @Html.ActionLink("Create New", "Create")
-                                </p>
-                                <table class="table">
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint_Status)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].date)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Customer_Complaints[0].Complaint_Type)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.User.FullName)
-                                        </th>
-                                        <th></th>
-                                    </tr>
+                <center>
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th>Complaint description</th>
+                                <th>Complaint Status</th>
+                                <th>Complaint Created Date</th>
+                                <th>Complaint Type</th>
+                                <th>Remarks</th>
+                                <th>Status Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
 
-                                    @foreach (var item in Model.Customer_Complaints)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Complaint)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Complaint_Status)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.date)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Complaint_Type.Complaint_Tpe)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.User.FullName)
-                                            </td>
-                                            
-                                        </tr>
-                                    }
+                        <tbody>
 
-                                </table>
+                            @foreach (var item in Model.Customer_Complaints)
+                            {
+                                <tr class="active-row">
 
-                            </div>
-                            <!-- /.container-fluid -->
-                        </div>
-                        <!-- /#page-wrapper -->
+                                    <td>@item.Complaint</td>
+                                    <td>@item.Complaint_Status</td>
+                                    <td>@item.date</td>
+                                    <td>@item.Complaint_Type.Complaint_Tpe</td>
+                                    <td>@item.remakrs </td>
+                                    <td>@item.status_date</td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Complaint_Id })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Complaint_Id })
+                                    </td>
 
-                    </div>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </center>
+
+            </div>
+        </div>
+    </div>
+</div>

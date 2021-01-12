@@ -1,80 +1,54 @@
-﻿@*@model IEnumerable<GroceryStore.Models.Category>*@
-
-@model GroceryStore.Controllers.Dto.UserDto
+﻿@model GroceryStore.Controllers.Dto.UserDto
 
 
 @{
     Layout = "~/Views/Shared/AdminDashboard.cshtml";
-    //Layout = null;
 }
 
 <div id="page-wrapper">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-
                 <h1 class="page-header">All Categories</h1>
-            </div>
-
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            View All Categories
-                        </div>
-                        <div class="container">
-                            <p>
-                                @Html.ActionLink("Create New", "Create")
-                            </p>
-                            <table class="table">
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.categories[0].category1)
-                                    </th>
-                                    @*<th>
-                                        @Html.DisplayNameFor(model => model.categories[0].ImageFilePath)
-                                    </th>*@
-                             
-                                    <th></th>
-                                </tr>
-
-                                @foreach (var item in Model.categories)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.category1)
-                                        </td>
-                                        @*<td>
-                                            @Html.DisplayFor(modelItem => item.ImageFilePath)
-                                        </td>*@
-                                        <td>
-                                            @if (item.Product_Location != null)
-                                            {
-                                                @Html.DisplayFor(modelItem => item.Product_Location.position)
-                                            }
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.category_id }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.category_id }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.category_id })
-                                        </td>
-                                    </tr>
-                                }
-
-                            </table>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
+                <div>
+                    <a href="/Categories/Create" class=" button2 py-3 px-4">Create New Category</a>
                 </div>
-                <!-- /.col-lg-12 -->
+                <hr />
+                
+                    <table class="content-table">
+                        <thead>
+
+                            <tr>
+                                <th>Category</th>
+                                <th>Category Id</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.categories)
+                            {
+                                <tr class="active-row">
+                                    <td>@item.category1</td>
+                                    <td>@item.category_id</td>
+                                    
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.category_id })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.category_id })
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                
+
             </div>
-            <!-- /.row -->
+            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.row -->
+        <!-- cxvfdgtrhyx -->
+        <!-- /.row -->
     </div>
-    <!-- /#page-wrapper -->
-
+    <!-- /.container-fluid -->
 </div>
-

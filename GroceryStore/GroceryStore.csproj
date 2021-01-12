@@ -177,7 +177,6 @@
     <Compile Include="Controllers\Admin\PastOrderController.cs" />
     <Compile Include="Controllers\Admin\OrderQueueController.cs" />
     <Compile Include="Controllers\Admin\OrderTrackController.cs" />
-    <Compile Include="Controllers\Admin\PastOrderDetailsController.cs" />
     <Compile Include="Controllers\Admin\StockDetailController.cs" />
     <Compile Include="Controllers\Admin\StockendController.cs" />
     <Compile Include="Controllers\Admin\ViewOrderQueueController.cs" />
@@ -205,6 +204,7 @@
     <Compile Include="Controllers\Dto\CartDto.cs" />
     <Compile Include="Controllers\Dto\CustomerComplaintDto.cs" />
     <Compile Include="Controllers\Dto\ListDto.cs" />
+    <Compile Include="Controllers\Dto\OrderDetailDto.cs" />
     <Compile Include="Controllers\Dto\OrderDto.cs" />
     <Compile Include="Controllers\Dto\ProductDto.cs" />
     <Compile Include="Controllers\Dto\UserDto.cs" />
@@ -223,6 +223,9 @@
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CashierDetail.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cashier_Counter.cs">
@@ -280,6 +283,9 @@
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\order.cs">
+      <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>GroceryStoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\orderProductsPrior.cs">
@@ -343,6 +349,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bootstrap\bootstrap-grid.css" />
     <Content Include="css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="css\carousel.css" />
     <Content Include="css\creditly.css" />
     <Content Include="css\css\bootstrap-reboot.css" />
     <Content Include="css\css\mixins\_text-hide.css" />
@@ -2354,7 +2361,6 @@
     <Content Include="Views\NewOrder\NewOrder.cshtml" />
     <Content Include="Views\OrderStatus\OrderStatus.cshtml" />
     <Content Include="Views\PastOrder\PastOrder.cshtml" />
-    <Content Include="Views\PastOrderDetails\PastOrderDetails.cshtml" />
     <Content Include="Views\AvailableSttock\dfb.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Home\Product.cshtml" />
@@ -2400,6 +2406,10 @@
     <Content Include="Views\Cashier_Counter\Details.cshtml" />
     <Content Include="Views\Cashier_Counter\Edit.cshtml" />
     <Content Include="Views\Cashier_Counter\Index.cshtml" />
+    <Content Include="Views\Cart\PickUp.cshtml" />
+    <Content Include="Views\OrderHistory\OrderDetail.cshtml" />
+    <Content Include="Views\ViewOrderQueue\QueueOrderDetails.cshtml" />
+    <Content Include="Views\PastOrder\PastOrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

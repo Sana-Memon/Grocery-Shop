@@ -21,6 +21,11 @@ namespace GroceryStore.Controllers
         public ActionResult Cart()
         {
             GroceryStoreEntities db = new GroceryStoreEntities();
+            
+            if (Session["RoleName"] == null)
+            {
+                return RedirectToAction("Auth", "Auth");
+            }
 
             var userId = Int32.Parse(Session["userID"]?.ToString());
             var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
@@ -28,14 +33,16 @@ namespace GroceryStore.Controllers
             
             // Calculating data for Cart
             decimal price = 0;
+            decimal discount = 0;
+
             foreach (var item in lists)
             {
-                price = price + item.product.CostPrice;
+                price = (decimal)(price + item.product.SellingPrice * item.quantity);
+                discount = (decimal)(discount + item.product.DiscountPrice * item.quantity);
             }
 
-            decimal delivery = 20;
-            decimal discount = 10;
-            decimal total = price + delivery + discount;
+            decimal delivery = 0;
+            decimal total = price + delivery - discount;
 
             return View(new CartDto { product_list = lists, SubTotal=price, Delivery=delivery, Discount=discount, Total=total });
         }
@@ -118,7 +125,7 @@ namespace GroceryStore.Controllers
             return null;
         }
 
-        [HttpPut]
+        [HttpPost]
         public ActionResult UpdateList()
         {
             GroceryStoreEntities db = new GroceryStoreEntities();
@@ -128,16 +135,19 @@ namespace GroceryStore.Controllers
 
 
             var userId = Int32.Parse(Session["userID"]?.ToString());
-            var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault(); //.SqlQuery("SELECT Customer_id from Customers Where UserID = @Id" + p1).FirstOrDefault();
+            var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
             int customerId = customer.Customer_id;
 
 
             var currentList = db.Lists.Where(x => x.ProductID == productId && x.CustomerID == customerId).FirstOrDefault();
             currentList.quantity = quantity;
             db.SaveChanges();
-
             return null;
         }
 
+        public ActionResult PickUp()
+        {
+            return View();
+        }
     }
 }

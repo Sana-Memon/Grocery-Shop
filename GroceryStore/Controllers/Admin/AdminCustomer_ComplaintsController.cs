@@ -132,6 +132,25 @@ namespace GroceryStore.Controllers.Admin
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult ResolveComplaint()
+        {
+            string remarks = (Request.Form["remarks"]).ToString();
+            int customer_id = Int32.Parse(Request.Form["customerId"]);
+            int complaint_id = Int32.Parse(Request.Form["complaintId"]);
+            string complaint_status = Request.Form["status"].ToString();
+
+            var complaint_ins = db.Customer_Complaints.Where(
+                x => x.Customer_Id == customer_id && x.Complaint_Id == complaint_id).FirstOrDefault();
+
+            complaint_ins.status_date = DateTime.Now;
+            complaint_ins.Complaint_Status = complaint_status;
+            complaint_ins.remakrs = remarks;
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
