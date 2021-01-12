@@ -82,6 +82,8 @@
     <Property Name="Complaint" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Complaint_Status" Type="nchar" MaxLength="10" />
     <Property Name="date" Type="date" />
+    <Property Name="remakrs" Type="varchar" MaxLength="200" />
+    <Property Name="status_date" Type="datetime" />
   </EntityType>
   <EntityType Name="Customer_Order">
     <Key>
@@ -421,6 +423,18 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Customer___Custo__72C60C4A">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Customer_Complaints" Type="Self.Customer_Complaints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Customer_Complaints">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__orders__AddressI__60A75C0F">
     <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
     <End Role="orders" Type="Self.orders" Multiplicity="*" />
@@ -478,18 +492,6 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Principal>
       <Dependent Role="Customer_Complaints">
         <PropertyRef Name="Complaint_type_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Customer_Complaints_Users">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Customer_Complaints" Type="Self.Customer_Complaints" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="Customer_Complaints">
-        <PropertyRef Name="Customer_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -820,6 +822,10 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       <End Role="orders" EntitySet="orders" />
       <End Role="Counter_Records" EntitySet="Counter_Records" />
     </AssociationSet>
+    <AssociationSet Name="FK__Customer___Custo__72C60C4A" Association="Self.FK__Customer___Custo__72C60C4A">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
+    </AssociationSet>
     <AssociationSet Name="FK__orders__AddressI__60A75C0F" Association="Self.FK__orders__AddressI__60A75C0F">
       <End Role="Address" EntitySet="Address" />
       <End Role="orders" EntitySet="orders" />
@@ -838,10 +844,6 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
     </AssociationSet>
     <AssociationSet Name="FK_Customer_Complaints_Complaint_Type" Association="Self.FK_Customer_Complaints_Complaint_Type">
       <End Role="Complaint_Type" EntitySet="Complaint_Type" />
-      <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Customer_Complaints_Users" Association="Self.FK_Customer_Complaints_Users">
-      <End Role="Users" EntitySet="Users" />
       <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
     </AssociationSet>
     <AssociationSet Name="FK_Customer_Order_Customers" Association="Self.FK_Customer_Order_Customers">

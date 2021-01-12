@@ -76,27 +76,31 @@ namespace GroceryStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "product_id,product_name,category_id,ImageFilePath,SellingPrice,CostPrice,DiscountPrice,FullDescription,StockAmount,SkuId,MartLocation,ImageFilePath2")] product product)
+        public ActionResult Create([Bind(Include = "product_name,ImageFilePath,SellingPrice,CostPrice,DiscountPrice,FullDescription,StockAmount,MartLocation,ImageFilePath2")] product product)
         {
+            product.category_id = Int32.Parse(Request.Form["category_id"]);
+            product.SkuId = Int32.Parse(Request.Form["SkuId"]);
             if (Session["RoleName"] == null)
             {
                 return RedirectToAction("Auth", "Auth");
             }
-            if (ModelState.IsValid)
-            {
-                db.products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.category_id = new SelectList(db.Categories, "category_id", "category1", product.category_id);
-            ViewBag.SkuId = new SelectList(db.SKUs, "SkuId", "Description", product.SkuId);
-            return View(product);
+            db.products.Add(product);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Allproducts/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["RoleName"] == null)
+            {
+                return RedirectToAction("Auth", "Auth");
+            }
+
+            int u_id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == u_id).FirstOrDefault();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -108,7 +112,7 @@ namespace GroceryStore.Controllers
             }
             ViewBag.category_id = new SelectList(db.Categories, "category_id", "category1", product.category_id);
             ViewBag.SkuId = new SelectList(db.SKUs, "SkuId", "Description", product.SkuId);
-            return View(product);
+            return View(new UserDto { product = product, User=user});
         }
 
         // POST: Allproducts/Edit/5
@@ -119,6 +123,8 @@ namespace GroceryStore.Controllers
         public ActionResult Edit([Bind(Include = "product_id,product_name,category_id,ImageFilePath,SellingPrice,CostPrice,DiscountPrice,FullDescription,StockAmount,SkuId,MartLocation,ImageFilePath2")] product product)
         {
 
+            product.category_id = Int32.Parse(Request.Form["category_id"]);
+            product.SkuId = Int32.Parse(Request.Form["SkuId"]);
             if (Session["userID"] == null) return RedirectToAction("Auth", "Auth"); 
 
             if (ModelState.IsValid)
@@ -131,17 +137,21 @@ namespace GroceryStore.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.category_id = new SelectList(db.Categories, "category_id", "category1", product.category_id);
-            ViewBag.SkuId = new SelectList(db.SKUs, "SkuId", "Description", product.SkuId);
 
-            
-
-            return View(product);
+            return RedirectToAction("Index");
         }
 
         // GET: Allproducts/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["RoleName"] == null)
+            {
+                return RedirectToAction("Auth", "Auth");
+            }
+
+            int u_id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == u_id).FirstOrDefault();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -151,7 +161,7 @@ namespace GroceryStore.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(new UserDto { User= user, product=product});
         }
 
         // POST: Allproducts/Delete/5
@@ -160,8 +170,14 @@ namespace GroceryStore.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             product product = db.products.Find(id);
-            db.products.Remove(product);
-            db.SaveChanges();
+            try { 
+                db.products.Remove(product);
+                db.SaveChanges();
+            }
+            catch
+            {
+                // Do nothing
+            }
             return RedirectToAction("Index");
         }
 

@@ -20,6 +20,7 @@ namespace GroceryStore.Controllers.Dto
 
         public List<Customer_Complaints> Customer_Complaints { get; set; }
 
+        public Customer_Complaints customer_Complaint { get; set; }
         public List<order> orders { get; set; }
         public List<OrderDto> OrderDto { get; set; }
         

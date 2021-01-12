@@ -20,8 +20,11 @@ namespace GroceryStore.Models
         public string Complaint { get; set; }
         public string Complaint_Status { get; set; }
         public Nullable<System.DateTime> date { get; set; }
+        public string remakrs { get; set; }
+        public Nullable<System.DateTime> status_date { get; set; }
     
         public virtual Complaint_Type Complaint_Type { get; set; }
         public virtual User User { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

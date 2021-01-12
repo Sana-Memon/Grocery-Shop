@@ -72,6 +72,9 @@
     <Property Name="date" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Complaint_Type" Relationship="Self.FK_Customer_Complaints_Complaint_Type" FromRole="Customer_Complaints" ToRole="Complaint_Type" />
     <NavigationProperty Name="User" Relationship="Self.FK_Customer_Complaints_Users" FromRole="Customer_Complaints" ToRole="Users" />
+    <NavigationProperty Name="Customer" Relationship="GroceryStoreModel.FK__Customer___Custo__72C60C4A" FromRole="Customer_Complaints" ToRole="Customer" />
+    <Property Name="remakrs" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="status_date" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Customer_Referals">
     <Key>
@@ -95,6 +98,7 @@
     <NavigationProperty Name="OurSatisfiedCustomers" Relationship="Self.FK_OurSatisfiedCustomers_Customers" FromRole="Customers" ToRole="OurSatisfiedCustomers" />
     <NavigationProperty Name="orders" Relationship="Self.Customer_Order" FromRole="Customers" ToRole="orders" />
     <NavigationProperty Name="Counter_Records" Relationship="GroceryStoreModel.FK__Counter_R__Custo__367C1819" FromRole="Customer" ToRole="Counter_Records" />
+    <NavigationProperty Name="Customer_Complaints" Relationship="GroceryStoreModel.FK__Customer___Custo__72C60C4A" FromRole="Customer" ToRole="Customer_Complaints" />
   </EntityType>
   <EntityType Name="DealAndDiscount">
     <Key>
@@ -794,6 +798,10 @@
     </AssociationSet>
     <EntitySet Name="OrderDetails" EntityType="GroceryStoreModel.OrderDetail" />
     <EntitySet Name="CashierDetails" EntityType="GroceryStoreModel.CashierDetail" />
+    <AssociationSet Name="FK__Customer___Custo__72C60C4A" Association="GroceryStoreModel.FK__Customer___Custo__72C60C4A">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cashier_Counter">
     <Key>
@@ -903,4 +911,16 @@
     <Property Name="OrderId" Type="Int32" Nullable="false" />
     <Property Name="Customer_id" Type="Int32" Nullable="false" />
   </EntityType>
+  <Association Name="FK__Customer___Custo__72C60C4A">
+    <End Type="GroceryStoreModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="GroceryStoreModel.Customer_Complaints" Role="Customer_Complaints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Customer_Complaints">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
