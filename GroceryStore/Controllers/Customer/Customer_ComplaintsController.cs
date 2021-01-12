@@ -181,7 +181,7 @@ namespace GroceryStore.Controllers
 
             Customer_Complaints customer_Complaints = db.Customer_Complaints.Find(id);
 
-            if (customer_Complaints.Complaint_Status.Contains("PENDING")) { 
+            if (customer_Complaints.Complaint_Status.Contains("PENDING")) {
                 db.Customer_Complaints.Remove(customer_Complaints);
                 db.SaveChanges();
             }

@@ -1,4 +1,5 @@
-﻿
+﻿@model GroceryStore.Controllers.Dto.UserDto
+
 @{
     ViewBag.Title = "OrderTrack";
     Layout = "~/Views/Shared/AdminDashboard.cshtml";
@@ -22,14 +23,14 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-6">
-                                <form role="form">
+                                <form role="form" action="../OrderTrack/GetOrderDetails" id="OrderSearchform" method="post">
                                     <div class="form-group">
-                                        <label>Enter Your Consignment Number</label>
-                                        <textarea class="form-control"></textarea>
+                                        <label>Enter Order Id</label>
+                                        <input type="number" class="form-control" name="SearchQuery"></input>
                                     </div>
-
-                                    <button type="submit" class="button2"><a href="../PastOrderDetails/PastOrderDetails" style="color:white">Submit</a></button>
                                 </form>
+
+                                <button type="submit" form="OrderSearchform" value="Submit">Search</button>
                             </div>
 
                         </div>

@@ -63,8 +63,11 @@ namespace GroceryStore.Controllers.Cashier
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Location,MaxOrderLimit")] Cashier_Counter cashier_Counter)
+        public ActionResult Create([Bind(Include = "Location,MaxOrderLimit")] Cashier_Counter cashier_Counter)
         {
+            cashier_Counter.MaxOrderLimit = Int32.Parse(Request.Form["cashier.MaxOrderLimit"]);
+            cashier_Counter.Location = Request.Form["cashier.Location"].ToString();
+
             if (ModelState.IsValid)
             {
                 db.Cashier_Counter.Add(cashier_Counter);
@@ -103,6 +106,10 @@ namespace GroceryStore.Controllers.Cashier
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Location,MaxOrderLimit")] Cashier_Counter cashier_Counter)
         {
+            cashier_Counter.Id = Int32.Parse(Request.Form["cashier.Id"]);
+            cashier_Counter.MaxOrderLimit = Int32.Parse(Request.Form["cashier.MaxOrderLimit"]);
+            cashier_Counter.Location = Request.Form["cashier.Location"].ToString();
+
             if (ModelState.IsValid)
             {
                 db.Entry(cashier_Counter).State = EntityState.Modified;
@@ -136,8 +143,11 @@ namespace GroceryStore.Controllers.Cashier
         public ActionResult DeleteConfirmed(int id)
         {
             Cashier_Counter cashier_Counter = db.Cashier_Counter.Find(id);
+            try { 
             db.Cashier_Counter.Remove(cashier_Counter);
             db.SaveChanges();
+            }
+            catch { }
             return RedirectToAction("Index");
         }
 
