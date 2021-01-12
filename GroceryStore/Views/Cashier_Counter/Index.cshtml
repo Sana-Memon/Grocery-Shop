@@ -9,60 +9,47 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Cashier Counter</h1>
+                <h1 class="page-header">All Cashier Counters</h1>
+                <div>
+                    <a href="/Cashier_Counter/Create" class=" button2 py-3 px-4">Create New</a>
+                </div>
+                <hr />
+                <center>
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Max Order Limit</th>
+                                <th>Total Orders in Queue</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.Cashier_Counters)
+                            {
+                                <tr class="active-row">
+                                    
+                                    <td>@item.Location</td>
+                                    <td>@item.MaxOrderLimit</td>
+                                    <td>@item.Current_Order_Count</td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </center>
+
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        All Counters
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-
-                                <p>
-                                    @Html.ActionLink("Create New", "Create")
-                                </p>
-                                @if (Model.Cashier_Counters.Count() > 0)
-                                {
-                                    <table class="table">
-                                        <tr>
-                                            <th>
-                                                Location
-                                            </th>
-                                            <th>
-                                                MaxOrderLimit
-                                            </th>
-                                        </tr>
-
-                                        @foreach (var item in Model.Cashier_Counters)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @item.Location
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.MaxOrderLimit)
-                                                </td>
-
-                                                <td>
-                                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                                                    @*@Html.ActionLink("Details", "Details", new { id = item.Id })*@
-                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                                </td>
-                                            </tr>
-                                        }
-
-                                    </table>
-
-                                }
-                            </div>
-                            <!-- /.container-fluid -->
-                        </div>
-                        <!-- /#page-wrapper -->
-
-                    </div>
+        <!-- cxvfdgtrhyx -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
