@@ -42,7 +42,7 @@ namespace GroceryStore.Controllers.Admin
                                            OrderType = orders.orderType,
                                            status_date = orders.status_date.ToString()
                                        }).ToList();
-
+            
             return View(new UserDto { User = user, OrderDto = allOrder });
         }
 
