@@ -267,7 +267,15 @@
                 </ol>
                 <!-- Wrapper for carousel items -->
                 <div class="carousel-inner">
-                    @{ Html.RenderAction("pvMLComponent", "Product", new { CustomerID = 6}); }
+                    @{ 
+                        int cid = 150;
+                        var user = Session["userID"];
+                        if (user != null)
+                        {
+                            cid = Int32.Parse(user.ToString());
+                        }
+
+                        Html.RenderAction("pvMLComponent", "Product", new { CustomerID = cid }); }
                 </div>
                 <!-- Carousel controls -->
                 <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">

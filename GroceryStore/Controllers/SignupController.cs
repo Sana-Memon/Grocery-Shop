@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using GroceryStore.Models;
 namespace GroceryStore.Controllers
+
 {
     public class SignupController : Controller
     {
@@ -19,15 +20,19 @@ namespace GroceryStore.Controllers
         [HttpPost]
         public ActionResult Signup(User userModel)
         {
-            using (GroceryStoreEntities db = new GroceryStoreEntities())
-            {
-                db.Users.Add(userModel);
-                db.SaveChanges();
-            }
+            GroceryStoreEntities db = new GroceryStoreEntities();
+            db.Users.Add(userModel);
+            db.SaveChanges();
+
+            Models.Customer cst = new Models.Customer();
+            cst.UserID = userModel.UserID;
+            db.Customers.Add(cst);
+            db.SaveChanges();
+
 
             ModelState.Clear();
             ViewBag.SuccessMessage = "Registration Completed";
-                return View("Signup", new User());
+            return RedirectToAction("Auth", "Auth");
         }
     }
 }

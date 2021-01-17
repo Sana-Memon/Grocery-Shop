@@ -1,4 +1,5 @@
 ﻿using GroceryStore.Models;
+using HomeBi.Libraries.PagedList;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,8 +14,7 @@ namespace GroceryStore.Controllers.Dto
         public User User { get; set; }
         public List<City> Cities { get; set; }
         public List<Address> Address { get; set; }
-        public List<product> Products { get; set; }
-
+        public IPagedList<product> Products { get; set; }
         public product product { get; set; }
         public List<Category> categories { get; set; }
 

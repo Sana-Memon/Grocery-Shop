@@ -56,7 +56,7 @@ namespace GroceryStore.Controllers
                                    MartLocation = product.MartLocation,
                                    ImageFilePath2 = product.ImageFilePath2,
                                    customerId = (y1 != null) ? y1.CustomerID : 0,
-                               }).Take(20).ToList();
+                               }).ToList();
 
 
             int Size_Of_Page = 8;
@@ -74,7 +74,7 @@ namespace GroceryStore.Controllers
         }
 
 
-        public List<product> MLComponent_ProductPreferences(int CustomerID)
+        public List<product> MLComponent_ProductPreferences(int U_id)
         {
             ViewBag.AlgorithmMode = "Product Preferences Algorithm";
 
@@ -92,16 +92,20 @@ namespace GroceryStore.Controllers
 
             List<product> _RecommendedProductsList = new List<product>();
 
-            var CurrentUser = (from x in db.Customers
-                               where x.Customer_id == CustomerID
+            var customer_ins = (from x in db.Customers
+                               where x.UserID == U_id
                                select x).FirstOrDefault();
 
-            ViewBag.FullName = "Shareef Ahmed";  // CurrentUser.FullName
+            var user_instance = (from x in db.Users
+                                     where x.UserID == U_id
+                                     select x).FirstOrDefault();
 
-            var productList = db.Lists
-                                .Where(x => x.CustomerID == CustomerID)
-                                .Select(x => x.ProductID)
-                                .ToList();
+            ViewBag.FullName = user_instance.FullName;
+
+            var productList = (from x in db.Lists
+                                where x.CustomerID == customer_ins.Customer_id
+                                select x.ProductID
+                                ).ToList();
 
 
             dt = ReadCsvFile(Server.MapPath("~") + "MLComponent\\ItemRecommendationsKB.csv");
@@ -120,7 +124,7 @@ namespace GroceryStore.Controllers
                 int? prodID = int.Parse(row[1].ToString());
                 product ProductItem = db.products.Where(d => d.product_id == prodID).FirstOrDefault();
 
-                List todolst = db.Lists.Where(x => x.CustomerID == CustomerID && x.ProductID == prodID).FirstOrDefault();
+                List todolst = db.Lists.Where(x => x.CustomerID == customer_ins.Customer_id && x.ProductID == prodID).FirstOrDefault();
                 
                 if (todolst != null)
                 {
