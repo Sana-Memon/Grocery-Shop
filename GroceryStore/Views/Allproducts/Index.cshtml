@@ -33,24 +33,34 @@
 
                             @foreach (var item in Model.Products)
                             {
-                                <tr class="active-row">
-                                    <td>
-                                        <img src="@Html.DisplayFor(modelItem => item.ImageFilePath)" alt="" width="80px" height="80px" />
-                                    </td>
-                                    <td>@item.product_name</td>
-                                    <td>@item.StockAmount</td>
-                                    <td>@item.MartLocation</td>
-                                    <td>@item.Category.category1</td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.product_id })
-                                        @Html.ActionLink("Details", "Details", new { id = item.product_id })
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.product_id })
-                                    </td>
-                                </tr>
-                            }
+                <tr class="active-row">
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.ImageFilePath)" alt="" width="80px" height="80px" />
+                    </td>
+                    <td>@item.product_name</td>
+                    <td>@item.StockAmount</td>
+                    <td>@item.MartLocation</td>
+                    <td>@item.Category.category1</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.product_id })
+                        @Html.ActionLink("Details", "Details", new { id = item.product_id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.product_id })
+                    </td>
+                </tr>}
 
                         </tbody>
                     </table>
+                </center>
+
+                <center>
+                    <div class="col text-center">
+                        <div class="block-27">
+                            Page 1 of 3
+                            <div class="pagination-container"><ul class="pagination"><li class="active"><a>1</a></li><li><a href="/allproducts/index?Page_No=2">2</a></li><li><a href="/allproducts/index?Page_No=3">3</a></li><li class="PagedList-skipToNext"><a href="/allproducts/index?Page_No=2" rel="next">»</a></li></ul></div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
                 </center>
 
             </div>

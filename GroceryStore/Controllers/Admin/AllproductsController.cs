@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using GroceryStore.Controllers.Dto;
 using GroceryStore.Models;
 using GroceryStore.Services;
+using HomeBi.Libraries.PagedList;
 
 namespace GroceryStore.Controllers
 {
@@ -18,7 +19,7 @@ namespace GroceryStore.Controllers
         private NotificationService notificationService = new NotificationService();
 
         // GET: Allproducts
-        public ActionResult Index()
+        public ActionResult Index(int? Page_No)
         {
             if(Session["RoleName"] == null)
             {
@@ -27,8 +28,10 @@ namespace GroceryStore.Controllers
             var products = db.products.Include(p => p.Category).Include(p => p.SKU);
             int id = Int32.Parse(Session["userID"].ToString());
             var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+            int Size_Of_Page = 8;
+            int No_Of_Page = (Page_No ?? 1);
 
-            return View(new UserDto { Products = products.ToList(), User = user }) ;
+            return View(new UserDto { Products = products.ToList().ToPagedList(No_Of_Page, Size_Of_Page), User = user }) ;
         }
 
         // GET: Allproducts/Details/5

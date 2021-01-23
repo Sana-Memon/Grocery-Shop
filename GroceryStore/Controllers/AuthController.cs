@@ -28,7 +28,7 @@ namespace GroceryStore.Controllers
                 var userDetail = db.Users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
                 if (userDetail == null)
                 {
-                    userModel.LoginErrorMsg = "Invalid UserName or Password";
+                    //userModel.LoginErrorMsg = "Invalid UserName or Password";
                 }
 
                 else

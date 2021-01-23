@@ -375,7 +375,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
     <Property Name="MartLocation" Type="nvarchar" MaxLength="50" />
     <Property Name="ImageFilePath2" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK__Address__CityId__4F7CD00D">
+  <Association Name="FK__Address__CityId__5070F446">
     <End Role="City" Type="Self.City" Multiplicity="0..1" />
     <End Role="Address" Type="Self.Address" Multiplicity="*" />
     <ReferentialConstraint>
@@ -387,7 +387,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Address__Country__5070F446">
+  <Association Name="FK__Address__Country__5165187F">
     <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
     <End Role="Address" Type="Self.Address" Multiplicity="*" />
     <ReferentialConstraint>
@@ -399,7 +399,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Counter_R__Cashi__52593CB8">
+  <Association Name="FK__Counter_R__Cashi__534D60F1">
     <End Role="Cashier_Counter" Type="Self.Cashier_Counter" Multiplicity="1" />
     <End Role="Counter_Records" Type="Self.Counter_Records" Multiplicity="*" />
     <ReferentialConstraint>
@@ -411,7 +411,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Counter_R__Order__534D60F1">
+  <Association Name="FK__Counter_R__Order__5441852A">
     <End Role="orders" Type="Self.orders" Multiplicity="1" />
     <End Role="Counter_Records" Type="Self.Counter_Records" Multiplicity="*" />
     <ReferentialConstraint>
@@ -423,7 +423,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Customer___Custo__72C60C4A">
+  <Association Name="FK__Customer___Custo__5629CD9C">
     <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
     <End Role="Customer_Complaints" Type="Self.Customer_Complaints" Multiplicity="*" />
     <ReferentialConstraint>
@@ -435,7 +435,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__orders__AddressI__60A75C0F">
+  <Association Name="FK__orders__AddressI__619B8048">
     <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
     <End Role="orders" Type="Self.orders" Multiplicity="*" />
     <ReferentialConstraint>
@@ -447,7 +447,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductNo__Produ__656C112C">
+  <Association Name="FK__ProductNo__Produ__66603565">
     <End Role="products" Type="Self.products" Multiplicity="0..1" />
     <End Role="ProductNotification" Type="Self.ProductNotification" Multiplicity="*" />
     <ReferentialConstraint>
@@ -459,7 +459,7 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductNo__UserI__66603565">
+  <Association Name="FK__ProductNo__UserI__6754599E">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="ProductNotification" Type="Self.ProductNotification" Multiplicity="*" />
     <ReferentialConstraint>
@@ -806,35 +806,35 @@ warning 6002: The table/view 'GroceryStore.dbo.ProductCategory' does not have a 
     [ProductCategory].[ImageFilePath2] AS [ImageFilePath2]
     FROM [dbo].[ProductCategory] AS [ProductCategory]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__Address__CityId__4F7CD00D" Association="Self.FK__Address__CityId__4F7CD00D">
+    <AssociationSet Name="FK__Address__CityId__5070F446" Association="Self.FK__Address__CityId__5070F446">
       <End Role="City" EntitySet="City" />
       <End Role="Address" EntitySet="Address" />
     </AssociationSet>
-    <AssociationSet Name="FK__Address__Country__5070F446" Association="Self.FK__Address__Country__5070F446">
+    <AssociationSet Name="FK__Address__Country__5165187F" Association="Self.FK__Address__Country__5165187F">
       <End Role="Country" EntitySet="Country" />
       <End Role="Address" EntitySet="Address" />
     </AssociationSet>
-    <AssociationSet Name="FK__Counter_R__Cashi__52593CB8" Association="Self.FK__Counter_R__Cashi__52593CB8">
+    <AssociationSet Name="FK__Counter_R__Cashi__534D60F1" Association="Self.FK__Counter_R__Cashi__534D60F1">
       <End Role="Cashier_Counter" EntitySet="Cashier_Counter" />
       <End Role="Counter_Records" EntitySet="Counter_Records" />
     </AssociationSet>
-    <AssociationSet Name="FK__Counter_R__Order__534D60F1" Association="Self.FK__Counter_R__Order__534D60F1">
+    <AssociationSet Name="FK__Counter_R__Order__5441852A" Association="Self.FK__Counter_R__Order__5441852A">
       <End Role="orders" EntitySet="orders" />
       <End Role="Counter_Records" EntitySet="Counter_Records" />
     </AssociationSet>
-    <AssociationSet Name="FK__Customer___Custo__72C60C4A" Association="Self.FK__Customer___Custo__72C60C4A">
+    <AssociationSet Name="FK__Customer___Custo__5629CD9C" Association="Self.FK__Customer___Custo__5629CD9C">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Customer_Complaints" EntitySet="Customer_Complaints" />
     </AssociationSet>
-    <AssociationSet Name="FK__orders__AddressI__60A75C0F" Association="Self.FK__orders__AddressI__60A75C0F">
+    <AssociationSet Name="FK__orders__AddressI__619B8048" Association="Self.FK__orders__AddressI__619B8048">
       <End Role="Address" EntitySet="Address" />
       <End Role="orders" EntitySet="orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductNo__Produ__656C112C" Association="Self.FK__ProductNo__Produ__656C112C">
+    <AssociationSet Name="FK__ProductNo__Produ__66603565" Association="Self.FK__ProductNo__Produ__66603565">
       <End Role="products" EntitySet="products" />
       <End Role="ProductNotification" EntitySet="ProductNotification" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductNo__UserI__66603565" Association="Self.FK__ProductNo__UserI__66603565">
+    <AssociationSet Name="FK__ProductNo__UserI__6754599E" Association="Self.FK__ProductNo__UserI__6754599E">
       <End Role="Users" EntitySet="Users" />
       <End Role="ProductNotification" EntitySet="ProductNotification" />
     </AssociationSet>

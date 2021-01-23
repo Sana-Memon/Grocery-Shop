@@ -3,6 +3,8 @@ using GroceryStore.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -54,7 +56,7 @@ namespace GroceryStore.Controllers
                                    MartLocation = product.MartLocation,
                                    ImageFilePath2 = product.ImageFilePath2,
                                    customerId = (y1 != null) ? y1.CustomerID : 0,
-                               }).Take(20).ToList();
+                               }).ToList();
 
 
             int Size_Of_Page = 8;
@@ -62,6 +64,118 @@ namespace GroceryStore.Controllers
 
 
             return View(OurProducts.ToPagedList(No_Of_Page, Size_Of_Page));
+        }
+
+        public ActionResult pvMLComponent(int customerID)
+        {
+            List<product> _RecommendedList = MLComponent_ProductPreferences(customerID);
+
+            return PartialView(_RecommendedList);
+        }
+
+
+        public List<product> MLComponent_ProductPreferences(int U_id)
+        {
+            ViewBag.AlgorithmMode = "Product Preferences Algorithm";
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("product_id");
+            dt.Columns.Add("recommendedProducts");
+            dt.Columns.Add("score");
+            dt.Columns.Add("rank");
+
+            DataTable dtProducts = new DataTable();
+            dtProducts.Columns.Add("product_id");
+            dtProducts.Columns.Add("recommendedProducts");
+            dtProducts.Columns.Add("score");
+            dtProducts.Columns.Add("rank");
+
+            List<product> _RecommendedProductsList = new List<product>();
+
+            var customer_ins = (from x in db.Customers
+                               where x.UserID == U_id
+                               select x).FirstOrDefault();
+
+            var user_instance = (from x in db.Users
+                                     where x.UserID == U_id
+                                     select x).FirstOrDefault();
+
+            ViewBag.FullName = user_instance.FullName;
+
+            var productList = (from x in db.Lists
+                                where x.CustomerID == customer_ins.Customer_id
+                                select x.ProductID
+                                ).ToList();
+
+
+            dt = ReadCsvFile(Server.MapPath("~") + "MLComponent\\ItemRecommendationsKB.csv");
+
+            foreach (var item in productList)
+            {
+                DataRow[] result = dt.Select("trim(product_id) = '" + item.ToString() + "'");
+                foreach (DataRow row in result)
+                {
+                    dtProducts.ImportRow(row);
+                }
+            }
+
+            foreach (DataRow row in dtProducts.Rows)
+            {
+                int? prodID = int.Parse(row[1].ToString());
+                product ProductItem = db.products.Where(d => d.product_id == prodID).FirstOrDefault();
+
+                List todolst = db.Lists.Where(x => x.CustomerID == customer_ins.Customer_id && x.ProductID == prodID).FirstOrDefault();
+                
+                if (todolst != null)
+                {
+                    // Todo : Recommendation Already Added
+                }
+                else
+                {
+                    _RecommendedProductsList.Add(ProductItem);
+                }
+            }
+
+            return _RecommendedProductsList;
+        }
+
+        public DataTable ReadCsvFile(string filePath)
+        {
+            string Fulltext = String.Empty;
+            DataTable dtCsv = new DataTable();
+
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    Fulltext = sr.ReadToEnd().ToString(); //read full file text  
+                    string[] rows = Fulltext.Split('\n'); //split full file text into rows  
+                    for (int i = 0; i < rows.Count() - 1; i++)
+                    {
+                        string[] rowValues = rows[i].Split(','); //split each row with comma to get individual values  
+                        {
+                            if (i == 0)
+                            {
+                                for (int j = 0; j < rowValues.Count(); j++)
+                                {
+                                    dtCsv.Columns.Add(rowValues[j]); //add headers  
+                                }
+                            }
+                            else
+                            {
+                                DataRow dr = dtCsv.NewRow();
+                                for (int k = 0; k < rowValues.Count(); k++)
+                                {
+                                    dr[k] = rowValues[k].ToString();
+                                }
+                                dtCsv.Rows.Add(dr); //add other rows  
+                            }
+                        }
+                    }
+                }
+            }
+
+            return dtCsv;
         }
 
         public PartialViewResult Shop()

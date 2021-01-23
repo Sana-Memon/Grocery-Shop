@@ -2307,6 +2307,8 @@
     <Content Include="Models\GroceryStoreEntities.edmx.diagram">
       <DependentUpon>GroceryStoreEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="MLComponent\ItemRecommendationsKB.csv" />
+    <Content Include="MLComponent\RecommendationsKB.csv" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2410,6 +2412,7 @@
     <Content Include="Views\OrderHistory\OrderDetail.cshtml" />
     <Content Include="Views\ViewOrderQueue\QueueOrderDetails.cshtml" />
     <Content Include="Views\PastOrder\PastOrderDetails.cshtml" />
+    <Content Include="Views\Product\pvMLComponent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

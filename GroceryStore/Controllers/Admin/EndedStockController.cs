@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GroceryStore.Controllers.Dto;
 using GroceryStore.Models;
+using HomeBi.Libraries.PagedList;
 
 namespace GroceryStore.Controllers.Admin
 {
@@ -22,11 +23,11 @@ namespace GroceryStore.Controllers.Admin
             {
                 return RedirectToAction("Auth", "Auth");
             }
-            var products = db.products.Include(p => p.Category).Include(p => p.SKU).Where(m => m.StockAmount <= 40);
+            var products = db.products.Include(p => p.Category).Include(p => p.SKU).Where(m => m.StockAmount <= 300);
             int id = Int32.Parse(Session["userID"].ToString());
             var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
 
-            return View(new UserDto { Products = products.ToList(), User = user });
+            return View(new UserDto { Products = products.ToList().ToPagedList(1,300), User = user });
         }
 
         // GET: EndedStock/Details/5

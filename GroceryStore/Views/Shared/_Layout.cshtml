@@ -189,8 +189,8 @@
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
                     <p class="mb-0 phone pl-md-2">
-                        <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span>+92-344-3456789</a>
-                        <a href="#"><span class="fa fa-paper-plane mr-1"></span> sanaamemon567@gmail.com</a>
+                        <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span>+92-111-3456789</a>
+                        <a href="#"><span class="fa fa-paper-plane mr-1"></span> groceryrecommendation@gmail.com</a>
                     </p>
                 </div>
                 <div class="col-md-6 d-flex justify-content-md-end">
@@ -207,18 +207,17 @@
 
                             @if (Session["userId"] == null)
                             {
-                <a href="../Signup/Signup" class="mr-2">Sign Up</a> <span style="color: white;">|</span>
+                                    <a href="../Signup/Signup" class="mr-2">Sign Up</a> <span style="color: white;">|</span>
                                 <a href="../Auth/Auth">Log In</a> }
                             else if (Session["RoleName"].ToString() == "Admin")
                             {
-                <a href="../AdminDashboard/AdminDashboard">Dashboard</a> <span style="color: white;">|</span> }
-            else if (Session["RoleName"].ToString() == "Customer")
-            {
-<a href="../CustomerDashboard/CustomerDashboard">Dashboard</a> <span style="color: white;">|</span>}
-
-                            @if (Session["userId"] != null)
+                                <a href="../AdminDashboard/AdminDashboard">Dashboard</a> <span style="color: white;">|</span> }
+                            
+                            else if (Session["RoleName"].ToString() == "Customer")
                             {
-                <a style="margin-left: 5px;" href="../Auth/Auth">Log Out</a>}
+                                <a href="../CustomerDashboard/CustomerDashboard">Dashboard</a> <span style="color: white;">|</span>}                            
+                                <a style="margin-left: 5px;" href="../Auth/Auth">Log Out</a>
+                            
                         </p>
                     </div>
                 </div>
