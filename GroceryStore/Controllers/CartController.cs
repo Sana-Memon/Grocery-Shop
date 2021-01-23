@@ -27,7 +27,7 @@ namespace GroceryStore.Controllers
                 return RedirectToAction("Auth", "Auth");
             }
 
-            var userId = Int32.Parse(Session["userID"]?.ToString());
+            var userId = Int32.Parse(Session["userID"].ToString());
             var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
             IEnumerable<List> lists = db.Lists.Include("product").Where(x => x.CustomerID == customer.Customer_id).ToList();
             

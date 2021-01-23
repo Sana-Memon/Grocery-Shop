@@ -15,18 +15,17 @@ namespace GroceryStore.Controllers
         // GET: Checkout
         public ActionResult Checkout()
         {
-            ViewBag.saveresult = "";
-
+            
             if (Session["RoleName"] == null)
             {
                 return RedirectToAction("Auth", "Auth");
             }
-            int id = Int32.Parse(Session["userID"].ToString());
-            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+            int u_id = Int32.Parse(Session["userID"].ToString());
+            var user = db.Users.Where(x => x.UserID == u_id).FirstOrDefault();
 
             var city = db.Cities.ToList();
 
-            var address = db.Addresses.Include("City").Where(x => x.CustomerID == id).ToList();
+            var address = db.Addresses.Include("City").Where(x => x.CustomerID == u_id).ToList();
 
             return View(new UserDto() { User = user, Cities = city, Address = address });
         }
