@@ -15,7 +15,8 @@ namespace GroceryStore.Controllers
         // GET: Checkout
         public ActionResult Checkout()
         {
-            
+            ViewBag.saveresult = "";
+
             if (Session["RoleName"] == null)
             {
                 return RedirectToAction("Auth", "Auth");

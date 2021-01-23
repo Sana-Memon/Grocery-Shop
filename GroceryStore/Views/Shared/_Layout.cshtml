@@ -207,20 +207,17 @@
 
                             @if (Session["userId"] == null)
                             {
-                <a href="../Signup/Signup" class="mr-2">Sign Up</a> <span style="color: white;">|</span>
+                                    <a href="../Signup/Signup" class="mr-2">Sign Up</a> <span style="color: white;">|</span>
                                 <a href="../Auth/Auth">Log In</a> }
                             else if (Session["RoleName"].ToString() == "Admin")
                             {
-                <a href="../AdminDashboard/AdminDashboard">Dashboard</a> <span style="color: white;">|</span> }
-            else if (Session["RoleName"].ToString() == "Customer")
-            {
-<a href="../CustomerDashboard/CustomerDashboard">Dashboard</a> <span style="color: white;">|</span>}
-
-                            @if (Session["userId"] != null)
+                                <a href="../AdminDashboard/AdminDashboard">Dashboard</a> <span style="color: white;">|</span> }
+                            
+                            else if (Session["RoleName"].ToString() == "Customer")
                             {
-                <a style="margin-left: 5px;" href="../Auth/Auth">Log Out</a>
-                                Session["userId"] = null;
-                            }
+                                <a href="../CustomerDashboard/CustomerDashboard">Dashboard</a> <span style="color: white;">|</span>}                            
+                                <a style="margin-left: 5px;" href="../Auth/Auth">Log Out</a>
+                            
                         </p>
                     </div>
                 </div>
