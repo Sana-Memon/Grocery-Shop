@@ -27,8 +27,16 @@ namespace GroceryStore.Controllers.Customer
 
             var user = db.Users.Where(x => x.UserID == userId).FirstOrDefault();
 
-            if (rolename == AppRoles.Customer)
-                return View(new UserDto { User = user } );
+            if (rolename == AppRoles.Customer) {
+
+                CustomerDashboardDetails dashboard_details = new CustomerDashboardDetails();
+                var incomplete_order_count = db.orders.Where(x => x.OrderStatus == "PENDING" || x.OrderStatus == "NOT PICKED UP").Count();
+                dashboard_details.order_tracking_details = incomplete_order_count;
+                var total_prod_count = db.products.Count();
+                dashboard_details.place_order_detail = total_prod_count;
+                return View(new UserDto { User = user , customer_d_details = dashboard_details} );
+            }
+
             else return RedirectToAction("Auth", "Auth");
         }
 

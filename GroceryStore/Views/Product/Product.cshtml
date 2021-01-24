@@ -143,11 +143,11 @@
 
                 <h2>@item.product_name</h2>
                 <h2>product Code: @item.product_id</h2>
-                <h5>category: Vegetables</h5>
+                <h5>category: @item.category_id</h5>
                 <h6><a href="#">1 review</a> <a href="#">View all review</a></h6>
                 <div class="price">
-                    <h4 class="old-price"><del>Rs.3456</del><sup>25% off</sup></h4>
-                    <h4 class="new-price">Rs.3000 +<abbr>99 Shipping</abbr></h4>
+                    <h4 class="old-price"><del>Rs.@item.DiscountPrice</del><sup>25% off</sup></h4>
+                    <h4 class="new-price">Rs.@item.SellingPrice +<abbr>99 Shipping</abbr></h4>
                 </div>
 
                 <button class="button2">Click to Buy</button>
