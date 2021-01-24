@@ -175,11 +175,7 @@
         const child = $(element.children().get(2));
 
 
-        @*if ($(child).children().get(0).textContent == messageRemove) {
-            deleteValue = 1;
-        } else {
-            deleteValue = 0;
-        }*@
+
 
         $.post(window.location.origin + '/Cart/SubmitList', $(event.srcElement).serialize(),
             (data) => {
@@ -196,7 +192,7 @@
                     $($(event.srcElement).children().get(1)).attr("value", "0");
                 }
                 console.log($($(child).children()));
-                //console.log(allProducts);
+        
 
                 if (allProducts == 0) {
                     $("#proceed-button").css('visibility', 'hidden');
@@ -206,12 +202,7 @@
                 }
 
                 console.log("doc is append");
-                //document.body.innerHTML +=('<a href="../Cart/Cart"> < button id = "proceed-button" type = "submit" class= "btn btn-primary" style = "position: fixed; bottom: 12px; width: 200px; right: 25px; padding: 10px;" > <span style=" display: inline-block; margin-right: 12px; font-size: 2em; font-weight: 900;">proceed</span> <span style="font-size: 2em; font-weight: bold; position: relative; top: 2px;">&#10132;</span></button ></a>')
 
-                @*console.log("data has been uploaded ");
-                console.log(data);
-                console.log(element.parent().parent());
-                element.parent().parent().remove();*@
             }
         );
 

@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<GroceryStore.Models.product>
+@model IEnumerable<GroceryStore.Controllers.Dto.ProductDto>
 
 
 @{
@@ -31,7 +31,22 @@
                                         <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                     </ul>
                                 </div>
-                                <a href="#" class="btn btn-primary">Add to Cart</a>
+                                <center>
+                                    @*action="../Cart/SubmitList"*@
+                                    <form onsubmit="submitProduct(event)">
+                                        <input type="hidden" name="productId" value="@item.product_id">
+                                        <input type="hidden" name="customerId" value="@item.customerId" />
+                                        <a class="add-to-cart" href="#">
+                                            @if (item.customerId > 0)
+                                            {
+                                                <button class="button2" style="padding: 10px 10px;">Remove</button> }
+                                            else
+                                            {
+                                                <button class="button2" style="padding: 10px 10px;">Add to Cart</button>}
+                                        </a>
+                                        @*<input name="hidden" name="customerId" value="@item.cus">*@
+                                    </form>
+                                </center>
                             </div>
                         </div>
                     </div>
@@ -49,46 +64,123 @@
     counter = 1;
 
 
-<div class="@status_2">
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            if (counter > 4)
+    <div class="@status_2">
+        <div class="row">
+            @foreach (var item in Model)
             {
-                if (counter == 9) { break; }
-                <div class="col-sm-3">
-                    <div class="thumb-wrapper">
-                        <div class="img-box">
-                            <img src="@item.ImageFilePath" class="img-fluid" alt="">
-                        </div>
-                        <div class="thumb-content">
-                            <h4>@item.product_name</h4>
-                            <p class="item-price"><strike>$@item.CostPrice</strike> <span>$@item.DiscountPrice</span></p>
-                            <div class="star-rating">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                </ul>
+                if (counter > 4)
+                {
+                    if (counter == 9) { break; }
+                    <div class="col-sm-3">
+                        <div class="thumb-wrapper">
+                            <div class="img-box">
+                                <img src="@item.ImageFilePath" class="img-fluid" alt="">
                             </div>
-                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                            <div class="thumb-content">
+                                <h4>@item.product_name</h4>
+                                <p class="item-price"><strike>$@item.CostPrice</strike> <span>$@item.DiscountPrice</span></p>
+                                <div class="star-rating">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                </div>
+                                <center>
+                                    @*action="../Cart/SubmitList"*@
+                                    <form onsubmit="submitProduct(event)">
+                                        <input type="hidden" name="productId" value="@item.product_id">
+                                        <input type="hidden" name="customerId" value="@item.customerId" />
+                                        <a class="add-to-cart" href="#">
+                                            @if (item.customerId > 0)
+                                            {
+                                                <button class="button2" style="padding: 10px 10px;">Remove</button> }
+                                            else
+                                            {
+                                                <button class="button2" style="padding: 10px 10px;">Add to Cart</button>}
+                                        </a>
+                                    </form>
+                                </center>
+                            </div>
                         </div>
                     </div>
-                </div>
-                counter++;
+                    counter++;
+                }
+                else
+                {
+                    counter++;
+                }
             }
-            else
-            {
-                counter++;
-            }
-        }
-    </div>
+        </div>
 
-</div>
+    </div>
 
 
 }
 
 
+<script>
+    let allProducts = @Model.Where(x => x.customerId > 0).ToList().Count;
+    let customerValue = @( @Model.Where(x => x.customerId > 0).ToList().FirstOrDefault() != null ? @Model.Where(x => x.customerId > 0).ToList().FirstOrDefault().customerId : 0 )
+
+    console.log(allProducts);
+    console.log(customerValue);
+    const submitProduct = (event) => {
+        event.preventDefault();
+        const messageRemove = "Remove";
+        const messageAdd = "Add to Cart";
+
+        let element = $(event.srcElement);
+        let deleteValue = 0;
+
+        const child = $(element.children().get(2));
+
+
+
+
+        $.post(window.location.origin + '/Cart/SubmitList', $(event.srcElement).serialize(),
+            (data) => {
+                if (data == true) {
+                    $(child).children().get(0).textContent = messageRemove;
+                    allProducts = allProducts + 1;
+                    $($(event.srcElement).children().get(1)).attr("value", customerValue.toString());
+                    @*$($(child).children().get(1)).attr('value', customerValue.toString());*@
+                }
+                else if (data == false) {
+                    $(child).children().get(0).textContent = messageAdd;
+                    allProducts = allProducts - 1;
+                    console.log($($(child).children().get(1)));
+                    $($(event.srcElement).children().get(1)).attr("value", "0");
+                }
+                console.log($($(child).children()));
+
+
+                if (allProducts == 0) {
+                    $("#proceed-button").css('visibility', 'hidden');
+
+                } else if (allProducts > 0) {
+                    $("#proceed-button").css('visibility', 'visible');
+                }
+
+                console.log("doc is append");
+
+            }
+        );
+
+
+    }
+</script>
+
+<style>
+    @@media screen and (max-width: 600px) {
+        #proceed-checkout button {
+            width: 120px !important;
+        }
+
+            #proceed-checkout button span {
+                font-size: 1.2em !important;
+            }
+    }
+</style>
