@@ -189,6 +189,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\Customer\AddNewAddressController.cs" />
     <Compile Include="Controllers\Customer\CustomerDashboardController.cs" />
+    <Compile Include="Controllers\Customer\CustomerOrderTrackController.cs" />
     <Compile Include="Controllers\Customer\CustomerProfileController.cs" />
     <Compile Include="Controllers\Customer\CustomerShoppingListController.cs" />
     <Compile Include="Controllers\Customer\OrderHistoryController.cs" />
@@ -2413,6 +2414,7 @@
     <Content Include="Views\ViewOrderQueue\QueueOrderDetails.cshtml" />
     <Content Include="Views\PastOrder\PastOrderDetails.cshtml" />
     <Content Include="Views\Product\pvMLComponent.cshtml" />
+    <Content Include="Views\CustomerOrderTrack\CustomerOrderTrack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
