@@ -1,8 +1,7 @@
-﻿
-@{
-    ViewBag.Title = "AdminDashboard";
-    Layout = "~/Views/Shared/AdminDashboard.cshtml";
-}
+﻿@model GroceryStore.Controllers.Dto.UserDto
+
+@{ ViewBag.Title = "AdminDashboard";
+                Layout = "~/Views/Shared/AdminDashboard.cshtml"; }
 
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -45,7 +44,7 @@
                                 <i class="fa fa-tasks fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">12</div>
+                                <div class="huge">@Model.admin_d_details.ending_products</div>
                                 <div>Stock Ending</div>
                             </div>
                         </div>
@@ -68,7 +67,7 @@
                                 <i class="fa fa-shopping-cart fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">124</div>
+                                <div class="huge">@Model.admin_d_details.available_products</div>
                                 <div>Available Stock</div>
                             </div>
                         </div>
@@ -309,9 +308,9 @@
                     <strong>See All Alerts</strong>
                     <i class="fa fa-angle-right"></i>
                 </a>
-            </li>`; 
+            </li>`;
 
-            document.getElementById('icon-number').innerText = (data.length > 10) ? '10+' : data.length.toString() 
+            document.getElementById('icon-number').innerText = (data.length > 10) ? '10+' : data.length.toString()
 
             console.log(data);
         });

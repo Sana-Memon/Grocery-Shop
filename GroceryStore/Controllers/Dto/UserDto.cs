@@ -31,5 +31,9 @@ namespace GroceryStore.Controllers.Dto
         public OrderDetailDto order_detail_dto { get; set; }
 
         public Category category { get; set; }
+
+        public AdminDashboardDetails admin_d_details { get; set; }
+
+        public CustomerDashboardDetails customer_d_details { get; set; }
     }
 }
