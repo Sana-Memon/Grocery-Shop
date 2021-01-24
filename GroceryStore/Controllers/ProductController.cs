@@ -42,7 +42,7 @@ namespace GroceryStore.Controllers
                                join list in db.Lists on new { pid = product.product_id } equals new { pid = list.ProductID } into yG
                                from y1 in yG.DefaultIfEmpty()
                                where (y1.CustomerID == customerId || (y1.ProductID == null && y1.CustomerID == null))
-                               orderby product.product_id descending
+                               orderby y1.CustomerID, product.product_id descending
                                select new ProductDto
                                {
                                    product_id = product.product_id,
