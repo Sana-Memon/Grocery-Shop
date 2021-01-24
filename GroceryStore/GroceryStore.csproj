@@ -2417,6 +2417,11 @@
     <Content Include="Views\PastOrder\PastOrderDetails.cshtml" />
     <Content Include="Views\Product\pvMLComponent.cshtml" />
     <Content Include="Views\CustomerOrderTrack\CustomerOrderTrack.cshtml" />
+    <Content Include="Views\Auth\ResetPassword.cshtml" />
+    <Content Include="Views\Auth\forgotPassword.cshtml" />
+    <Content Include="Views\SingleProduct\Comments.cshtml" />
+    <Content Include="Views\SingleProduct\ShowComment.cshtml" />
+    <Content Include="Views\SingleProduct\_CommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
