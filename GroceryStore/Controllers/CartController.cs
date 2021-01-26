@@ -50,6 +50,12 @@ namespace GroceryStore.Controllers
         [HttpPost]
         public ActionResult SubmitList()
         {
+            // enums
+            string ADD = "ADD";
+            string REMOVE = "REMOVE";
+            string ERROR = "ERROR";
+            string REDIRECT = "REDIRECT";
+
             GroceryStoreEntities db = new GroceryStoreEntities();
             List list = new List();
             try
@@ -57,7 +63,13 @@ namespace GroceryStore.Controllers
                 int productId = Int32.Parse(Request.Form["productId"]);
                 int requestCustomerId = Int32.Parse ( Request.Form["customerId"] );
 
+
+                if (Session["userID"] == null) return Json ( REDIRECT );
+
+
                 var userId = Int32.Parse ( Session["userID"]?.ToString() );
+
+
                 var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault(); //.SqlQuery("SELECT Customer_id from Customers Where UserID = @Id" + p1).FirstOrDefault();
                 int customerId = customer.Customer_id;
 
@@ -65,12 +77,12 @@ namespace GroceryStore.Controllers
 
                 
 
-                if (product.StockAmount - 1 < 0)
+                if (product.StockAmount - 1 < 90)
                 {
-                    int roleId = Int32.Parse(Session["RoleID"].ToString());
+                     int roleId = Int32.Parse(Session["RoleID"].ToString());
                     // 1 is admin role Id.
                     _notificationService.AddNotificationForAdmin(1, userId, productId);
-                    return null;
+                    return Json(ERROR);
                 }
 
                 if(requestCustomerId != customerId)
@@ -83,14 +95,14 @@ namespace GroceryStore.Controllers
                     product.StockAmount = product.StockAmount - 1;
 
                     db.SaveChanges();
-                    return Json ( true );
+                    return Json ( ADD );
                 }
                 else if (requestCustomerId == customerId)
                 {
                     var currentList = db.Lists.Where(x => x.ProductID == productId && x.CustomerID == customerId).FirstOrDefault();
                     db.Lists.Remove(currentList);
                     db.SaveChanges();
-                    return Json(false);
+                    return Json( REMOVE );
                 }
                 else
                 {

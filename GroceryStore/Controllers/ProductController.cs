@@ -42,7 +42,7 @@ namespace GroceryStore.Controllers
                                join list in db.Lists on new { pid = product.product_id } equals new { pid = list.ProductID } into yG
                                from y1 in yG.DefaultIfEmpty()
                                where (y1.CustomerID == customerId || (y1.ProductID == null && y1.CustomerID == null))
-                               orderby y1.CustomerID, product.product_id descending
+                               orderby product.product_id descending
                                select new ProductDto
                                {
                                    product_id = product.product_id,
@@ -61,6 +61,7 @@ namespace GroceryStore.Controllers
 
             int Size_Of_Page = 8;
             int No_Of_Page = (Page_No ?? 1);
+
 
 
             return View(OurProducts.ToPagedList(No_Of_Page, Size_Of_Page));
@@ -202,6 +203,26 @@ namespace GroceryStore.Controllers
         public PartialViewResult Shop()
         {
             return PartialView();
+        }
+
+        [HttpGet]
+        public int? GetCustomerId()
+        {
+            int? userId = null;
+            try
+            {
+                userId = Int32.Parse(Session["userID"]?.ToString());
+            }
+            catch (Exception e)
+            {
+            }
+
+            var customer = db.Customers.Where(x => x.UserID == userId).FirstOrDefault();
+            int? customerId = customer?.Customer_id;
+
+            if (customerId == null) return 0;
+
+            return customerId;
         }
 
         [HttpPost]
