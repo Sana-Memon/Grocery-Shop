@@ -23,7 +23,7 @@ namespace GroceryStore.Controllers.Admin
             {
                 return RedirectToAction("Auth", "Auth");
             }
-            var products = db.products.Include(p => p.Category).Include(p => p.SKU).Where(m => m.StockAmount <= 90);
+            var products = db.products.Include(p => p.Category).Include(p => p.SKU).Where(m => m.StockAmount <= 10);
             int id = Int32.Parse(Session["userID"].ToString());
             var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
 
