@@ -77,7 +77,7 @@ namespace GroceryStore.Controllers
 
                 
 
-                if (product.StockAmount - 1 < 90)
+                if (product.StockAmount - 1 < 10)
                 {
                      int roleId = Int32.Parse(Session["RoleID"].ToString());
                     // 1 is admin role Id.
