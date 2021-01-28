@@ -25,7 +25,7 @@ namespace GroceryStore.Controllers
             {
                 return RedirectToAction("Auth", "Auth");
             }
-            var products = db.products.Include(p => p.Category).Include(p => p.SKU);
+            var products = db.products.Include(p => p.Category).Include(p => p.SKU).OrderByDescending(p => p.product_id);
             int id = Int32.Parse(Session["userID"].ToString());
             var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
             int Size_Of_Page = 8;
