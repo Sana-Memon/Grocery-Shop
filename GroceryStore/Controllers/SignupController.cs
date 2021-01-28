@@ -21,6 +21,7 @@ namespace GroceryStore.Controllers
         public ActionResult Signup(User userModel)
         {
             GroceryStoreEntities db = new GroceryStoreEntities();
+            userModel.Role = 3;
             db.Users.Add(userModel);
             db.SaveChanges();
 
